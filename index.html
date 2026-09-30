@@ -2,13 +2,15 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>מורה דרך לסנסקריט - איינגר</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>לימוד סנסקריט ליוגה - מסורת איינגר</title>
     
-    <!-- Google Fonts: Rubik for a beautiful, modern Hebrew font -->
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Rubik for Hebrew & Noto Serif Devanagari for Sanskrit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS via CDN -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -17,31 +19,37 @@
                 extend: {
                     fontFamily: {
                         rubik: ['Rubik', 'sans-serif'],
+                        sanskrit: ['"Noto Serif Devanagari"', 'serif'],
                     },
                     colors: {
                         cream: {
-                            DEFAULT: '#FDFBF7',
-                            dark: '#F3EFE6'
+                            50: '#FDFBF7',
+                            100: '#FAF5EE',
+                            200: '#F2E9DC',
+                            300: '#E4D6C3'
                         },
-                        grey: {
-                            light: '#8C92AC',
-                            dark: '#4A4A4A'
+                        charcoal: {
+                            DEFAULT: '#383330',
+                            light: '#5E5752',
+                            muted: '#8C837C'
                         },
-                        dustyPink: {
-                            light: '#E8D4D4',
-                            DEFAULT: '#D4B4B4',
-                            dark: '#B89999'
+                        terracotta: {
+                            light: '#F8ECEB',
+                            DEFAULT: '#C07373',
+                            dark: '#A65A5A',
+                            deep: '#853F3F'
                         },
-                        feedback: {
-                            green: '#d7ffb8',
-                            greenDark: '#58a700',
-                            red: '#ffdfe0',
-                            redDark: '#ea2b2b'
-                        }
+                        sage: {
+                            light: '#EFF4F0',
+                            DEFAULT: '#728C74',
+                            dark: '#566E58'
+                        },
+                        ochre: '#D89B54'
                     },
                     boxShadow: {
-                        'btn': '0 4px 0 0 rgba(0,0,0,0.1)',
-                        'btn-active': '0 0px 0 0 rgba(0,0,0,0.1)',
+                        'duo': '0 4px 0 0 rgba(0,0,0,0.12)',
+                        'duo-active': '0 1px 0 0 rgba(0,0,0,0.12)',
+                        'card': '0 8px 24px -4px rgba(56, 51, 48, 0.08)'
                     }
                 }
             }
@@ -51,398 +59,801 @@
     <style>
         body {
             font-family: 'Rubik', sans-serif;
-            background-color: #e5e5e5;
+            background-color: #EDE8E1;
             margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #383330;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        #app-container {
+        #app-frame {
             width: 100%;
             max-width: 480px;
-            height: 100vh;
-            max-height: 900px;
-            background-color: #FDFBF7;
+            height: 100dvh;
+            background-color: #FAF5EE;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        @media (min-width: 481px) {
-            #app-container {
-                height: 90vh;
-                border-radius: 24px;
+        @media (min-width: 520px) {
+            #app-frame {
+                height: 94vh;
+                max-height: 900px;
+                border-radius: 32px;
+                box-shadow: 0 20px 50px rgba(56, 51, 48, 0.15);
+                border: 1px solid rgba(228, 214, 195, 0.6);
             }
         }
 
-        .duo-btn {
-            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        .duo-button {
+            transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            user-select: none;
         }
         
-        .duo-btn:active:not(:disabled) {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0 0 rgba(0,0,0,0.1) !important;
+        .duo-button:active:not(:disabled) {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 0 rgba(0,0,0,0.1) !important;
         }
 
-        .feedback-panel {
-            transform: translateY(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .feedback-sheet {
+            transform: translateY(105%);
+            transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
         }
         
-        .feedback-panel.show {
+        .feedback-sheet.open {
             transform: translateY(0);
         }
 
-        ::-webkit-scrollbar {
-            display: none;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
         }
-        
-        .view {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-            width: 100%;
-        }
-        
-        .view.active {
-            display: flex;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E4D6C3;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 
-    <div id="app-container" class="text-grey-dark">
-        
-        <div id="start-view" class="view active px-6 py-10 justify-center items-center text-center bg-cream">
-            <div class="mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-32 h-32 mx-auto text-dustyPink">
-                    <path d="M12 22c-4.97 0-9-4.03-9-9 0-4.97 4.03-9 9-9s9 4.03 9 9c0 4.97-4.03 9-9 9z" stroke="none" fill="#F3EFE6"/>
-                    <path d="M12 22s-3-5.5-3-9c0-3.5 3-9 3-9s3 5.5 3 9c0 3.5-3 9-3 9z" fill="#D4B4B4" stroke="none"/>
-                    <path d="M12 22s-7-2-7-8c0-4 4-7 4-7" stroke="#B89999"/>
-                    <path d="M12 22s7-2 7-8c0-4-4-7-4-7" stroke="#B89999"/>
-                    <circle cx="12" cy="7" r="2" fill="#8C92AC" stroke="none"/>
-                </svg>
-            </div>
-            <h1 class="text-3xl font-bold mb-3 text-grey-dark">לימודי סנסקריט ליוגה</h1>
-            <p class="text-grey-light mb-10 text-lg">למד את השמות העתיקים של תרגול האיינגר שלך.</p>
+    <main id="app-frame">
+
+        <!-- Screen 1: Welcome & Preparation Screen -->
+        <section id="start-screen" class="flex flex-col h-full justify-between p-6 sm:p-8 bg-cream-50 select-none text-center">
             
-            <button onclick="startQuiz()" class="duo-btn w-full bg-dustyPink text-white font-bold text-lg py-4 rounded-2xl shadow-[0_4px_0_0_#B89999] hover:bg-dustyPink-dark">
-                התחל תרגול
-            </button>
-        </div>
+            <div class="pt-6">
+                <!-- Iyengar Yoga Lotus Motif -->
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-cream-100 border border-cream-300 shadow-sm mb-6 text-terracotta">
+                    <svg class="w-14 h-14" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                        <circle cx="50" cy="50" r="46" stroke="#E4D6C3" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <path d="M50 20 C42 35 30 55 30 70 C30 81 39 88 50 88 C61 88 70 81 70 70 C70 55 58 35 50 20 Z" fill="#F8ECEB" stroke="currentColor" stroke-width="2"/>
+                        <path d="M50 35 C45 48 38 62 38 72 C38 78 43 83 50 83 C57 83 62 78 62 72 C62 62 55 48 50 35 Z" fill="#C07373" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M50 48 L50 85" stroke="#FAF5EE" stroke-width="2"/>
+                    </svg>
+                </div>
 
-        <div id="quiz-view" class="view flex-col relative">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-wider bg-cream-200 text-charcoal-light mb-3">
+                    מסורת ב.ק.ס איינגר • אור על היוגה
+                </span>
+                
+                <h1 class="text-3xl font-bold text-charcoal tracking-tight mb-2">
+                    שפת היוגה בסנסקריט
+                </h1>
+                
+                <p class="text-sm font-sanskrit text-terracotta-dark tracking-wide mb-3">
+                    योगेन चित्तस्य पदेन वाचां मलं शरीरस्य च वैद्यकेन
+                </p>
+                
+                <p class="text-charcoal-light text-sm sm:text-base leading-relaxed max-w-xs mx-auto">
+                    למדו לזהות את תנוחות היוגה, לפרק את שמותיהן להברות המשמעותיות ולהעמיק את איכות התרגול על המזרן.
+                </p>
+            </div>
+
+            <!-- Features Highlights -->
+            <div class="grid grid-cols-2 gap-3 my-auto py-2 text-right">
+                <div class="p-3.5 bg-white/70 border border-cream-200 rounded-2xl">
+                    <div class="text-terracotta font-bold text-lg mb-0.5">תמונות מקור</div>
+                    <div class="text-xs text-charcoal-light leading-snug">צילומים מפורטים של מנח התנוחה</div>
+                </div>
+                <div class="p-3.5 bg-white/70 border border-cream-200 rounded-2xl">
+                    <div class="text-sage-dark font-bold text-lg mb-0.5">פירוק שורשים</div>
+                    <div class="text-xs text-charcoal-light leading-snug">הבנת חלקי המילים של כל אסאנה</div>
+                </div>
+            </div>
+
+            <!-- Start Action Button -->
+            <div class="pb-4">
+                <button onclick="quizEngine.startQuiz()" class="duo-button w-full py-4 px-6 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-lg shadow-[0_4px_0_0_#853F3F]">
+                    התחל תרגול
+                </button>
+            </div>
+        </section>
+
+        <section id="quiz-screen" class="hidden flex-col h-full relative bg-cream-100">
             
-            <div class="px-6 pt-6 pb-2 flex items-center gap-4">
-                <button onclick="endQuiz()" class="text-grey-light hover:text-grey-dark transition-colors font-bold text-xl">&times;</button>
-                <div class="flex-1 text-center font-bold text-dustyPink-dark">
-                    תרגול אינסופי
+            <!-- Top Navigation Bar (with Back Button) -->
+            <header class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-cream-200 bg-cream-50/80 backdrop-blur-sm z-10">
+                
+                <!-- Back Button to Previous Question -->
+                <button id="prev-btn" onclick="quizEngine.goToPreviousQuestion()" title="חזרה לשאלה קודמת" class="duo-button flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-cream-300 bg-white text-charcoal text-xs font-semibold shadow-sm hover:bg-cream-100 disabled:opacity-40 disabled:pointer-events-none transition-opacity">
+                    <span class="text-sm">↩</span>
+                    <span>שאלה קודמת</span>
+                </button>
+
+                <!-- Question Counter & Sanskrit Badge -->
+                <div class="flex items-center gap-2">
+                    <span id="question-counter" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-cream-200 text-charcoal">
+                        שאלה 1
+                    </span>
+                </div>
+
+                <!-- Exit Practice -->
+                <button onclick="quizEngine.exitToHome()" title="חזרה לתפריט" class="w-8 h-8 flex items-center justify-center rounded-xl text-charcoal-muted hover:text-charcoal hover:bg-cream-200 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </header>
+
+            <!-- Scrollable Question Canvas -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-5 pb-36 flex flex-col">
+                
+                <!-- Question Title -->
+                <div class="mb-3">
+                    <div id="sanskrit-script-banner" class="text-xs font-sanskrit text-terracotta tracking-wider mb-1 font-semibold">
+                        <!-- e.g. ताडासन • Tādāsana -->
+                    </div>
+                    <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-charcoal leading-tight">
+                        איזו תנוחה מוצגת כאן?
+                    </h2>
+                </div>
+
+                <!-- Yoga Pose Real Image Frame with Fallback and Zoom -->
+                <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-white border border-cream-300 shadow-sm mb-4 flex items-center justify-center group">
+                    <div id="image-loading-skeleton" class="absolute inset-0 bg-cream-200 animate-pulse flex items-center justify-center text-xs text-charcoal-muted">
+                        טוען תמונה...
+                    </div>
+                    <img id="pose-image" src="" alt="תנוחת יוגה" class="w-full h-full object-contain p-2 relative z-10 transition-transform duration-300 group-hover:scale-105" onload="quizEngine.onImageLoaded()" onerror="quizEngine.onImageFailed(this)" />
+                    
+                    <!-- Zoom badge -->
+                    <button onclick="quizEngine.showImageModal()" class="absolute bottom-2 left-2 z-20 bg-charcoal/70 hover:bg-charcoal text-white rounded-lg p-1.5 backdrop-blur-sm text-xs flex items-center gap-1 shadow">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        <span>הגדל</span>
+                    </button>
+                </div>
+
+                <!-- Answer Choice Buttons -->
+                <div id="options-grid" class="flex flex-col gap-2.5">
+                    <!-- Injected dynamically by JS -->
                 </div>
             </div>
 
-            <div class="flex-1 overflow-y-auto px-6 pb-32 flex flex-col justify-center">
-                
-                <h2 id="question-text" class="text-2xl font-bold mb-6 mt-4 text-right">השאלה תופיע כאן</h2>
-                
-                <div id="question-media" class="w-full flex justify-center mb-6 hidden">
-                    <!-- Image/SVG injected via JS -->
-                </div>
-
-                <div id="options-container" class="flex flex-col gap-4">
-                    <!-- Buttons injected via JS -->
-                </div>
-            </div>
-
-            <div id="action-bar" class="absolute bottom-0 left-0 w-full p-6 bg-white border-t border-cream-dark flex flex-col justify-end z-10 transition-colors duration-300">
-                <button id="check-btn" onclick="checkAnswer()" disabled class="duo-btn w-full bg-cream-dark text-grey-light font-bold text-lg py-4 rounded-2xl cursor-not-allowed">
+            <!-- Bottom Fixed Action Bar -->
+            <footer id="action-bar" class="absolute bottom-0 left-0 w-full p-4 sm:p-5 bg-white border-t border-cream-200 flex flex-col justify-end z-20">
+                <button id="check-btn" onclick="quizEngine.checkCurrentAnswer()" disabled class="duo-button w-full py-4 px-6 rounded-2xl bg-cream-300 text-charcoal-muted font-bold text-base shadow-sm cursor-not-allowed transition-all">
                     בדוק תשובה
                 </button>
-            </div>
+            </footer>
 
-            <div id="feedback-panel" class="feedback-panel absolute bottom-0 left-0 w-full p-6 flex flex-col justify-between z-20 min-h-[160px]">
-                <div>
-                    <div id="feedback-title" class="font-bold text-2xl mb-2 flex items-center gap-2">
-                        <!-- Icon and Title injected via JS -->
+            <!-- Rich Feedback Sheet (Slides up on submission) -->
+            <div id="feedback-sheet" class="feedback-sheet absolute bottom-0 left-0 w-full p-5 sm:p-6 bg-white border-t-2 z-30 shadow-[0_-10px_30px_rgba(0,0,0,0.12)] flex flex-col max-h-[85vh] overflow-y-auto custom-scrollbar">
+                
+                <!-- Status Header (Icon + Text) -->
+                <div class="flex items-center gap-3 mb-3">
+                    <div id="feedback-icon" class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-bold text-white shadow-sm">
+                        <!-- SVG Check or Cross injected here -->
                     </div>
-                    <p id="feedback-explanation" class="text-base mb-6 font-medium leading-relaxed text-right">
-                        הסבר מופיע כאן.
-                    </p>
+                    <div>
+                        <h3 id="feedback-headline" class="text-xl font-bold leading-tight"></h3>
+                        <p id="feedback-subhead" class="text-xs text-charcoal-muted"></p>
+                    </div>
                 </div>
-                <button id="continue-btn" onclick="nextQuestion()" class="duo-btn w-full font-bold text-lg py-4 rounded-2xl shadow-btn">
-                    המשך
+
+                <!-- Sanskrit Breakdown Chips Section -->
+                <div class="bg-cream-50 border border-cream-200 rounded-2xl p-3.5 mb-3.5">
+                    <div class="text-xs font-bold text-charcoal-light uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-terracotta" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+                        <span>פירוק השם בסנסקריט:</span>
+                    </div>
+                    <div id="sanskrit-chips-container" class="flex flex-wrap gap-2">
+                        <!-- Injected dynamic chips -->
+                    </div>
+                </div>
+
+                <!-- Iyengar 'Light on Yoga' Alignment Pointer -->
+                <div class="bg-sage-light/60 border border-sage/20 rounded-2xl p-3.5 mb-5 text-right">
+                    <div class="text-xs font-bold text-sage-dark mb-1 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span>דגש מתוך "אור על היוגה" (ב.ק.ס איינגר):</span>
+                    </div>
+                    <p id="iyengar-quote" class="text-xs sm:text-sm text-charcoal leading-relaxed font-medium"></p>
+                </div>
+
+                <!-- Next Question Button -->
+                <button id="next-question-btn" onclick="quizEngine.advanceToNextQuestion()" class="duo-button w-full py-4 rounded-2xl font-bold text-lg text-white shadow-duo">
+                    המשך לשאלה הבאה
                 </button>
+            </div>
+        </section>
+
+        <!-- Image Zoom Modal -->
+        <div id="image-modal" class="hidden fixed inset-0 z-50 bg-charcoal/90 p-4 flex flex-col justify-center items-center backdrop-blur-sm" onclick="quizEngine.hideImageModal()">
+            <div class="relative max-w-lg w-full bg-white rounded-3xl p-3 overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-2 px-2">
+                    <span id="modal-title" class="font-bold text-charcoal text-sm"></span>
+                    <button onclick="quizEngine.hideImageModal()" class="text-charcoal-muted hover:text-charcoal p-1 text-xl font-bold">&times;</button>
+                </div>
+                <div class="w-full max-h-[70vh] flex items-center justify-center bg-cream-50 rounded-2xl overflow-hidden">
+                    <img id="modal-image" src="" alt="תנוחה מוגדלת" class="w-full h-auto max-h-[65vh] object-contain" />
+                </div>
+                <p class="text-center text-xs text-charcoal-muted mt-2">לחץ בכל מקום לסגירה</p>
             </div>
         </div>
 
-    </div>
+    </main>
 
     <script>
-        const questions = [
+        /* Database of Light on Yoga poses with real Wikimedia Commons URLs and root breakdowns */
+        const POSE_DATABASE = [
             {
-                type: 'text',
-                question: "מה משמעות המילה 'טדה' (Tada) בתנוחת טדאסנה (Tadasana)?",
-                options: ["הר", "עץ", "לוחם", "מתיחה"],
-                correctAnswer: 0,
-                explanation: "טדה = הר. זוהי תנוחת ההר (Tadasana), העמידה הבסיסית והיציבה ביותר ביוגה."
+                id: "tadasana_root",
+                sanskritScript: "ताडासन • Tādāsana",
+                poseHebrewName: "טדאסאנה (תנוחת ההר)",
+                question: "מה הפירוש המילולי של המילה 'טָאדָה' (Tāḍa)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Tadasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "הר",
+                    "עץ",
+                    "מקל ישר",
+                    "לוחם"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "טדה (Tāḍa)", meaning: "הר" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה / יציבה" }
+                ],
+                iyengarNote: "טדאסאנה היא התנוחה הראשונה והבסיסית ביותר מבין תנוחות העמידה. באור על היוגה מדגיש איינגר: למדו לעמוד שווה על עקבי הרגליים והבהונות, כשהמשקל מחולק באופן מושלם כהר איתן."
             },
             {
-                type: 'image',
-                question: "איזו תנוחה מתוארת באיור זה, המדמה כלב מתמתח?",
-                media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="mx-auto w-48 h-48 text-[#8C92AC]">
-                            <line x1="20" y1="170" x2="180" y2="170" stroke="#E8D4D4" stroke-width="4"/>
-                            <path d="M50 170 L100 70 L150 170" />
-                            <circle cx="85" cy="115" r="12" fill="#D4B4B4" stroke="none"/>
-                            <line x1="50" y1="170" x2="100" y2="70" />
-                        </svg>`,
-                options: ["אוטנאסנה", "אדו מוקה שוואנאסנה", "ויראסנה", "הלאסנה"],
-                correctAnswer: 1, 
-                explanation: "אדו מוקה שוואנאסנה (כלב מביט למטה). פירוק: אדו = מטה, מוקה = פנים, שוואנה = כלב."
+                id: "adho_mukha_identify",
+                sanskritScript: "अधोमुखश्वानासन • Adho Mukha Śvānāsana",
+                poseHebrewName: "אדו מוקה שוואנאסאנה",
+                question: "איזו תנוחה מוצגת בתמונה?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ado-muka-shvanasana.jpg?width=600",
+                options: [
+                    "אורדווה מוקה שוואנאסאנה",
+                    "אדו מוקה שוואנאסאנה",
+                    "פשצ'ימוטאנאסאנה",
+                    "צ'טורנגה דנדאסאנה"
+                ],
+                correctIndex: 1,
+                breakdown: [
+                    { root: "אדו (Adho)", meaning: "כלפי מטה" },
+                    { root: "מוקה (Mukha)", meaning: "פנים" },
+                    { root: "שוואנה (Śvāna)", meaning: "כלב" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "התנוחה מחקה כלב המותח את איבריו קדימה ולמטה. איינגר מציין שהיא מפיגה עייפות, מזרימה דם ללב ולמוח ומשחררת נוקשות בעקבים ובכתפיים."
             },
             {
-                type: 'text',
-                question: "בתנוחת אורדווה מוקה שוואנאסנה (Urdhva Mukha Svanasana), מה משמעות המילה 'אורדווה'?",
-                options: ["פנים", "למטה", "למעלה / מעלה", "כלב"],
-                correctAnswer: 2,
-                explanation: "אורדווה = למעלה. בניגוד לאדו (מטה), כאן הכלב מביט למעלה אל התקרה."
+                id: "trikonasana_root",
+                sanskritScript: "उत्थित त्रिकोणासन • Utthita Trikoṇāsana",
+                poseHebrewName: "אוטיטה טריקונאסאנה",
+                question: "מה פירוש הצירוף 'טְרִי' (Tri) ו-'קוֹנָה' (Koṇa)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Trikonasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "שלוש זוויות (משולש)",
+                    "שלוש גפיים",
+                    "מתיחת שלושת הערוצים",
+                    "שלושת הלוחמים"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "אוטיטה (Utthita)", meaning: "מוארך / מורם" },
+                    { root: "טרי (Tri)", meaning: "שלוש" },
+                    { root: "קונה (Koṇa)", meaning: "זווית" }
+                ],
+                iyengarNote: "בתנוחת המשולש המוארך, הגב והרגליים מתוחים באותו מישור. לפי איינגר, היא מחזקת את שרירי הרגליים, פותחת את בית החזה ומסירה נוקשות באגן."
             },
             {
-                type: 'text',
-                question: "המילה 'אוט' (Ut) משמעותה עז/אינטנסיבי. מה המשמעות של 'טאנה' (Tana) באוטנאסנה (Uttanasana)?",
-                options: ["מתיחה", "ישיבה", "כפיפה", "ראש"],
-                correctAnswer: 0,
-                explanation: "טאנה = מתיחה. אוטנאסנה היא כפיפה חזקה לפנים היוצרת מתיחה אינטנסיבית של החלק האחורי."
+                id: "vrikshasana_identify",
+                sanskritScript: "वृक्षासन • Vṛkṣāsana",
+                poseHebrewName: "וריקשאסאנה (תנוחת העץ)",
+                question: "מה מסמלת המילה 'וריקשה' (Vṛkṣa) בתנוחה זו?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Vriksasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "ענף גמיש",
+                    "עץ",
+                    "שורש",
+                    "פרח הלוטוס"
+                ],
+                correctIndex: 1,
+                breakdown: [
+                    { root: "וריקשה (Vṛkṣa)", meaning: "עץ" },
+                    { root: "אסאנה (Āsana)", meaning: "יציבה" }
+                ],
+                iyengarNote: "וריקשאסאנה מעניקה יציבות נפשית ומפתחת שיווי משקל וריכוז. איינגר מלמד לקבע את כף הרגל במעלה הירך הפנימית ולמתוח את הזרועות ישרות מעלה."
             },
             {
-                type: 'text',
-                question: "מה הפירוש של המילה 'וירא' (Vira) בתנוחת ויראסנה (Virasana)?",
-                options: ["חכם", "גיבור", "עץ", "לוטוס"],
-                correctAnswer: 1,
-                explanation: "וירה = גיבור. ויראסנה היא תנוחת הגיבור, ישיבה המטפחת אומץ ויציבות."
+                id: "virabhadrasana_name",
+                sanskritScript: "वीरभद्रासन • Vīrabhadrāsana",
+                poseHebrewName: "ויראבדראסאנה",
+                question: "על שם מי קרויה סדרת תנוחות ה'ויראבדראסאנה'?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Virabhadrasana_II_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "מלך קדום מהוודות",
+                    "הלוחם הגיבור שנוצר ממחלפות ראשו של שיווה",
+                    "אל השמש והאור",
+                    "שמו של הנזיר הראשון שלמד יוגה"
+                ],
+                correctIndex: 1,
+                breakdown: [
+                    { root: "וירא (Vīra)", meaning: "גיבור / אמיץ" },
+                    { root: "בהדרה (Bhadra)", meaning: "נעלה / מבורך" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "ויראבדרא היא דמות מיתולוגית לוחמת. התנוחה מפתחת אומץ לב, כוח ברגליים וגמישות במפרקי הירך."
             },
             {
-                type: 'image',
-                question: "מה המשמעות של 'טרי' ו-'קונה' בתנוחת טריקונאסנה (Trikonasana)?",
-                media: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" class="mx-auto w-40 h-40 text-[#D4B4B4]">
-                            <polygon points="100,30 170,170 30,170" fill="#FDFBF7"/>
-                        </svg>`,
-                options: ["ישר ומתוח", "שתיים ויד", "משולש והפוך", "שלוש וזווית"],
-                correctAnswer: 3,
-                explanation: "טרי = שלוש (3), קונה = זווית. לכן טריקונאסנה מתורגמת כ'תנוחת המשולש'."
+                id: "sirsasana_crown",
+                sanskritScript: "सालम्ब शीर्षासन • Sālamba Śīrṣāsana",
+                poseHebrewName: "סאלמבה שירשאסאנה",
+                question: "ב'אור על היוגה', שירשאסאנה מכונה 'מלך התנוחות'. מה משמעות המילה 'שירשה' (Śīrṣa)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Salamba_Sirsasana_-_Supported_Headstand.jpg?width=600",
+                options: [
+                    "ראש",
+                    "כתפיים",
+                    "נר / להבה",
+                    "כתר"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "סה (Sa)", meaning: "ביחד / עם" },
+                    { root: "אלמבה (Ālamba)", meaning: "תמיכה / משענת" },
+                    { root: "שירשה (Śīrṣa)", meaning: "ראש" }
+                ],
+                iyengarNote: "שירשאסאנה מזינה את תאי המוח ומספקת בהירות מחשבתית. ביצוע מדויק על פי איינגר דורש שהמשקל יישאר על האמות ולא ידחס את חוליות הצוואר."
             },
             {
-                type: 'text',
-                question: "איזו תנוחה נקראת \"מלכת התנוחות\" ופירוש שמה הוא תנוחת הראש?",
-                options: ["שירשאסנה (Shirshasana)", "סרוונגאסנה (Sarvangasana)", "טדאסנה (Tadasana)", "הלאסנה (Halasana)"],
-                correctAnswer: 0,
-                explanation: "שירשה = ראש. שירשאסנה היא עמידת הראש, המוכרת כ'אב' או 'מלכת' התנוחות."
+                id: "halasana_tool",
+                sanskritScript: "हलासन • Halāsana",
+                poseHebrewName: "הלאסאנה",
+                question: "איזה כלי חקלאי הודי מסורתי נתן לתנוחה זו את שמה?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Udi_demonstrating_Halasana_(plough_pose)-_2016.jpg?width=600",
+                options: [
+                    "מגל",
+                    "מחרשה",
+                    "עגלת עץ",
+                    "מעדר"
+                ],
+                correctIndex: 1,
+                breakdown: [
+                    { root: "הָלָה (Hala)", meaning: "מחרשה" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "הגוף בהלאסאנה מדמה מחרשה. התנוחה מזרימה דם לאיברי הבטן, מרגיעה את מערכת העצבים ומרעננת את עמוד השדרה."
             },
             {
-                type: 'text',
-                question: "בתנוחת סרוונגאסנה (Sarvangasana), הידועה כעמידת כתפיים, מה פירוש המילה 'סרווה'?",
-                options: ["צוואר", "איבר", "הכל / כל", "הפוך"],
-                correctAnswer: 2,
-                explanation: "סרווה = הכל, אנגה = איבר. זוהי תנוחה המיטיבה עם כל איברי הגוף."
+                id: "paschimo_direction",
+                sanskritScript: "पश्चिमोत्तानासन • Paścimottānāsana",
+                poseHebrewName: "פשצ'ימוטאנאסאנה",
+                question: "המילה 'פשצ'ימה' (Paścima) פירושה מערב. מה מסמל 'המערב' בגוף האדם לפי היוגה?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Paschimotanasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "החלק הקדמי (הפנים לחום השמש)",
+                    "החלק האחורי של כל הגוף (מהעקבים ועד הראש)",
+                    "צד שמאל של הגוף (הצד הירחי)",
+                    "אזור הלב והנשימה"
+                ],
+                correctIndex: 1,
+                breakdown: [
+                    { root: "פשצ'ימה (Paścima)", meaning: "מערב / צד אחורי" },
+                    { root: "אוט-טאנה (Ut-tāna)", meaning: "מתיחה עזה" }
+                ],
+                iyengarNote: "היוגי נהג לתרגל כשפניו למזרח, ולכן גבו הוא ה'מערב'. פשצ'ימוטאנאסאנה היא המתיחה העזה והמרגיעה של כל חלקו האחורי של הגוף."
             },
             {
-                type: 'text',
-                question: "ממה מורכב השם צ'טורנגה דנדאסנה (Chaturanga Dandasana)?",
-                options: ["שמונה, איבר, משטח", "ארבע, איבר, מקל", "ידיים, רגליים, בטן", "שתיים, מקל, חזק"],
-                correctAnswer: 1,
-                explanation: "צ'טור = ארבע, אנגה = איבר, דנדה = מקל. התנוחה היא שהייה על ארבעת הגפיים כמו מקל ישר."
+                id: "bhujangasana_snake",
+                sanskritScript: "भुजङ्गासन • Bhujaṅgāsana",
+                poseHebrewName: "בהוג'אנגאסאנה",
+                question: "איזה בעל חיים מיוצג בתנוחת ה'בהוג'אנגאסאנה'?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Bhujangasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "נחש / קוברה",
+                    "תנין",
+                    "עקרב",
+                    "ברבור"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "בהוג'אנגה (Bhujaṅga)", meaning: "נחש קוברה" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "התנוחה מדמה נחש הזוקף את ראשו. איינגר מדגיש לפתוח את בית החזה לפנים ולא לדחוס את הגב התחתון."
             },
             {
-                type: 'text',
-                question: "מה מסמלת המילה 'פשצ'ימה' (Paschima) בתנוחה פשצ'ימוטנאסנה (Paschimottanasana)?",
-                options: ["מערב / החלק האחורי", "מזרח / החלק הקדמי", "שמיים / מעלה", "אדמה / מטה"],
-                correctAnswer: 0,
-                explanation: "פשצ'ימה = מערב. ביוגה, צד מערב מתייחס לחלק האחורי של הגוף, הנמתח בתנוחה זו."
+                id: "utkatasana_power",
+                sanskritScript: "उत्कटासन • Utkaṭāsana",
+                poseHebrewName: "אוטקטאסאנה",
+                question: "מהי המשמעות המדויקת של המילה 'אוּטְקַטָה' (Utkaṭa)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Utkatasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "עוצמתי / עז / סוער",
+                    "כיסא מלכות",
+                    "ברך כפופה",
+                    "עמידת ברק"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "אוטקטה (Utkaṭa)", meaning: "עוצמתי / עז" },
+                    { root: "אסאנה (Āsana)", meaning: "יציבה" }
+                ],
+                iyengarNote: "למרות שלעיתים מכנים אותה 'תנוחת הכיסא', פירושה האמיתי הוא 'התנוחה העוצמתית'. היא מעוררת חום, מחזקת את שרירי הירכיים ומרימה את הסרעפת."
             },
             {
-                type: 'text',
-                question: "איזו תנוחה מקבלת את שמה מהמילה 'הלה' (Hala) שמשמעותה מחרשה?",
-                options: ["נאוואסנה", "באקאסנה", "הלאסנה", "בהוג'נגאסנה"],
-                correctAnswer: 2,
-                explanation: "הלה = מחרשה. בהלאסנה (Halasana) הגוף והרגליים יוצרים צורה המזכירה מחרשה הודית מסורתית."
+                id: "parsvakonasana_side",
+                sanskritScript: "उत्थित पार्श्वकोणासन • Utthita Pārśvakoṇāsana",
+                poseHebrewName: "אוטיטה פארשוואקונאסאנה",
+                question: "מה פירוש החלק 'פַּארְשְׁוָוה' (Pārśva) בשם התנוחה?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Utthita-Parshvakonasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "צד / אגף",
+                    "זווית ישרה",
+                    "יד מתוחה",
+                    "עמוד שדרה"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "אוטיטה (Utthita)", meaning: "מוארך" },
+                    { root: "פארשווא (Pārśva)", meaning: "צד / צלע" },
+                    { root: "קונה (Koṇa)", meaning: "זווית" }
+                ],
+                iyengarNote: "יוצרת קו מתיחה ישר ואחיד מעקב כף הרגל האחורית ועד לקצות אצבעות היד העליונה לאורך כל צד הגוף."
             },
             {
-                type: 'text',
-                question: "מה פירוש המילה 'בהוג'נגה' (Bhujanga) בתנוחת בהוג'נגאסנה?",
-                options: ["כלב", "חתול", "עגור", "נחש / קוברה"],
-                correctAnswer: 3,
-                explanation: "בהוג'נגה = נחש. תנוחת הקוברה, בה מרכז החזה מורם כמו ראש של נחש מוכן להכשה."
+                id: "virasana_sitting",
+                sanskritScript: "वीरासन • Vīrāsana",
+                poseHebrewName: "ויראסאנה",
+                question: "כיצד יושבים בתנוחת ויראסאנה על פי הוראותיו של איינגר?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Virasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "הברכיים צמודות, כפות הרגליים לצדי הירכיים, והישבנים מונחים על הרצפה",
+                    "ישיבה שלובת רגליים כשכפות הרגליים מעל הירכיים",
+                    "עמידת ברכיים בפישוק רחב",
+                    "ישיבה ישירות על שני העקבים"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "וירה (Vīra)", meaning: "גיבור" },
+                    { root: "אסאנה (Āsana)", meaning: "ישיבה" }
+                ],
+                iyengarNote: "בוויראסאנה (תנוחת הגיבור) הרגליים מקבילות והישבן נח בין העקבים. איינגר ממליץ עליה בחום לאחר ארוחה להקלה על תחושת כבדות בבטן."
             },
             {
-                type: 'text',
-                question: "בתנוחת באדהה קונאסנה (Baddha Konasana), מה משמעות המילה 'באדהה'?",
-                options: ["קשור / אחוז", "פתוח / רחב", "ישר", "כפוף"],
-                correctAnswer: 0,
-                explanation: "באדהה = קשור, קונה = זווית. זוהי 'תנוחת הזווית הקשורה', שבה כפות הרגליים אחוזות יחד."
+                id: "ustrasana_camel",
+                sanskritScript: "उष्ट्रासन • Uṣṭrāsana",
+                poseHebrewName: "אושטראסאנה",
+                question: "מה פירוש המילה 'אוּשְׁטְרָה' (Uṣṭra)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Ustrasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "גמל",
+                    "סוס",
+                    "קשת",
+                    "הר געש"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "אושְׁטרה (Uṣṭra)", meaning: "גמל" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "אושטראסאנה (תנוחת הגמל) מקשתת את כל עמוד השדרה לאחור, מרחיבה את הריאות ומשפרת את יציבת הכתפיים השפופות."
             },
             {
-                type: 'text',
-                question: "על שם מה קרויה תנוחת נאוואסנה (Navasana)?",
-                options: ["סירה", "קשת", "גשר", "גלגל"],
-                correctAnswer: 0,
-                explanation: "נאווה = סירה. בתנוחה זו הגוף מוחזק בזווית המזכירה צורת סירה השטה על המים."
+                id: "dhanurasana_bow",
+                sanskritScript: "धनुरासन • Dhanurāsana",
+                poseHebrewName: "דהנוראסאנה",
+                question: "מה משמעות המילה 'דְהָנוּר' (Dhanur) בסנסקריט?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Dhanurasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "קשת של צייד",
+                    "חץ שלוח",
+                    "גלגל עגלה",
+                    "אבן חן"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "דהנור (Dhanur)", meaning: "קשת" },
+                    { root: "אסאנה (Āsana)", meaning: "תנוחה" }
+                ],
+                iyengarNote: "הזרועות משמשות כמיתר הקשת המושך את הקרסוליים והשוקיים מעלה, והבטן מהווה את הבסיס המאוזן של הגוף על הקרקע."
             },
             {
-                type: 'text',
-                question: "איזה בעל חיים מיוצג בתנוחת באקאסנה (Bakasana)?",
-                options: ["נשר", "טווס", "עגור / חסידה", "יונה"],
-                correctAnswer: 2,
-                explanation: "באקה = עגור. באקאסנה היא תנוחת שיווי משקל על הידיים המדמה עגור העומד בבריכת מים."
+                id: "gomukhasana_cow",
+                sanskritScript: "गोमुखासन • Gomukhāsana",
+                poseHebrewName: "גומוקהאסאנה",
+                question: "ממה מורכבות המילים 'גוֹ' (Go) ו-'מוּקְהָה' (Mukha)?",
+                imageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Gomukhasana_Yoga-Asana_Nina-Mel.jpg?width=600",
+                options: [
+                    "פרה + פנים (פני פרה)",
+                    "אור + שחר",
+                    "יד + כתף",
+                    "חלב + טוהר"
+                ],
+                correctIndex: 0,
+                breakdown: [
+                    { root: "גו (Go)", meaning: "פרה" },
+                    { root: "מוקהה (Mukha)", meaning: "פנים" }
+                ],
+                iyengarNote: "מנח הרגליים המוצלבות והידיים האחוזות מאחורי הגב מזכיר מבנה פני פרה. תנוחה מעולה לפתיחת בית החזה ומפרקי הכתף."
             }
         ];
 
-        let currentQuestionIndex = -1;
-        let selectedOptionIndex = null;
-
-        const views = {
-            start: document.getElementById('start-view'),
-            quiz: document.getElementById('quiz-view')
+        /* Fallback SVG drawings for each pose in case Wikimedia images fail or are blocked */
+        const POSE_FALLBACK_SVGS = {
+            default: `<svg class="w-28 h-28 mx-auto text-terracotta" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="50" cy="20" r="10"/><path d="M50 30 L50 70 L30 95 M50 70 L70 95 M25 45 L75 45"/></svg>`
         };
-        
-        const ui = {
-            questionText: document.getElementById('question-text'),
-            questionMedia: document.getElementById('question-media'),
-            optionsContainer: document.getElementById('options-container'),
-            checkBtn: document.getElementById('check-btn'),
-            feedbackPanel: document.getElementById('feedback-panel'),
-            feedbackTitle: document.getElementById('feedback-title'),
-            feedbackExplanation: document.getElementById('feedback-explanation'),
-            continueBtn: document.getElementById('continue-btn'),
-            actionBar: document.getElementById('action-bar')
-        };
+    </script>
 
-        function switchView(viewName) {
-            Object.values(views).forEach(v => {
-                if(v) v.classList.remove('active');
-            });
-            if(views[viewName]) views[viewName].classList.add('active');
-        }
+    <script>
+        class SanskritQuizEngine {
+            constructor() {
+                // Navigation history: an array storing indices of questions seen in order
+                this.history = [];
+                this.historyPointer = -1;
+                this.selectedOptionIndex = null;
+                this.isAnswerChecked = false;
 
-        function startQuiz() {
-            switchView('quiz');
-            nextQuestion();
-        }
-
-        function renderQuestion() {
-            selectedOptionIndex = null;
-            ui.feedbackPanel.classList.remove('show');
-            ui.actionBar.style.opacity = '1';
-            
-            ui.checkBtn.disabled = true;
-            ui.checkBtn.className = "duo-btn w-full bg-cream-dark text-grey-light font-bold text-lg py-4 rounded-2xl cursor-not-allowed";
-
-            const q = questions[currentQuestionIndex];
-            
-            ui.questionText.innerText = q.question;
-
-            if (q.type === 'image' && q.media) {
-                ui.questionMedia.innerHTML = q.media;
-                ui.questionMedia.classList.remove('hidden');
-            } else {
-                ui.questionMedia.innerHTML = '';
-                ui.questionMedia.classList.add('hidden');
+                // Cached DOM elements
+                this.dom = {
+                    startScreen: document.getElementById('start-screen'),
+                    quizScreen: document.getElementById('quiz-screen'),
+                    prevBtn: document.getElementById('prev-btn'),
+                    counterBadge: document.getElementById('question-counter'),
+                    sanskritBanner: document.getElementById('sanskrit-script-banner'),
+                    questionText: document.getElementById('question-text'),
+                    poseImage: document.getElementById('pose-image'),
+                    imageSkeleton: document.getElementById('image-loading-skeleton'),
+                    optionsGrid: document.getElementById('options-grid'),
+                    checkBtn: document.getElementById('check-btn'),
+                    feedbackSheet: document.getElementById('feedback-sheet'),
+                    feedbackIcon: document.getElementById('feedback-icon'),
+                    feedbackHeadline: document.getElementById('feedback-headline'),
+                    feedbackSubhead: document.getElementById('feedback-subhead'),
+                    sanskritChipsContainer: document.getElementById('sanskrit-chips-container'),
+                    iyengarQuote: document.getElementById('iyengar-quote'),
+                    nextQuestionBtn: document.getElementById('next-question-btn'),
+                    imageModal: document.getElementById('image-modal'),
+                    modalImage: document.getElementById('modal-image'),
+                    modalTitle: document.getElementById('modal-title')
+                };
             }
 
-            ui.optionsContainer.innerHTML = '';
-            q.options.forEach((optionText, index) => {
-                const btn = document.createElement('button');
-                btn.className = "duo-btn w-full text-right p-4 rounded-2xl border-2 border-cream-dark bg-white text-grey-dark font-medium text-lg hover:bg-gray-50 transition-colors shadow-sm";
-                btn.innerText = optionText;
-                btn.onclick = () => selectOption(index, btn);
-                ui.optionsContainer.appendChild(btn);
-            });
-        }
+            startQuiz() {
+                this.dom.startScreen.classList.add('hidden');
+                this.dom.quizScreen.classList.remove('hidden');
+                this.dom.quizScreen.classList.add('flex');
 
-        function selectOption(index, btnElement) {
-            if (ui.feedbackPanel.classList.contains('show')) return;
+                this.history = [];
+                this.historyPointer = -1;
+                this.pickNextQuestion(true);
+            }
 
-            selectedOptionIndex = index;
+            exitToHome() {
+                this.dom.quizScreen.classList.add('hidden');
+                this.dom.quizScreen.classList.remove('flex');
+                this.dom.startScreen.classList.remove('hidden');
+                this.dom.feedbackSheet.classList.remove('open');
+            }
 
-            Array.from(ui.optionsContainer.children).forEach(child => {
-                child.className = "duo-btn w-full text-right p-4 rounded-2xl border-2 border-cream-dark bg-white text-grey-dark font-medium text-lg hover:bg-gray-50 transition-colors shadow-sm";
-            });
+            getCurrentQuestion() {
+                if (this.historyPointer < 0 || this.historyPointer >= this.history.length) return null;
+                const poseIndex = this.history[this.historyPointer];
+                return POSE_DATABASE[poseIndex];
+            }
 
-            btnElement.className = "duo-btn w-full text-right p-4 rounded-2xl border-2 border-dustyPink-dark bg-dustyPink-light text-grey-dark font-bold text-lg shadow-[0_2px_0_0_#B89999]";
-
-            ui.checkBtn.disabled = false;
-            ui.checkBtn.className = "duo-btn w-full bg-dustyPink text-white font-bold text-lg py-4 rounded-2xl shadow-[0_4px_0_0_#B89999] hover:bg-dustyPink-dark cursor-pointer";
-        }
-
-        function checkAnswer() {
-            if (selectedOptionIndex === null) return;
-
-            const q = questions[currentQuestionIndex];
-            const isCorrect = (selectedOptionIndex === q.correctAnswer);
-
-            Array.from(ui.optionsContainer.children).forEach((btn, idx) => {
-                btn.onclick = null; 
-                btn.style.cursor = 'default';
+            // Pick a new random question not equal to current
+            pickNextQuestion(isFirst = false) {
+                let nextIndex;
+                const currentPoseIndex = (this.historyPointer >= 0) ? this.history[this.historyPointer] : -1;
                 
-                if (idx === q.correctAnswer) {
-                    btn.classList.add('border-feedback-greenDark', 'bg-green-50', 'text-feedback-greenDark');
-                    btn.classList.remove('border-dustyPink-dark', 'bg-dustyPink-light', 'text-grey-dark');
-                } else if (idx === selectedOptionIndex && !isCorrect) {
-                    btn.classList.add('border-feedback-redDark', 'bg-red-50', 'text-feedback-redDark', 'opacity-50');
-                    btn.classList.remove('border-dustyPink-dark', 'bg-dustyPink-light');
-                } else {
-                    btn.classList.add('opacity-50');
-                }
-            });
+                do {
+                    nextIndex = Math.floor(Math.random() * POSE_DATABASE.length);
+                } while (nextIndex === currentPoseIndex && POSE_DATABASE.length > 1);
 
-            showFeedback(isCorrect, q.explanation);
-        }
-
-        function showFeedback(isCorrect, explanation) {
-            ui.actionBar.style.opacity = '0';
-            
-            if (isCorrect) {
-                ui.feedbackPanel.className = "feedback-panel absolute bottom-0 left-0 w-full p-6 flex flex-col justify-between z-20 min-h-[180px] show bg-feedback-green";
-                ui.feedbackTitle.innerHTML = `
-                    <div class="bg-white rounded-full p-1 text-feedback-greenDark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <span class="text-feedback-greenDark">מצוין!</span>
-                `;
-                ui.feedbackExplanation.className = "text-base mb-6 font-medium text-green-900 text-right";
-                ui.continueBtn.className = "duo-btn w-full font-bold text-lg py-4 rounded-2xl bg-feedback-greenDark text-white shadow-[0_4px_0_0_#3f7a00] hover:bg-green-700";
-            } else {
-                ui.feedbackPanel.className = "feedback-panel absolute bottom-0 left-0 w-full p-6 flex flex-col justify-between z-20 min-h-[180px] show bg-feedback-red";
-                ui.feedbackTitle.innerHTML = `
-                    <div class="bg-white rounded-full p-1 text-feedback-redDark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </div>
-                    <span class="text-feedback-redDark">לא מדויק</span>
-                `;
-                ui.feedbackExplanation.className = "text-base mb-6 font-medium text-red-900 text-right";
-                ui.continueBtn.className = "duo-btn w-full font-bold text-lg py-4 rounded-2xl bg-feedback-redDark text-white shadow-[0_4px_0_0_#b51919] hover:bg-red-700";
+                this.history.push(nextIndex);
+                this.historyPointer = this.history.length - 1;
+                this.renderCurrentQuestion();
             }
 
-            ui.feedbackExplanation.innerText = explanation;
+            goToPreviousQuestion() {
+                if (this.historyPointer > 0) {
+                    this.historyPointer--;
+                    this.renderCurrentQuestion();
+                }
+            }
+
+            advanceToNextQuestion() {
+                // If the student went back and is advancing forward through history
+                if (this.historyPointer < this.history.length - 1) {
+                    this.historyPointer++;
+                    this.renderCurrentQuestion();
+                } else {
+                    // Otherwise generate a new question
+                    this.pickNextQuestion();
+                }
+            }
+
+            renderCurrentQuestion() {
+                const q = this.getCurrentQuestion();
+                if (!q) return;
+
+                // Close feedback sheet & reset state
+                this.dom.feedbackSheet.classList.remove('open');
+                this.selectedOptionIndex = null;
+                this.isAnswerChecked = false;
+
+                // Update navigation controls
+                this.dom.prevBtn.disabled = (this.historyPointer <= 0);
+                this.dom.counterBadge.innerText = `שאלה ${this.historyPointer + 1}`;
+
+                // Update question text & Sanskrit header
+                this.dom.sanskritBanner.innerText = q.sanskritScript;
+                this.dom.questionText.innerText = q.question;
+
+                // Load pose image
+                this.dom.imageSkeleton.style.display = 'flex';
+                this.dom.poseImage.style.opacity = '0';
+                this.dom.poseImage.src = q.imageUrl;
+                this.dom.poseImage.alt = q.poseHebrewName;
+
+                // Render options
+                this.dom.optionsGrid.innerHTML = '';
+                q.options.forEach((optText, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-cream-200 bg-white hover:bg-cream-50 text-charcoal font-medium text-base shadow-sm flex items-center justify-between";
+                    btn.innerHTML = `
+                        <span class="flex-1">${optText}</span>
+                        <span class="w-6 h-6 rounded-full border border-cream-300 flex items-center justify-center text-xs text-charcoal-muted ml-1 opt-circle">
+                            ${['א', 'ב', 'ג', 'ד'][idx]}
+                        </span>
+                    `;
+                    btn.onclick = () => this.selectOption(idx, btn);
+                    this.dom.optionsGrid.appendChild(btn);
+                });
+
+                // Reset Check button
+                this.dom.checkBtn.disabled = true;
+                this.dom.checkBtn.className = "duo-button w-full py-4 px-6 rounded-2xl bg-cream-300 text-charcoal-muted font-bold text-base shadow-sm cursor-not-allowed";
+                this.dom.checkBtn.innerText = "בדוק תשובה";
+            }
+
+            selectOption(index, btnElement) {
+                if (this.isAnswerChecked) return;
+
+                this.selectedOptionIndex = index;
+
+                // Reset all other option button styles
+                Array.from(this.dom.optionsGrid.children).forEach(child => {
+                    child.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-cream-200 bg-white hover:bg-cream-50 text-charcoal font-medium text-base shadow-sm flex items-center justify-between";
+                    const circle = child.querySelector('.opt-circle');
+                    if (circle) circle.className = "w-6 h-6 rounded-full border border-cream-300 flex items-center justify-center text-xs text-charcoal-muted ml-1 opt-circle";
+                });
+
+                // Highlight selected button
+                btnElement.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-terracotta bg-terracotta-light text-charcoal font-bold text-base shadow-[0_2px_0_0_#C07373] flex items-center justify-between";
+                const activeCircle = btnElement.querySelector('.opt-circle');
+                if (activeCircle) activeCircle.className = "w-6 h-6 rounded-full bg-terracotta text-white flex items-center justify-center text-xs font-bold ml-1 opt-circle";
+
+                // Enable Check button
+                this.dom.checkBtn.disabled = false;
+                this.dom.checkBtn.className = "duo-button w-full py-4 px-6 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-base shadow-[0_4px_0_0_#853F3F] cursor-pointer";
+            }
+
+            checkCurrentAnswer() {
+                if (this.selectedOptionIndex === null || this.isAnswerChecked) return;
+                this.isAnswerChecked = true;
+
+                const q = this.getCurrentQuestion();
+                const isCorrect = (this.selectedOptionIndex === q.correctIndex);
+
+                // Disable options and paint correct/wrong
+                Array.from(this.dom.optionsGrid.children).forEach((btn, idx) => {
+                    btn.disabled = true;
+                    btn.style.cursor = 'default';
+
+                    if (idx === q.correctIndex) {
+                        btn.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-emerald-600 bg-emerald-50 text-emerald-900 font-bold text-base flex items-center justify-between";
+                    } else if (idx === this.selectedOptionIndex && !isCorrect) {
+                        btn.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-base opacity-75 flex items-center justify-between";
+                    } else {
+                        btn.className = "duo-button w-full text-right p-4 rounded-2xl border-2 border-cream-200 bg-white/60 text-charcoal-muted text-base opacity-40 flex items-center justify-between";
+                    }
+                });
+
+                this.showFeedbackDrawer(isCorrect, q);
+            }
+
+            showFeedbackDrawer(isCorrect, q) {
+                // Populate Sanskrit Breakdown Chips
+                this.dom.sanskritChipsContainer.innerHTML = '';
+                q.breakdown.forEach(item => {
+                    const chip = document.createElement('div');
+                    chip.className = "px-3 py-1.5 rounded-xl bg-white border border-cream-300 shadow-sm flex items-center gap-1.5 text-xs";
+                    chip.innerHTML = `
+                        <span class="font-bold text-terracotta-dark">${item.root}:</span>
+                        <span class="text-charcoal font-medium">${item.meaning}</span>
+                    `;
+                    this.dom.sanskritChipsContainer.appendChild(chip);
+                });
+
+                // Populate Iyengar Light on Yoga note
+                this.dom.iyengarQuote.innerText = q.iyengarNote;
+
+                if (isCorrect) {
+                    this.dom.feedbackSheet.style.borderColor = "#728C74";
+                    this.dom.feedbackIcon.className = "w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-bold text-white bg-sage-dark";
+                    this.dom.feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>`;
+                    this.dom.feedbackHeadline.innerText = "נכון מאוד!";
+                    this.dom.feedbackHeadline.className = "text-xl font-bold leading-tight text-sage-dark";
+                    this.dom.feedbackSubhead.innerText = q.poseHebrewName;
+                    this.dom.nextQuestionBtn.className = "duo-button w-full py-4 rounded-2xl font-bold text-lg text-white bg-sage-dark hover:bg-sage shadow-[0_4px_0_0_#566E58]";
+                } else {
+                    this.dom.feedbackSheet.style.borderColor = "#C07373";
+                    this.dom.feedbackIcon.className = "w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-bold text-white bg-terracotta";
+                    this.dom.feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>`;
+                    this.dom.feedbackHeadline.innerText = "לא מדויק";
+                    this.dom.feedbackHeadline.className = "text-xl font-bold leading-tight text-terracotta-deep";
+                    this.dom.feedbackSubhead.innerText = `התשובה הנכונה: ${q.options[q.correctIndex]}`;
+                    this.dom.nextQuestionBtn.className = "duo-button w-full py-4 rounded-2xl font-bold text-lg text-white bg-terracotta hover:bg-terracotta-dark shadow-[0_4px_0_0_#853F3F]";
+                }
+
+                // Slide up feedback drawer
+                this.dom.feedbackSheet.classList.add('open');
+            }
+
+            onImageLoaded() {
+                this.dom.imageSkeleton.style.display = 'none';
+                this.dom.poseImage.style.opacity = '1';
+            }
+
+            onImageFailed(imgElement) {
+                this.dom.imageSkeleton.style.display = 'none';
+                imgElement.style.display = 'none';
+                
+                // Fallback SVG representation
+                const fallbackContainer = document.createElement('div');
+                fallbackContainer.className = "w-full h-full flex flex-col items-center justify-center text-center p-4 bg-cream-100 rounded-xl";
+                fallbackContainer.innerHTML = `
+                    ${POSE_FALLBACK_SVGS.default}
+                    <span class="text-xs text-charcoal-muted mt-2 font-medium">איור סכמטי של התנוחה</span>
+                `;
+                imgElement.parentNode.appendChild(fallbackContainer);
+            }
+
+            showImageModal() {
+                const q = this.getCurrentQuestion();
+                if (!q) return;
+                this.dom.modalTitle.innerText = `${q.poseHebrewName} • ${q.sanskritScript}`;
+                this.dom.modalImage.src = q.imageUrl;
+                this.dom.imageModal.classList.remove('hidden');
+            }
+
+            hideImageModal() {
+                this.dom.imageModal.classList.add('hidden');
+            }
         }
 
-        function nextQuestion() {
-            // Infinite loop logic: pick a random question that isn't the current one
-            let newIndex;
-            do {
-                newIndex = Math.floor(Math.random() * questions.length);
-            } while (newIndex === currentQuestionIndex && questions.length > 1);
-            
-            currentQuestionIndex = newIndex;
-            renderQuestion();
-        }
-
-        function endQuiz() {
-            // Return to start screen without showing a score
-            switchView('start');
-        }
-        
+        // Initialize application engine on load
+        let quizEngine;
+        window.addEventListener('DOMContentLoaded', () => {
+            quizEngine = new SanskritQuizEngine();
+        });
     </script>
 </body>
 </html>
