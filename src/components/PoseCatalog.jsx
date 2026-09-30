@@ -123,6 +123,22 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
                   {pose.iyengarNote}
                 </div>
 
+                {pose.anatomicalPointers && pose.anatomicalPointers.length > 0 && (
+                  <div className="bg-sky-50/80 border border-sky-200/80 rounded-xl p-2.5 text-xs text-charcoal">
+                    <div className="font-bold text-sky-900 flex items-center gap-1 mb-1">
+                      <span>🎯 כיווני תנועה ופעולה אנטומית:</span>
+                    </div>
+                    <ul className="space-y-1 pr-1 text-[11px]">
+                      {pose.anatomicalPointers.map((p, pIdx) => (
+                        <li key={pIdx} className="flex items-start gap-1">
+                          <span className="text-terracotta shrink-0 font-bold">←</span>
+                          <span><strong>{p.area}:</strong> {p.direction}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {pose.propsGuide && (
                   <div className="bg-amber-50/80 border border-amber-200/80 rounded-xl p-2.5 text-xs text-charcoal">
                     <div className="font-bold text-amber-900 flex items-center gap-1 mb-0.5">

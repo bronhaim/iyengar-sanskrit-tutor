@@ -88,6 +88,24 @@ export const ImageModal = ({ pose, onClose }) => {
             </div>
           )}
 
+          {pose.anatomicalPointers && pose.anatomicalPointers.length > 0 && (
+            <div className="bg-sky-50 border border-sky-200 rounded-xl p-3 text-xs text-charcoal">
+              <div className="font-bold text-sky-900 flex items-center gap-1 mb-1.5">
+                <span>🎯 כיווני תנועה ופעולה אנטומית (Action Vectors):</span>
+              </div>
+              <ul className="space-y-1.5 pr-1">
+                {pose.anatomicalPointers.map((pointer, idx) => (
+                  <li key={idx} className="flex items-start gap-1.5 text-xs">
+                    <span className="text-terracotta shrink-0 font-bold">←</span>
+                    <span>
+                      <strong className="text-charcoal font-bold">{pointer.area}:</strong> {pointer.direction}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {pose.propsGuide && (
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-charcoal">
               <div className="font-bold text-amber-900 flex items-center gap-1 mb-1">
