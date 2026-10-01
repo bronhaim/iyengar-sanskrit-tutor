@@ -3,16 +3,24 @@ import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
   return (
-    <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E5D9C8] sticky top-0 z-40 px-4 sm:px-8 py-3 transition-all">
+    <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E5D9C8] sticky top-0 z-40 px-4 sm:px-8 py-2 sm:py-2.5 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         
-        {/* Brand / Logo (Right in RTL) */}
+        {/* Brand / Logo (Right in RTL) - Styled emblem */}
         <button 
           onClick={() => setCurrentView('home')} 
-          className="text-charcoal hover:opacity-85 transition-opacity text-right"
+          className="flex flex-col items-center sm:items-start justify-center text-charcoal hover:opacity-85 transition-opacity text-right group py-0.5"
+          title="חזרה לדף הבית"
         >
-          <div className="font-bold text-base sm:text-lg text-charcoal leading-tight tracking-tight">
+          {/* Purple Icon on top */}
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-gradient-to-br from-[#7B4B85] to-[#542B5E] text-white flex items-center justify-center text-xs shadow-xs mb-1 group-hover:scale-105 transition-transform border border-[#542B5E]/30">
+            <span className="leading-none text-[11px] sm:text-xs">🕉️</span>
+          </div>
+          <div className="font-bold text-[12px] sm:text-[13px] text-charcoal leading-tight tracking-tight">
             יוגה איינגר לתרגול ביתי
+          </div>
+          <div className="text-[9px] sm:text-[10px] text-charcoal-muted font-normal tracking-wide leading-tight">
+            דיוק, יציבה והעמקה
           </div>
         </button>
 
