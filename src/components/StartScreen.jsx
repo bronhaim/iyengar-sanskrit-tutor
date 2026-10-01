@@ -284,9 +284,6 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 />
               ))}
             </div>
-            <div className="text-[11px] text-charcoal-muted mt-1.5 font-light">
-              לחצו על התמונה או החיצים כדי להחליף תנוחה
-            </div>
 
           </div>
 
