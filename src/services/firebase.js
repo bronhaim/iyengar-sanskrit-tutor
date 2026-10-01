@@ -21,13 +21,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA0r5G50wO7fZMwcgWUp8BcIiqWRZOE6iU",
-  authDomain: "iyengar-yoga-app.firebaseapp.com",
-  projectId: "iyengar-yoga-app",
-  storageBucket: "iyengar-yoga-app.firebasestorage.app",
-  messagingSenderId: "182926733949",
-  appId: "1:182926733949:web:973b857c81217163e2f714",
-  measurementId: "G-KVL3SR29VX"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
