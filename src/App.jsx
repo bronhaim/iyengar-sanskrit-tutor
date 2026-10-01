@@ -204,10 +204,10 @@ export function App() {
           <div className="space-y-1">
             <div className="flex items-center justify-center md:justify-start gap-2 font-bold text-base text-charcoal">
               <span>🕉️</span>
-              <span>לימוד סנסקריט ליוגה • מסורת איינגר</span>
+              <span>יוגה איינגר בבית • תרגול ושמות התנוחות</span>
             </div>
             <p className="text-xs text-charcoal-muted">
-              מוקדש ללימוד שפת היוגה, דגשי אנטומיה ותרגול מעמיק
+              תרגול יוגה איינגר ביתי ולימוד שמות התנוחות בהשראת הספר "אור על היוגה"
             </p>
           </div>
 
@@ -218,19 +218,19 @@ export function App() {
             <button onClick={() => { setCurrentView('catalog'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
               קטלוג תנוחות
             </button>
-            <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
-              חידון סנסקריט
-            </button>
             <button onClick={() => { setCurrentView('sequences'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-amber-800 transition-colors">
-              רצפים ביתיים
+              רצפי שיעורים
+            </button>
+            <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
+              חידון שמות ותנוחות
             </button>
             <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
-              מילון שורשים
+              מילון סנסקריט
             </button>
           </div>
 
           <div className="text-[11px] text-charcoal-muted">
-            מסורת ב.ק.ס איינגר
+            בהשראת הספר "אור על היוגה" • ב.ק.ס איינגר
           </div>
 
         </div>

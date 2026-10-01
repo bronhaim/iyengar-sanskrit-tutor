@@ -17,10 +17,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           </div>
           <div>
             <div className="font-bold text-base sm:text-lg text-charcoal leading-tight">
-              לימוד סנסקריט ליוגה
+              יוגה איינגר בבית
             </div>
             <div className="text-xs text-soft-green font-semibold leading-tight">
-              מסורת איינגר
+              תרגול, שמות התנוחות וסנסקריט
             </div>
           </div>
         </button>
@@ -52,18 +52,6 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           </button>
 
           <button
-            onClick={onStartQuiz || (() => setCurrentView('quiz'))}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
-              currentView === 'quiz' 
-                ? 'bg-white text-terracotta shadow-xs font-bold' 
-                : 'text-charcoal-muted hover:text-charcoal'
-            }`}
-          >
-            <Play className="w-4 h-4 fill-current text-terracotta" />
-            <span>חידון סנסקריט</span>
-          </button>
-
-          <button
             onClick={() => setCurrentView('sequences')}
             className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
               currentView === 'sequences' 
@@ -72,7 +60,19 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             }`}
           >
             <Sparkles className="w-4 h-4 text-amber-600" />
-            <span>רצפים</span>
+            <span>רצפי שיעורים</span>
+          </button>
+
+          <button
+            onClick={onStartQuiz || (() => setCurrentView('quiz'))}
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+              currentView === 'quiz' 
+                ? 'bg-white text-terracotta shadow-xs font-bold' 
+                : 'text-charcoal-muted hover:text-charcoal'
+            }`}
+          >
+            <Play className="w-4 h-4 fill-current text-terracotta" />
+            <span>חידון</span>
           </button>
 
           <button
@@ -84,7 +84,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             }`}
           >
             <BookOpen className="w-4 h-4 text-soft-green" />
-            <span>מילון שורשים</span>
+            <span>מילון סנסקריט</span>
           </button>
         </nav>
 
@@ -99,16 +99,16 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
               תנוחות
             </button>
             <button
+              onClick={() => setCurrentView('sequences')}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'sequences' ? 'bg-white shadow-xs font-bold text-amber-700' : 'text-charcoal-muted'}`}
+            >
+              שיעורים
+            </button>
+            <button
               onClick={onStartQuiz || (() => setCurrentView('quiz'))}
               className={`px-2 py-1 rounded-lg font-medium ${currentView === 'quiz' ? 'bg-white shadow-xs font-bold text-terracotta' : 'text-charcoal-muted'}`}
             >
               חידון
-            </button>
-            <button
-              onClick={() => setCurrentView('roots')}
-              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'roots' ? 'bg-white shadow-xs font-bold text-soft-green' : 'text-charcoal-muted'}`}
-            >
-              שורשים
             </button>
           </div>
 

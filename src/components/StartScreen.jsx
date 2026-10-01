@@ -1,7 +1,82 @@
-import React from 'react';
-import { Play, BookOpen, Compass, Sparkles, ArrowLeft, Heart, Award, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Play, BookOpen, Compass, Sparkles, ArrowLeft, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react';
+
+const SHOWCASE_POSES = [
+  {
+    id: 'utthita-trikonasana',
+    hebrewName: 'אוטיטה טריקונאסאנה',
+    sanskrit: 'Utthita Trikoṇāsana',
+    meaning: 'תנוחת המשולש המוארך',
+    image: '/images/poses/utthita-trikonasana.jpg',
+    fallback: '/images/poses/utthita-trikonasana.png'
+  },
+  {
+    id: 'supta-baddha-konasana',
+    hebrewName: 'סופטה באדהה קונאסאנה',
+    sanskrit: 'Supta Baddhakoṇāsana',
+    meaning: 'זווית קשורה בשכיבה',
+    image: '/images/poses/supta-baddha-konasana.jpg',
+    fallback: '/images/poses/supta-baddha-konasana-guide.jpg'
+  },
+  {
+    id: 'adho-mukha-svanasana',
+    hebrewName: 'אדו מוקה שוואנאסאנה',
+    sanskrit: 'Adho Mukha Śvānāsana',
+    meaning: 'כלב מביט כלפי מטה',
+    image: '/images/poses/adho-mukha-svanasana.jpg',
+    fallback: '/images/poses/adho-mukha-svanasana.png'
+  },
+  {
+    id: 'virabhadrasana-2',
+    hebrewName: 'ויראבדראסאנה II',
+    sanskrit: 'Vīrabhadrāsana II',
+    meaning: 'תנוחת הלוחם השנייה',
+    image: '/images/poses/virabhadrasana-2.jpg',
+    fallback: '/images/poses/virabhadrasana-2.png'
+  },
+  {
+    id: 'vriksasana',
+    hebrewName: 'וריקשאסאנה',
+    sanskrit: 'Vṛkṣāsana',
+    meaning: 'תנוחת העץ',
+    image: '/images/poses/vriksasana.jpg',
+    fallback: '/images/poses/vriksasana.png'
+  },
+  {
+    id: 'salamba-sarvangasana',
+    hebrewName: 'סאלמבה סרוואנגאסאנה',
+    sanskrit: 'Sālamba Sarvāṅgāsana',
+    meaning: 'עמידת כתפיים נתמכת',
+    image: '/images/poses/salamba-sarvangasana.jpg',
+    fallback: '/images/poses/salamba-sarvangasana.png'
+  }
+];
 
 export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, totalPoses }) => {
+  const [currentPoseIdx, setCurrentPoseIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-advance showcase every 4.5 seconds unless paused
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrentPoseIdx((prev) => (prev + 1) % SHOWCASE_POSES.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const nextPose = (e) => {
+    e?.stopPropagation();
+    setCurrentPoseIdx((prev) => (prev + 1) % SHOWCASE_POSES.length);
+  };
+
+  const prevPose = (e) => {
+    e?.stopPropagation();
+    setCurrentPoseIdx((prev) => (prev - 1 + SHOWCASE_POSES.length) % SHOWCASE_POSES.length);
+  };
+
+  const currentPose = SHOWCASE_POSES[currentPoseIdx];
+
   return (
     <div className="w-full flex flex-col gap-12 sm:gap-16 animate-fadeIn pb-12">
       
@@ -15,12 +90,12 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             {/* Iyengar Tradition Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E8E0D6] shadow-xs text-charcoal">
               <span className="text-terracotta">🌸</span>
-              <span>מסורת איינגר • לימוד תנוחות ושורשים</span>
+              <span>בהשראת הספר "אור על היוגה" • ב.ק.ס איינגר</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-[1.18] tracking-tight">
-              לימוד סנסקריט <br className="hidden sm:inline" />
-              <span className="text-terracotta font-serifHebrew">לתנוחות היוגה</span>
+              יוגה איינגר בבית <br className="hidden sm:inline" />
+              <span className="text-terracotta font-serifHebrew">תרגול ושמות התנוחות</span>
             </h1>
 
             <p className="text-sm sm:text-base font-sanskrit text-terracotta-dark tracking-wide dir-ltr text-right font-medium">
@@ -28,25 +103,25 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </p>
 
             <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl">
-              מרחב לימוד שקט ומזמין להבנת שמות תנוחות היוגה, פירוק שורשי הסנסקריט (מה זה אדו, מה זה מוקה, וירה וקונה), ודגשי אנטומיה ותרגול מעמיקים.
+              מרחב מקיף לתרגול יוגה איינגר אישי בבית ולימוד שמות התנוחות: קטלוג תנוחות יוגה מפורט, רצפי שיעורים ביתיים מובנים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
 
             {/* Quick Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <button
-                onClick={onStartQuiz}
+                onClick={onOpenCatalog}
                 className="inline-flex items-center justify-center px-8 py-4 bg-terracotta hover:bg-terracotta-dark text-white rounded-full text-base font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 gap-2.5"
               >
-                <Play className="w-5 h-5 fill-current" />
-                <span>התחל תרגול וחידון יומי</span>
+                <Compass className="w-5 h-5" />
+                <span>קטלוג תנוחות יוגה ({totalPoses})</span>
               </button>
 
               <button
-                onClick={onOpenCatalog}
-                className="inline-flex items-center justify-center px-7 py-4 bg-white border border-[#E8E0D6] hover:border-soft-green text-charcoal hover:text-soft-green rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                onClick={onStartQuiz}
+                className="inline-flex items-center justify-center px-7 py-4 bg-white border border-[#E8E0D6] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
               >
-                <Compass className="w-5 h-5 text-soft-green" />
-                <span>עיון בקטלוג התנוחות ({totalPoses})</span>
+                <Play className="w-5 h-5 fill-current text-terracotta" />
+                <span>חידון שמות ותנוחות</span>
               </button>
             </div>
 
@@ -54,70 +129,116 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             <div className="pt-4 flex flex-wrap items-center gap-5 text-xs text-charcoal-muted">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>צילומי סטודיו מפורטים</span>
+                <span>קטלוג תנוחות יוגה</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>פירוק הברות ושורשים</span>
+                <span>רצפי שיעורים ביתיים</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>הנחיות עזרים (בולסטר, בלוק, חגורה)</span>
+                <span>חידון סנסקריט ואימון</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-soft-green" />
+                <span>מילון סנסקריט</span>
               </div>
             </div>
 
           </div>
 
-          {/* Media Column - Circular Frame with Utthita Trikonasana (Left in RTL - 5 cols) */}
-          <div className="lg:col-span-5 flex justify-center items-center relative">
-            <div className="relative group">
+          {/* Media Column - Interactive Circular Showcase (Left in RTL - 5 cols) */}
+          <div 
+            className="lg:col-span-5 flex flex-col items-center justify-center relative select-none"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="relative group cursor-pointer" onClick={nextPose}>
               
-              {/* Outer decorative ring */}
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-70 group-hover:opacity-100 transition-opacity"></div>
+              {/* Outer decorative glowing ring */}
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
               
-              {/* Main Circular Image Frame (as requested, like Atar's website style) */}
+              {/* Main Circular Image Frame (Interactive pose switcher) */}
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-92 lg:h-92 rounded-full border-8 border-white shadow-2xl overflow-hidden bg-white mx-auto flex items-center justify-center">
                 <img 
-                  src="/images/poses/utthita-trikonasana.jpg" 
-                  alt="אוטיטה טריקונאסאנה - Utthita Trikonasana"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  key={currentPose.id}
+                  src={currentPose.image} 
+                  alt={currentPose.hebrewName}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700 animate-fadeIn"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = '/images/poses/utthita-trikonasana.png';
+                    e.target.src = currentPose.fallback;
                   }}
                 />
+
+                {/* Left / Right Interactive Arrow Overlays */}
+                <button
+                  onClick={prevPose}
+                  aria-label="תנוחה קודמת"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-charcoal flex items-center justify-center shadow-md backdrop-blur-sm opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:scale-110"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                <button
+                  onClick={nextPose}
+                  aria-label="תנוחה הבאה"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-charcoal flex items-center justify-center shadow-md backdrop-blur-sm opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:scale-110"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
               </div>
 
               {/* Floating Pose Badge */}
-              <div className="absolute -bottom-3 sm:bottom-2 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E8E0D6] rounded-2xl px-5 py-2.5 shadow-lg text-center whitespace-nowrap">
+              <div className="absolute -bottom-3 sm:bottom-2 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E8E0D6] rounded-2xl px-5 py-2.5 shadow-lg text-center whitespace-nowrap transition-all">
                 <div className="font-bold text-sm text-charcoal">
-                  אוטיטה טריקונאסאנה
+                  {currentPose.hebrewName}
                 </div>
                 <div className="text-[11px] text-terracotta font-medium">
-                  Utthita Trikoṇāsana • תנוחת המשולש המוארך
+                  {currentPose.sanskrit} • {currentPose.meaning}
                 </div>
               </div>
 
             </div>
+
+            {/* Interactive Carousel Indicator Dots */}
+            <div className="flex items-center justify-center gap-2 mt-6">
+              {SHOWCASE_POSES.map((pose, idx) => (
+                <button
+                  key={pose.id}
+                  onClick={() => setCurrentPoseIdx(idx)}
+                  className={`h-2 rounded-full transition-all ${
+                    idx === currentPoseIdx 
+                      ? 'w-7 bg-terracotta shadow-xs' 
+                      : 'w-2 bg-[#E8E0D6] hover:bg-charcoal-muted'
+                  }`}
+                  aria-label={`עבור לתנוחת ${pose.hebrewName}`}
+                />
+              ))}
+            </div>
+            <div className="text-[11px] text-charcoal-muted mt-1.5 font-light">
+              לחצו על התמונה כדי להחליף תנוחה
+            </div>
+
           </div>
 
         </div>
       </section>
 
-      {/* 2. FEATURE CARDS GRID (Atar site aesthetic with warm cards) */}
+      {/* 2. THE 4 PILLARS OF THE PLATFORM */}
       <section className="space-y-6">
         <div className="text-right">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-charcoal">
-            במה תרצו להעמיק היום?
+            מרחב התרגול והלימוד שלך
           </h2>
           <p className="text-charcoal-muted text-sm sm:text-base font-light">
-            בחרו את ציר הלמידה המתאים לכם לקראת התרגול הבא
+            כל מה שדרוש להעמקת תרגול יוגה איינגר בבית
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          {/* Card 1: קטלוג תנוחות */}
+          {/* Card 1: קטלוג תנוחות יוגה */}
           <div 
             onClick={onOpenCatalog}
             className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-soft-green/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
@@ -127,63 +248,19 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 🧘‍♂️
               </div>
               <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-soft-green transition-colors">
-                קטלוג תנוחות איינגר
+                קטלוג תנוחות יוגה
               </h3>
               <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
-                עיון מעמיק בכל התנוחות, צילומי סטודיו מפורטים, דגשי אנטומיה, עבודה עם פרופס (בלוקים, בולסטר) והתוויות נגד.
+                צילומי סטודיו מפורטים, עבודה עם פרופס (בלוקים, בולסטר, חגורות), דגשי אנטומיה והתוויות נגד לכל תנוחה.
               </p>
             </div>
             <div className="flex items-center text-soft-green font-semibold text-sm gap-2">
-              <span>לכל התנוחות</span>
+              <span>לקטלוג התנוחות</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
           </div>
 
-          {/* Card 2: חידון סנסקריט */}
-          <div 
-            onClick={onStartQuiz}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-terracotta/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
-          >
-            <div>
-              <div className="w-14 h-14 rounded-2xl bg-terracotta-light flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform text-terracotta">
-                🎯
-              </div>
-              <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-terracotta transition-colors">
-                חידון ואימון יומי
-              </h3>
-              <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
-                זיהוי תנוחות מתוך תמונות, שאלות על פירושי שמות, דגשי איינגר ומעקב התקדמות אישי כמו ב-Duolingo.
-              </p>
-            </div>
-            <div className="flex items-center text-terracotta font-semibold text-sm gap-2">
-              <span>התחל אימון</span>
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            </div>
-          </div>
-
-          {/* Card 3: מילון שורשי סנסקריט */}
-          <div 
-            onClick={onOpenRoots}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-charcoal/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
-          >
-            <div>
-              <div className="w-14 h-14 rounded-2xl bg-cream-200 flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
-                📖
-              </div>
-              <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-charcoal transition-colors">
-                מילון שורשי סנסקריט
-              </h3>
-              <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
-                פירוק והבנה של מילות המפתח: אדו (מטה), מוקה (פנים), שוואנה (כלב), וירה (גיבור), וריקשה (עץ) וקונה (זווית).
-              </p>
-            </div>
-            <div className="flex items-center text-charcoal font-semibold text-sm gap-2">
-              <span>למילון השורשים</span>
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            </div>
-          </div>
-
-          {/* Card 4: רצפי תרגול ביתיים */}
+          {/* Card 2: רצפי שיעורים ביתיים */}
           <div 
             onClick={onOpenSequences}
             className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-amber-400 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
@@ -193,14 +270,58 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 ✨
               </div>
               <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-amber-800 transition-colors">
-                רצפי תרגול ביתיים
+                רצפי שיעורים ביתיים
               </h3>
               <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
-                סדרות מובנות לפי מסורת איינגר: רצף עמידה לפתיחת הגוף, רצף הרפיה ושיקום, רצף להקלה על עייפות ונשימה.
+                תוכניות תרגול מובנות לבית לפי מסורת איינגר: רצף בוקר מעורר, רצף ערב להרפיה, שיקום, כאבי גב ועיכול.
               </p>
             </div>
             <div className="flex items-center text-amber-800 font-semibold text-sm gap-2">
-              <span>לכל הרצפים</span>
+              <span>לכל השיעורים</span>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            </div>
+          </div>
+
+          {/* Card 3: חידון שמות ותנוחות */}
+          <div 
+            onClick={onStartQuiz}
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-terracotta/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+          >
+            <div>
+              <div className="w-14 h-14 rounded-2xl bg-terracotta-light flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform text-terracotta">
+                🎯
+              </div>
+              <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-terracotta transition-colors">
+                חידון שמות ותנוחות
+              </h3>
+              <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
+                אימון יומי לזיהוי תנוחות מתוך צילומי סטודיו, שאלות על שמות בסנסקריט, פירוק מילים ומעקב התקדמות אישי.
+              </p>
+            </div>
+            <div className="flex items-center text-terracotta font-semibold text-sm gap-2">
+              <span>התחל חידון</span>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            </div>
+          </div>
+
+          {/* Card 4: מילון סנסקריט */}
+          <div 
+            onClick={onOpenRoots}
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-charcoal/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+          >
+            <div>
+              <div className="w-14 h-14 rounded-2xl bg-cream-200 flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
+                📖
+              </div>
+              <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-charcoal transition-colors">
+                מילון סנסקריט
+              </h3>
+              <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
+                פירוק והבנה של מילות המפתח: אדו (מטה), מוקה (פנים), שוואנה (כלב), וירה (גיבור), וריקשה (עץ) וקונה (זווית).
+              </p>
+            </div>
+            <div className="flex items-center text-charcoal font-semibold text-sm gap-2">
+              <span>למילון הסנסקריט</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
           </div>
@@ -219,7 +340,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             <span className="text-soft-green font-extrabold">היא משנה את האדם שרואה."</span>
           </blockquote>
           <div className="text-xs sm:text-sm text-charcoal-muted font-medium pt-1">
-            ב.ק.ס איינגר
+            ב.ק.ס איינגר • מתוך הספר "אור על היוגה"
           </div>
         </div>
       </section>
