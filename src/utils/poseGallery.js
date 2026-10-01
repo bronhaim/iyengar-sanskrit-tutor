@@ -603,17 +603,17 @@ export const KNOWN_POSE_VARIATIONS = {
   'adho-mukha-vrikshasana': [
     {
       id: 'studio',
-      title: 'עמידת ידיים (אדו מוקה וריקשאסאנה)',
+      title: 'הדגמת סטודיו (עמידת ידיים חופשית)',
       badge: '📸 הדגמת סטודיו',
-      description: 'אדו מוקה וריקשאסאנה: עמידת ידיים ישרה ויציבה, זרועות ישרות ורגליים זקופות מעלה מול קיר',
+      description: 'אדו מוקה וריקשאסאנה: עמידת ידיים ישרה ומדויקת, זרועות ישרות ונעולות, גו ורגליים מתוחים בקו אנכי',
       src: '/images/poses/adho-mukha-vrikshasana.jpg'
     },
     {
-      id: 'alt',
-      title: 'הדגמה באיכות גבוהה',
-      badge: '🧘 הדגמה נוספת',
-      description: 'מנח אדו מוקה וריקשאסאנה באיכות מלאה',
-      src: '/images/poses/adho-mukha-vrikshasana.png'
+      id: 'wall',
+      title: 'תרגול נתמך קיר',
+      badge: '🧱 תרגול מול קיר',
+      description: 'אדו מוקה וריקשאסאנה עם תמיכת קיר: תרגול יציב ומאפשר דגש על פתיחת בית החזה ויישור הזרועות',
+      src: '/images/poses/adho-mukha-vrikshasana-wall.jpg'
     }
   ]
 };
