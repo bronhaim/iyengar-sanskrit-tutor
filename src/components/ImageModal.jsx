@@ -155,7 +155,14 @@ export const ImageModal = ({ pose, onClose }) => {
                   key={currentItem.src}
                   src={currentItem.src}
                   alt={currentItem.title || pose.poseHebrewName}
-                  onError={() => setImgError(true)}
+                  onError={(e) => {
+                    if (currentItem?.src && currentItem.src.endsWith('.jpg')) {
+                      e.target.onerror = () => setImgError(true);
+                      e.target.src = currentItem.src.replace('.jpg', '.png');
+                    } else {
+                      setImgError(true);
+                    }
+                  }}
                   className="max-h-[76vh] max-w-full object-contain drop-shadow-2xl rounded-lg"
                 />
               ) : (
@@ -297,7 +304,14 @@ export const ImageModal = ({ pose, onClose }) => {
                 key={currentItem.src}
                 src={currentItem.src}
                 alt={currentItem.title || pose.poseHebrewName}
-                onError={() => setImgError(true)}
+                onError={(e) => {
+                  if (currentItem?.src && currentItem.src.endsWith('.jpg')) {
+                    e.target.onerror = () => setImgError(true);
+                    e.target.src = currentItem.src.replace('.jpg', '.png');
+                  } else {
+                    setImgError(true);
+                  }
+                }}
                 className="w-full h-full object-contain rounded-xl transition-all duration-300 group-hover:scale-[1.02]"
               />
             ) : (

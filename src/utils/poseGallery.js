@@ -295,6 +295,15 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'שאוואסאנה (תנוחת הרפיה / גופה): הרפיה מודעת ושקטה בשכיבה על הגב, כפות ידיים פונות מעלה וגוף שליו לחלוטין',
       src: '/images/poses/savasana.jpg'
     }
+  ],
+  'bhujangasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 תצלום התנוחה',
+      description: 'בהוג\'אנגאסאנה (תנוחת הנחש / קוברה): פתיחת בית החזה, הארכת הגב התחתון ורוחב בכתפיים',
+      src: '/images/poses/bhujangasana.jpg'
+    }
   ]
 };
 
