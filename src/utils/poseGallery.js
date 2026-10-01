@@ -89,9 +89,9 @@ export const KNOWN_POSE_VARIATIONS = {
   'utthita-parsvakonasana': [
     {
       id: 'studio',
-      title: 'הדגמת סטודיו רשמית',
+      title: 'הדגמת סטודיו רשמית עם בלוק',
       badge: '📸 הדמות הראשית',
-      description: 'זווית צדדית מוארכת: רגל קדמית ב-90 מעלות, קו אלכסוני רציף וארוך מהעקב האחורי ועד לקצות האצבעות',
+      description: 'זווית צדדית מוארכת (אוטיטה פארשוואקונאסאנה): מנח מדויק עם תמיכת בלוק עץ, רגל קדמית ב-90 מעלות וזרוע מתוחה באלכסון מעבר לראש',
       src: '/images/poses/utthita-parsvakonasana.jpg'
     },
     {
