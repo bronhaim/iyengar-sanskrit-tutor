@@ -41,6 +41,16 @@ Setting & Style:
 
 ## 6. Priority Fixes & Alignment Rectifications (Scheduled for 15:07 Reset)
 
+### 🌟 Universal Golden Rule for All Bent-Knee Poses (כלל ברזל יישורת):
+**"תמיד בתנוחות שהרגל הקדמית כפופה היא צריכה להיות ב-90 מעלות מדויקות בין המפסעה לברך"**
+In ANY standing pose where the front leg is bent (Virabhadrasana I, Virabhadrasana II, Utthita Parsvakonasana, Parivrtta Parsvakonasana):
+1. **Front Thigh:** Must descend until it is strictly horizontal and parallel to the floor. The inner groin crease drops to the exact level of the inner knee.
+2. **Front Shin:** Strictly vertical and perpendicular to the floor (90° right angle). The knee is stacked directly above the heel/ankle – NEVER overshooting forward past the toes or collapsing inward.
+3. **No Knee Shearing Arrows:** Directional arrows must NEVER point forward into the knee. Arrows must show:
+   - Pelvic descent / sinking of the hip crease.
+   - Grounding down into the front heel.
+   - Deep anchorage into the back outer heel.
+
 ### Virabhadrasana I (ויראבדראסאנה 1 - Warrior 1) - CRITICAL FIX #1:
 - **Identified Flaws in previous version:**
   - Back foot was partially lifted on the ball of the foot (Gym lunge/Crescent lunge mistake) instead of rooted flat.
