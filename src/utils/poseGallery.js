@@ -551,6 +551,22 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'מנח פאוואנמוקטאסאנה בהדגמה נוספת',
       src: '/images/poses/pavanamuktasana.png'
     }
+  ],
+  'setu-bandha-sarvangasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדגמת סטודיו',
+      description: 'סאטו באנדהה סרוואנגאסאנה (תנוחת הגשר): קימור עמוק של הגב והרמת האגן בשכיבה, פתיחת בית החזה והסרעפת',
+      src: '/images/poses/setu-bandha-sarvangasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה באיכות גבוהה',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח סאטו באנדהה סרוואנגאסאנה בקימור מלא',
+      src: '/images/poses/setu-bandha-sarvangasana.png'
+    }
   ]
 };
 
