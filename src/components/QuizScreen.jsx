@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Undo2, X, ZoomIn, CheckCircle2, AlertCircle, BookOpen, Lightbulb, ChevronLeft } from 'lucide-react';
+import { Undo2, X, CheckCircle2, AlertCircle, BookOpen, Lightbulb, ChevronLeft } from 'lucide-react';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 
 export const QuizScreen = ({
@@ -91,19 +91,11 @@ export const QuizScreen = ({
             1. If IDENTIFY question: Render large, clear, well-proportioned pose photo (not tiny on mobile!)
             2. If ROOT question (no pose image needed): Render a serene Sanskrit calligraphy focus card instead of a cropped empty box! */}
         {isIdentifyQuestion ? (
-          <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-3xl overflow-hidden bg-cream-50/50 border border-[#E8E0D6] shadow-xs flex items-center justify-center p-3 group">
+          <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-3xl overflow-hidden bg-cream-50/50 border border-[#E8E0D6] shadow-xs flex items-center justify-center p-3">
             <PoseSvgIllustration 
               poseId={question.id} 
               className="w-full h-full object-contain" 
             />
-
-            <button
-              onClick={() => onOpenZoomModal(question)}
-              className="absolute bottom-3 left-3 bg-charcoal/80 hover:bg-charcoal text-white rounded-xl px-3 py-1.5 backdrop-blur-md text-xs font-semibold flex items-center gap-1.5 shadow-md transition-all"
-            >
-              <ZoomIn className="w-4 h-4" />
-              <span>הגדל תמונה</span>
-            </button>
           </div>
         ) : (
           /* Sanskrit Calligraphy Card for Root Meaning Questions */
