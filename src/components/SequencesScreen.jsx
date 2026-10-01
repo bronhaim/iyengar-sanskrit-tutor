@@ -15,12 +15,12 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
 
   const categoryFilters = [
     { id: 'all', label: 'הכל' },
-    { id: 'favorites', label: `⭐ מועדפים (${favSeqCount})` },
-    { id: 'morning', label: '🌅 בוקר' },
-    { id: 'evening', label: '🌙 ערב' },
-    { id: 'remedial', label: '💆 כאבי ראש ומתח' },
-    { id: 'digestion', label: '🍃 לאחר אוכל' },
-    { id: 'pregnancy', label: '🤰 הריון' }
+    { id: 'favorites', label: favSeqCount > 0 ? `מועדפים (${favSeqCount})` : 'מועדפים' },
+    { id: 'morning', label: 'בוקר' },
+    { id: 'evening', label: 'ערב' },
+    { id: 'remedial', label: 'כאבי ראש ומתח' },
+    { id: 'digestion', label: 'לאחר אוכל' },
+    { id: 'pregnancy', label: 'הריון' }
   ];
 
   const filteredSequences = YOGA_SEQUENCES.filter(seq => {
@@ -55,14 +55,12 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
               onBackToHome();
             }
           }}
-          className="flex items-center gap-1.5 text-[#382417] hover:text-[#74482B] text-sm font-semibold transition-colors"
+          className="px-3.5 py-1.5 rounded-xl bg-[#EAE0D3] hover:bg-[#D5C2AF] text-[#382417] text-sm font-semibold transition-colors"
         >
-          <ArrowRight className="w-4 h-4" />
           <span>{activeSequence ? 'חזרה לרצפים' : 'חזרה לראשי'}</span>
         </button>
 
-        <h2 className="text-base font-bold text-[#382417] flex items-center gap-1.5">
-          <Sparkles className="w-4 h-4 text-[#74482B]" />
+        <h2 className="text-base font-bold text-[#382417]">
           <span>{activeSequence ? activeSequence.title : 'רצפי תרגול ביתיים'}</span>
         </h2>
       </header>
@@ -90,7 +88,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-[#74482B] text-white shadow-sm'
+                    ? 'bg-[#67442B] text-white shadow-sm font-bold'
                     : 'bg-[#FAF6F0] text-[#382417] border border-[#D5C2AF] hover:bg-white'
                 }`}
               >
@@ -219,9 +217,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 <div className="pt-1 flex items-center justify-start">
                   <button
                     onClick={() => handleStartGuided(seq)}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-[#74482B] hover:bg-[#54321A] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
                   >
-                    <Play className="w-4 h-4 fill-current ml-0.5" />
                     <span>התחל תרגול מודרך</span>
                   </button>
                 </div>
@@ -261,9 +258,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 
                 <button
                   onClick={() => onOpenZoomModal(currentPose)}
-                  className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm border border-cream-300 px-2.5 py-1 rounded-xl text-xs font-semibold text-charcoal flex items-center gap-1 shadow-sm hover:bg-white transition-colors"
+                  className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm border border-cream-300 px-3 py-1.5 rounded-xl text-xs font-semibold text-charcoal shadow-sm hover:bg-white transition-colors"
                 >
-                  <Info className="w-3.5 h-3.5 text-terracotta" />
                   <span>דף תנוחה מלא</span>
                 </button>
               </div>
@@ -308,26 +304,23 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
             <button
               onClick={() => setGuidedStepIndex(prev => Math.max(0, prev - 1))}
               disabled={guidedStepIndex === 0}
-              className="flex-1 py-3 rounded-2xl bg-white border border-cream-300 text-charcoal font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-cream-100 transition-colors flex items-center justify-center gap-1"
+              className="flex-1 py-3 rounded-2xl bg-white border border-cream-300 text-charcoal font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-cream-100 transition-colors text-center"
             >
-              <ChevronRight className="w-4 h-4" />
               <span>תנוחה קודמת</span>
             </button>
 
             {guidedStepIndex < activeSequence.poses.length - 1 ? (
               <button
                 onClick={() => setGuidedStepIndex(prev => prev + 1)}
-                className="flex-1 py-3 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-duo-terracotta flex items-center justify-center gap-1 transition-all"
+                className="flex-1 py-3 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md text-center transition-all"
               >
                 <span>תנוחה הבאה</span>
-                <ChevronLeft className="w-4 h-4" />
               </button>
             ) : (
               <button
                 onClick={() => setActiveSequence(null)}
-                className="flex-1 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-1 transition-all"
+                className="flex-1 py-3 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md text-center transition-all"
               >
-                <CheckCircle2 className="w-4 h-4" />
                 <span>סיום תרגול</span>
               </button>
             )}
