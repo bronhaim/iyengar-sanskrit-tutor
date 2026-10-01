@@ -28,8 +28,10 @@ export const AuthModal = ({ isOpen, onClose }) => {
         return 'חשבון זה עדיין אינו קיים במערכת. לחץ למטה על "הירשם בחינם" כדי ליצור סיסמה.';
       case 'auth/operation-not-allowed':
         return 'שיטת התחברות זו אינה מופעלת עדיין ב-Firebase Console. ודא שהפעלת את Email/Password או Google ב-Sign-in method.';
-      case 'auth/unauthorized-domain':
-        return 'דומיין זה טרם אושר ב-Firebase Console (יש להוסיף את הדומיין ב-Authentication > Settings > Authorized Domains).';
+      case 'auth/unauthorized-domain': {
+        const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'הדומיין הנוכחי';
+        return `הדומיין (${currentHostname}) טרם אושר ב-Firebase. היכנס ל-Firebase Console > Authentication > לשונית Settings > גלול ל-Authorized Domains והוסף את "${currentHostname}".`;
+      }
       case 'auth/popup-blocked':
         return 'חלון ההתחברות נחסם על ידי הדפדפן. אנא אשר חלונות קופצים (Pop-ups) עבור אתר זה.';
       case 'auth/email-already-in-use':
