@@ -19,7 +19,7 @@ To ensure **100% strict visual consistency** across all pose photographs:
 - Reference Photo 2 (Trikonasana / Alignment Anchor): `watermarked_img_11923653126053845456.jpg`
 - Reference Photo 3 (Facial Profile & Stubble Anchor): `facial_profile_anchor.jpg`
 
-## 4. Master Prompt Template for Image Generation
+## 4. Master Prompt Template for Image Generation (CLEAN PHOTOGRAPHY ONLY - NO ARROWS)
 ```plaintext
 A full-body photograph of the exact same man from the reference image, performing the Iyengar yoga pose: [INSERT_POSE_NAME_HERE].
 
@@ -29,15 +29,16 @@ Character & Appearance:
 
 Setting & Style:
 - Clean studio setting with a pure seamless white background and seamless white floor.
-- Clear, bright, neutral lighting suitable for adding vector annotation arrows later.
+- Clear, bright, neutral studio lighting.
+- Pure photograph, NO drawn arrows, NO text, NO graphic overlays, clean authentic posture demonstration.
 - Full body in frame, no limbs cropped.
 - Ultra-realistic, crisp focus, anatomical precision showing correct alignment for Iyengar yoga.
 ```
 
 ## 5. Workflow Automation for Pose Generation & Asset Integration
 1. Save generated WebP / JPG assets into `public/images/poses/[pose-id].jpg` (or `.webp`).
-2. Update dataset entry in `src/data/posesData.js` with pose details, action vectors, props guide, and muscle anatomy.
-3. Keep clean white backgrounds to enable SVG/Canvas Action Vector Arrow overlays in `PoseSvgIllustration.jsx` and `ImageModal.jsx`.
+2. Update dataset entry in `src/data/posesData.js` with pose details, props guide, and muscle anatomy.
+3. Clean high-end photography without graphical overlays.
 
 ## 6. Priority Fixes & Alignment Rectifications (Scheduled for 15:07 Reset)
 
@@ -46,24 +47,16 @@ Setting & Style:
 In ANY standing pose where the front leg is bent (Virabhadrasana I, Virabhadrasana II, Utthita Parsvakonasana, Parivrtta Parsvakonasana):
 1. **Front Thigh:** Must descend until it is strictly horizontal and parallel to the floor. The inner groin crease drops to the exact level of the inner knee.
 2. **Front Shin:** Strictly vertical and perpendicular to the floor (90° right angle). The knee is stacked directly above the heel/ankle – NEVER overshooting forward past the toes or collapsing inward.
-3. **No Knee Shearing Arrows:** Directional arrows must NEVER point forward into the knee. Arrows must show:
-   - Pelvic descent / sinking of the hip crease.
-   - Grounding down into the front heel.
-   - Deep anchorage into the back outer heel.
+3. **Clean Photography Only:** NO arrows or graphics drawn on the body.
 
 ### Virabhadrasana I (ויראבדראסאנה 1 - Warrior 1) - CRITICAL FIX #1:
-- **Identified Flaws in previous version:**
+- **Identified Flaws in previous version to fix:**
   - Back foot was partially lifted on the ball of the foot (Gym lunge/Crescent lunge mistake) instead of rooted flat.
   - Front thigh was not deep enough at 90 degrees.
-  - Arrow mistakenly pointed forward into the knee, which causes knee shearing.
-- **Strict B.K.S. Iyengar "Light on Yoga" Requirements for Replacement:**
+- **Strict B.K.S. Iyengar "Light on Yoga" Requirements for Clean Replacement:**
   1. **Back Foot & Leg:** Back foot MUST be completely flat on the floor, turned inward 45-60 degrees. Outer edge and heel pressing down forcefully into the floor with back knee completely straight and kneecap locked up.
   2. **Front Thigh & Knee:** Front knee bent to an EXACT 90-degree right angle. Thigh strictly parallel to the floor, shin strictly vertical (knee stacked directly above ankle/heel, NEVER drifting forward past toes).
   3. **Hips & Pelvis:** Both hips squared completely forward toward the front wall (left hip rolling forward, right hip drawing back).
   4. **Arms & Spine:** Arms stretched straight up overhead, elbows straight, palms pressed together in Anjali Mudra, chest lifted, head tilted back gazing at thumbs.
-  5. **Action Vector Arrows:**
-     - Downward/backward arrow anchoring the outer back heel firmly to the mat.
-     - Downward arrow descending the pelvic floor to achieve the 90° thigh.
-     - Forward-rolling arrow on back hip squaring the pelvis.
-     - Upward arrow lifting the spine, chest, and arms toward the ceiling.
+  5. **Style:** Clean, beautiful studio photograph without any arrows or graphics.
 

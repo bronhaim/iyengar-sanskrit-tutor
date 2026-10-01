@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
  * and gracefully falls back to vector illustrations if no photo exists yet.
  */
 export const PoseSvgIllustration = ({ poseId, className = "w-full h-full text-terracotta", customSrc = null }) => {
-  const formats = ['.jpg', '.png', '.webp', '.jpeg'];
+  const formats = ['.png', '.jpg', '.webp', '.jpeg'];
   const [formatIndex, setFormatIndex] = useState(0);
   const [hasImageError, setHasImageError] = useState(false);
 
