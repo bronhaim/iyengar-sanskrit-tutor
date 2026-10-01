@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Mail, Lock, User, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -93,10 +94,13 @@ export const AuthModal = ({ isOpen, onClose }) => {
     }
   };
 
-  return (
+  if (!isOpen) return null;
+
+  return typeof document !== 'undefined' ? createPortal(
     <div 
-      className="fixed inset-0 z-50 bg-charcoal/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
+      className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fadeIn"
       onClick={onClose}
+      dir="rtl"
     >
       <div 
         className="relative max-w-md w-full bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-cream-200 overflow-hidden text-right"
@@ -294,6 +298,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
           )}
         </div>
       </div>
-    </div>
-  );
+    </div>,
+    document.body
+  ) : null;
 };
