@@ -115,6 +115,22 @@ export const ImageModal = ({ pose, onClose }) => {
             </div>
           )}
 
+          {pose.muscleAnatomy && (
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-xs text-charcoal">
+              <div className="font-bold text-indigo-950 flex items-center gap-1 mb-1.5">
+                <span>🦴 ביומכניקה ואנטומיה שרירית (Ray Long / Kaminoff):</span>
+              </div>
+              <div className="space-y-1 text-xs">
+                <div>
+                  <strong className="text-emerald-800 font-bold">💪 שרירים פועלים (Agonists):</strong> {pose.muscleAnatomy.active}
+                </div>
+                <div>
+                  <strong className="text-amber-800 font-bold">🧘 שרירים מתארכים (Antagonists):</strong> {pose.muscleAnatomy.stretched}
+                </div>
+              </div>
+            </div>
+          )}
+
           {pose.drishti && (
             <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs text-charcoal">
               <div className="font-bold text-purple-900 flex items-center gap-1 mb-1">

@@ -139,6 +139,18 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
                   </div>
                 )}
 
+                {pose.muscleAnatomy && (
+                  <div className="bg-indigo-50/80 border border-indigo-200/80 rounded-xl p-2.5 text-xs text-charcoal">
+                    <div className="font-bold text-indigo-950 flex items-center gap-1 mb-0.5">
+                      <span>🦴 ביומכניקה ואנטומיה שרירית:</span>
+                    </div>
+                    <div className="text-[11px] space-y-0.5">
+                      <div><strong className="text-emerald-800">פועלים:</strong> {pose.muscleAnatomy.active}</div>
+                      <div><strong className="text-amber-800">מתארכים:</strong> {pose.muscleAnatomy.stretched}</div>
+                    </div>
+                  </div>
+                )}
+
                 {pose.drishti && (
                   <div className="bg-purple-50/80 border border-purple-200/80 rounded-xl p-2.5 text-xs text-charcoal">
                     <div className="font-bold text-purple-900 flex items-center gap-1 mb-0.5">

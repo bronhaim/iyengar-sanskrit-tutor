@@ -843,6 +843,190 @@ export const POSE_DATABASE = [
       { area: "זרועות", direction: "פרוסות לצדדים ב-45 מעלות, כפות ידיים פונות מעלה" },
       { area: "עיניים ונשימה", direction: "הרפיה פנימית שקטה" }
     ],
-    propsGuide: "🛌 הנחת בולסטר מתחת לברכיים להקלת עומס מהגב התחתון. כיסוי העיניים בכרית עיניים (Eye Pillow) להרגעת המוח."
+    propsGuide: "🛌 הנחת בולסטר מתחת לברכיים להקלת עומס מהגב התחתון. כיסוי העיניים בכרית עיניים (Eye Pillow) להרגעת המוח.",
+    muscleAnatomy: {
+      active: "הרפיה פאסיבית של כל שרירי השלד (מוח ותודעה רגועים)",
+      stretched: "שחרור והרפיה מוחלטת לשרשרת השרירים הקדמית והאחורית"
+    }
+  },
+
+  // --- 7. תנוחות נתמכות, הפוכות וכפופות נוספות (Classical Iyengar Core Poses) ---
+  {
+    id: "setu-bandha-sarvangasana",
+    type: "root",
+    sanskritScript: "सेतुबन्ध सर्वाङ्गासन • Setu Bandha Sarvāṅgāsana",
+    poseHebrewName: "סאטו באנדהה סרוואנגאסאנה (תנוחת הגשר)",
+    englishName: "Supported Bridge Pose",
+    category: "backbend",
+    question: "מה פירוש המילים 'סֶטוּ' (Setu) ו-'בָּאנְדְהָה' (Bandha)?",
+    options: ["גשר + מנעול/קשר", "עמוד + סלע", "נחנח + זרם", "גלגל + קשת"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "סטו (Setu)", meaning: "גשר" },
+      { root: "באנדהה (Bandha)", meaning: "מנעול / קשר" },
+      { root: "סרוואנגה (Sarvāṅga)", meaning: "כל האיברים" }
+    ],
+    iyengarNote: "הגוף מקומר כגשר יציב. פותחת בעוצמה את בית החזה והסרעפת, מווסתת את בלוטת התריס ומביאה שקט נפשי עמוק.",
+    benefits: "פתיחת הריאות והחזה, הרגעת מערכת העצבים והפחתת מתח, וויסות בלוטת התריס והקלה על כאבי גב.",
+    drishti: "👁️ אל עצם החזה (Sternum / Nabhi)",
+    cautions: "⚠️ פציעות צוואר: חובה לבצע את התנוחה כשהכתפיים מושענות על שמיכות והסאקרום נתמך על בלוק.",
+    anatomicalPointers: [
+      { area: "אגן וסאקרום", direction: "הרמה גבוהה וקימור עמוק מעלה" },
+      { area: "כתפיים ושכמות", direction: "גלגול פנימה מתחת לגב להרמת החזה" },
+      { area: "כפות רגליים", direction: "נעוצות ומקבילות בקרקע" }
+    ],
+    propsGuide: "🧱 הנחת בלוק מעץ (עומד או שטוח) מתחת לאזור הסאקרום להרפיה פאסיבית עמוקה. 🛌 תמיכת בולסטר לאורך הגב.",
+    muscleAnatomy: {
+      active: "ישבן (Gluteus Maximus), המסטרינגס, זוקפי עמוד השדרה (Erector Spinae)",
+      stretched: "חזה (Pectoralis Major), שריר המותניים (Psoas), ארבע-ראשי (Quadriceps)"
+    }
+  },
+  {
+    id: "supta-baddha-konasana",
+    type: "root",
+    sanskritScript: "सुप्त बद्धकोणासन • Supta Baddhakoṇāsana",
+    poseHebrewName: "סופטה באדהה קונאסאנה (זווית קשורה בשכיבה)",
+    englishName: "Reclining Bound Angle Pose",
+    category: "seated",
+    question: "מה פירוש המונח 'סוּפְטָה בָּאדְהָה' (Supta Baddha)?",
+    options: ["בשכיבה + קשור / אחוז", "בעמידה + פתוח", "בישיבה + ישר", "בפיתול + מתוח"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "סופטה (Supta)", meaning: "בשכיבה / נח" },
+      { root: "באדהה (Baddha)", meaning: "קשור" },
+      { root: "קונה (Koṇa)", meaning: "זווית" }
+    ],
+    iyengarNote: "תנוחת הרפיה ושיקום (Restorative) מרכזית ביותר באיינגר יוגה. פותחת את האגן והחזה ומשרה רוגע עמוק.",
+    benefits: "שחרור עמוק של המפשעות והאגן, הרחבת הנשימה הסרעפתית, הורדת לחץ דם והקלה על תסמיני מחזור והריון.",
+    drishti: "👁️ עיניים עצומות ברכות - התכנסות פנימה",
+    cautions: "⚠️ מתיחת יתר במפשעות: חובה להניח בלוקים או שמיכות מקופלות מתחת לבירכיים למניעת מתיחה כואבת.",
+    anatomicalPointers: [
+      { area: "חזה וכלוב צלעות", direction: "נשענים על בולסטר רחב ופתוח מעלה" },
+      { area: "מפשעות וירכיים", direction: "הרפיה מוחלטת כלפי מטה לצדדים" },
+      { area: "כפות רגליים", direction: "צמודות זו לזו קרוב לאגן" }
+    ],
+    propsGuide: "🛌 שכיבה על בולסטר לאורך עמוד השדרה. 🧱 תמיכת בלוקים מתחת לברכיים. 🎗️ חגורה סביב המותניים וכפות הרגליים.",
+    muscleAnatomy: {
+      active: "מסובבי ירך חיצוניים (External Rotators)",
+      stretched: "מקרבי הירך (Adductors - ירך פנימית), שרירי חזה קטנים (Pectoralis Minor)"
+    }
+  },
+  {
+    id: "viparita-karani",
+    type: "root",
+    sanskritScript: "विपरीत करणी • Viparīta Karaṇī",
+    poseHebrewName: "ויפריטה קראני (הפוכה נתמכת מול קיר)",
+    englishName: "Legs-Up-the-Wall Pose",
+    category: "inversion",
+    question: "מה המשמעות המילולית של המילה 'וִיפָרִיטָה' (Viparīta)?",
+    options: ["הפוך / מקורקע", "מהיר", "גבוה", "זקוף"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "ויפריטה (Viparīta)", meaning: "הפוך" },
+      { root: "קראני (Karaṇī)", meaning: "פעולה / עשייה" }
+    ],
+    iyengarNote: "פנינה של הרפיה והתחדשות: הרגליים מורמות אנכית על הקיר כשהאגן נח על בולסטר. מרגיעה את הלב והמוח.",
+    benefits: "שחרור עייפות קשה מהרגליים והוורידים, הרגעת מערכת העצבים, שיפור מחזור הדם והפחתת חרדה.",
+    drishti: "👁️ עיניים עצומות ברכות או אל החזה",
+    cautions: "⚠️ בזמן וסת: יש לתרגל ללא הגבהת אגן (אגן שטוח על הרצפה) או להימנע משהות ממושכת.",
+    anatomicalPointers: [
+      { area: "רגליים", direction: "אנכיות וישרות, נשענות קלות על הקיר" },
+      { area: "אגן וגב תחתון", direction: "נתמכים ופרוסים על בולסטר" },
+      { area: "חזה וכתפיים", direction: "פתוחים ושטוחים על הרצפה" }
+    ],
+    propsGuide: "🛌 בולסטר צמוד לקיר מתחת לאגן. 🧣 כרית עיניים על העיניים להרפיה מנטלית מוחלטת.",
+    muscleAnatomy: {
+      active: "הרפיה פאסיבית של שרירי הרגליים והאגן",
+      stretched: "המסטרינגס (מתיחה קלה ופאסיבית), שריר המותניים (Psoas)"
+    }
+  },
+  {
+    id: "supta-virasana",
+    type: "root",
+    sanskritScript: "सुप्त वीरासन • Supta Vīrāsana",
+    poseHebrewName: "סופטה ויראסאנה (גיבור בשכיבה)",
+    englishName: "Reclined Hero Pose",
+    category: "seated",
+    question: "מה השילוב של המילים 'סוּפְטָה' ו-'וִירָה'?",
+    options: ["גיבור בשכיבה", "מלך עומד", "לוחם מפותל", "חכם יושב"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "סופטה (Supta)", meaning: "בשכיבה" },
+      { root: "וירה (Vīra)", meaning: "גיבור" }
+    ],
+    iyengarNote: "שכיבה לאחור ממצב ויראסאנה. מעניקה מתיחה עמוקה לירכיים הקדמיות ומנוחה מופלאה לרגליים עייפות.",
+    benefits: "מתיחה עוצמתית לארבע-ראשי ולמפשעות, עיסוי איברי הבטן, הקלה על עייפות ברגליים ושיפור העיכול.",
+    drishti: "👁️ עיניים עצומות או אל קצה האף",
+    cautions: "⚠️ כאבי ברכיים או גב תחתון: חובה לשכב על בולסטר או מספר שמיכות מוגבהות ולהימנע מהגעת גב לאוויר.",
+    anatomicalPointers: [
+      { area: "ירכיים קדמיות", direction: "מתיחה עזה מברכיים ועד האגן" },
+      { area: "עמוד שדרה", direction: "נתמך וארוך על בולסטר לאחור" },
+      { area: "ברכיים", direction: "צמודות ומקבילות במידת האפשר" }
+    ],
+    propsGuide: "🛌 שכיבה לאחור על בולסטר מוגבה בשמיכות. 🧱 בלוק מתחת לישבן במידת הצורך.",
+    muscleAnatomy: {
+      active: "סארטוריוס (Sartorius), שרירי השוק הקדמיים",
+      stretched: "ארבע-ראשי (Rectus Femoris), שריר המותניים (Psoas Major)"
+    }
+  },
+  {
+    id: "adho-mukha-vrikshasana",
+    type: "identify",
+    sanskritScript: "अधोमुख वृक्षासन • Adho Mukha Vṛkṣāsana",
+    poseHebrewName: "אדו מוקה וריקשאסאנה (עמידת ידיים / עץ הפוך)",
+    englishName: "Handstand Pose",
+    category: "inversion",
+    question: "מה שם התנוחה המוכרת כעמידת ידיים?",
+    options: ["אדו מוקה וריקשאסאנה", "שירשאסאנה", "צ'טורנגה", "פינצ'ה מאיוראסאנה"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "אדו (Adho)", meaning: "כלפי מטה" },
+      { root: "מוקה (Mukha)", meaning: "פנים" },
+      { root: "וריקשה (Vṛkṣa)", meaning: "עץ" }
+    ],
+    iyengarNote: "תנוחת איזון על הזרועות המפתחת כוח אדיר, נחישות וביטחון עצמי. הגוף מזנק מעלה כעץ הפוך.",
+    benefits: "חיזוק עוצמתי של הזרועות, הכתפיים ופרקי הידיים, המרצת זרימת הדם והאנרגיה, ופיתוח מיקוד מנטלי.",
+    drishti: "👁️ אל הנקודה בין כפות הידיים (Nasagrai / רצפה)",
+    cautions: "⚠️ לחץ דם גבוה, פציעות בפרקי הידיים או בזמן וסת: הימנע/י מתרגול עמידת ידיים חופשית.",
+    anatomicalPointers: [
+      { area: "זרועות ומרפקים", direction: "נעולים וישרים לחלוטין, דחיפה אקטיבית מעלה" },
+      { area: "כתפיים", direction: "הרמה עמוקה מטה לכיוון הרגליים" },
+      { area: "גוף ורגליים", direction: "קו אנכי ישר מול קיר" }
+    ],
+    propsGuide: "🧱 דחיפה מול קיר (Wall Handstand). 🎗️ חגורה סביב הזרועות מעל המרפקים לשמירה על רוחב כתפיים.",
+    muscleAnatomy: {
+      active: "דלתואיד (Deltoid), תלת-ראשי (Triceps Brachii), שרירי הליבה (Core), Trapezius",
+      stretched: "כיפוף פרק כף היד, שרירי חזה"
+    }
+  },
+  {
+    id: "pincha-mayurasana",
+    type: "identify",
+    sanskritScript: "पिञ्च मयूरासन • Piñcha Mayūrāsana",
+    poseHebrewName: "פינצ'ה מאיוראסאנה (עמידת אמות / נוצת הטווס)",
+    englishName: "Feathered Peacock Pose",
+    category: "inversion",
+    question: "מה פירוש המילים 'פִּינְצָ'ה' (Piñcha) ו-'מָאיִינְרָה' (Mayūra)?",
+    options: ["נוצה + טווס", "כנף + נשר", "זנב + אריה", "קרן + צבי"],
+    correctIndex: 0,
+    breakdown: [
+      { root: "פינצ'ה (Piñcha)", meaning: "נוצה" },
+      { root: "מאיורה (Mayūra)", meaning: "טווס" }
+    ],
+    iyengarNote: "הגוף נתמך על האמות ומקושת קלות כנוצת הטווס הפרוסה. מפתחת יציבות, גמישות בחזה וכוח בכתפיים.",
+    benefits: "חיזוק אדיר של השכמות, הכתפיים והגב, פתיחת בית החזה ופיתוח שיווי משקל מתקדם.",
+    drishti: "👁️ אל הרצפה בין האמות",
+    cautions: "⚠️ פציעות כתפיים או צוואר: חובה להשתמש בבלוק בין הידיים וחגורה סביב המרפקים מול קיר.",
+    anatomicalPointers: [
+      { area: "אמות", direction: "שטוחות ומקבילות ברוחב הכתפיים" },
+      { area: "כתפיים ושכמות", direction: "הרמה עמוקה הרחק מהרצפה" },
+      { area: "גב ורגליים", direction: "צמיחה אנכית מעלה" }
+    ],
+    propsGuide: "🧱 בלוק מעץ בין האגודלים להחזקת כפות הידיים. 🎗️ חגורה סביב המרפקים. תרגול מול קיר.",
+    muscleAnatomy: {
+      active: "Serratus Anterior, דלתואיד אחורי ואמצעי, זוקפי גב, Rectus Abdominis",
+      stretched: "Pectoralis Major, Latissimus Dorsi"
+    }
   }
 ];
+
