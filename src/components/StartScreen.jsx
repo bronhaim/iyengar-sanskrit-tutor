@@ -11,14 +11,6 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/utthita-trikonasana.png'
   },
   {
-    id: 'salamba-sarvangasana',
-    hebrewName: 'סאלמבה סרוואנגאסאנה',
-    sanskrit: 'Sālamba Sarvāṅgāsana',
-    meaning: 'עמידת כתפיים נתמכת',
-    image: '/images/poses/salamba-sarvangasana.jpg',
-    fallback: '/images/poses/salamba-sarvangasana.png'
-  },
-  {
     id: 'virabhadrasana-2',
     hebrewName: 'ויראבדראסאנה II',
     sanskrit: 'Vīrabhadrāsana II',
@@ -27,28 +19,28 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/virabhadrasana-2.png'
   },
   {
-    id: 'supta-baddha-konasana',
-    hebrewName: 'סופטה באדהה קונאסאנה',
-    sanskrit: 'Supta Baddhakoṇāsana',
-    meaning: 'זווית קשורה בשכיבה',
-    image: '/images/poses/supta-baddha-konasana.jpg',
-    fallback: '/images/poses/supta-baddha-konasana-guide.jpg'
-  },
-  {
-    id: 'adho-mukha-svanasana',
-    hebrewName: 'אדו מוקה שוואנאסאנה',
-    sanskrit: 'Adho Mukha Śvānāsana',
-    meaning: 'כלב מביט כלפי מטה',
-    image: '/images/poses/adho-mukha-svanasana.jpg',
-    fallback: '/images/poses/adho-mukha-svanasana.png'
-  },
-  {
     id: 'ardha-chandrasana',
     hebrewName: "ארדהה צ'נדראסאנה",
     sanskrit: 'Ardha Chandrāsana',
     meaning: 'תנוחת חצי ירח',
     image: '/images/poses/ardha-chandrasana.jpg',
     fallback: '/images/poses/ardha-chandrasana.png'
+  },
+  {
+    id: 'utthita-parsvakonasana',
+    hebrewName: 'אוטיטה פארשוואקונאסאנה',
+    sanskrit: 'Utthita Pārśvakoṇāsana',
+    meaning: 'תנוחת הזווית הצידית המוארכת',
+    image: '/images/poses/utthita-parsvakonasana.jpg',
+    fallback: '/images/poses/utthita-parsvakonasana.png'
+  },
+  {
+    id: 'parivrtta-trikonasana',
+    hebrewName: 'פאריבריטה טריקונאסאנה',
+    sanskrit: 'Parivṛtta Trikoṇāsana',
+    meaning: 'תנוחת המשולש המפותל',
+    image: '/images/poses/parivrtta-trikonasana.jpg',
+    fallback: '/images/poses/parivrtta-trikonasana.png'
   },
   {
     id: 'vriksasana',
@@ -230,17 +222,17 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               {/* Outer decorative glowing ring */}
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               
-              {/* Main Circular Image Frame */}
+              {/* Main Circular Image Frame - Full size object-cover presentation */}
               <div 
                 onClick={nextPose}
                 title="לחצו להחלפת תנוחה"
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-92 lg:h-92 rounded-full border-8 border-white shadow-2xl overflow-hidden bg-white mx-auto flex items-center justify-center cursor-pointer p-4 sm:p-6"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-92 lg:h-92 rounded-full border-8 border-white shadow-2xl overflow-hidden bg-white mx-auto flex items-center justify-center cursor-pointer"
               >
                 <img 
                   key={currentPose.id}
                   src={currentPose.image} 
                   alt={currentPose.hebrewName}
-                  className="w-full h-full max-w-[76%] max-h-[76%] object-contain object-center group-hover:scale-[1.03] transition-transform duration-500 animate-fadeIn drop-shadow-sm select-none"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700 animate-fadeIn"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = currentPose.fallback;
