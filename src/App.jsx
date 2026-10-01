@@ -252,8 +252,11 @@ export function App() {
             <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
               חידון
             </button>
-            <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+            <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-charcoal transition-colors">
               מילון סנסקריט
+            </button>
+            <button onClick={() => { setCurrentView('favorites'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-charcoal transition-colors">
+              מועדפים
             </button>
           </div>
 

@@ -60,17 +60,6 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           </button>
 
           <button
-            onClick={() => setCurrentView('favorites')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
-              currentView === 'favorites' 
-                ? 'bg-white text-charcoal shadow-xs' 
-                : 'text-charcoal-muted hover:text-charcoal'
-            }`}
-          >
-            מועדפים
-          </button>
-
-          <button
             onClick={onStartQuiz || (() => setCurrentView('quiz'))}
             className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'quiz' 
@@ -90,6 +79,17 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             }`}
           >
             מילון סנסקריט
+          </button>
+
+          <button
+            onClick={() => setCurrentView('favorites')}
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+              currentView === 'favorites' 
+                ? 'bg-white text-charcoal shadow-xs' 
+                : 'text-charcoal-muted hover:text-charcoal'
+            }`}
+          >
+            מועדפים
           </button>
         </nav>
 
