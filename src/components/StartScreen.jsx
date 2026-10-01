@@ -158,7 +158,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </h1>
 
             <p className="text-lg sm:text-xl text-[#624530] font-light leading-relaxed max-w-xl text-center">
-              מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
+              מרחב מקיף לתרגול יוגה איינגר אישי - קטלוג תנוחות מפורט, רצפי תרגולים, חידון שמות ותנוחות, ומילון סנסקריט
             </p>
 
             {/* Quick Action Buttons - 4 Rich Earth-Brown Buttons */}
