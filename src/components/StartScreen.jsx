@@ -6,35 +6,41 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     <section className="flex flex-col h-full justify-between p-6 sm:p-8 bg-cream-50 select-none text-center animate-fadeIn overflow-y-auto custom-scrollbar">
       
       <div className="pt-2">
-        {/* Lotus & Om Symbol Header */}
-        <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-full bg-cream-100 border border-cream-300 shadow-sm mb-5 text-terracotta mx-auto">
-          <svg className="w-14 h-14" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-            <circle cx="50" cy="50" r="46" stroke="#E4D6C3" strokeWidth="1.5" strokeDasharray="4 3"/>
-            <path d="M50 20 C42 35 30 55 30 70 C30 81 39 88 50 88 C61 88 70 81 70 70 C70 55 58 35 50 20 Z" fill="#F8ECEB" stroke="currentColor" strokeWidth="2"/>
-            <path d="M50 35 C45 48 38 62 38 72 C38 78 43 83 50 83 C57 83 62 78 62 72 C62 62 55 48 50 35 Z" fill="#C07373" stroke="currentColor" strokeWidth="1.5"/>
-            <path d="M50 48 L50 85" stroke="#FAF5EE" strokeWidth="2"/>
-          </svg>
-          <span className="absolute -bottom-1 text-xs font-bold bg-terracotta text-white px-2 py-0.5 rounded-full shadow-sm">
-            {totalPoses} תנוחות
-          </span>
+        {/* Iyengar Studio Hero Badge (Replaces old lotus icon) */}
+        <div className="relative inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-b from-cream-100 to-cream-200 border border-cream-300 shadow-md mb-4 text-terracotta mx-auto overflow-hidden group">
+          <img 
+            src="/images/poses/tadasana.jpg" 
+            alt="Iyengar Yoga Practice Model"
+            className="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              // Graceful fallback if photograph is loading
+              e.target.onerror = null;
+              e.target.style.display = 'none';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent flex items-end justify-center pb-1.5">
+            <span className="text-[11px] font-bold bg-terracotta text-white px-2.5 py-0.5 rounded-full shadow-sm">
+              {totalPoses} תנוחות איינגר
+            </span>
+          </div>
         </div>
 
         {/* Iyengar Tradition Badge */}
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold bg-cream-200 text-charcoal border border-cream-300 mb-3">
           <span className="text-terracotta">🌸</span>
-          <span>מסורת ב.ק.ס איינגר • למידה ותרגול</span>
+          <span>מסורת ב.ק.ס איינגר • תרגול, אנטומיה וסנסקריט</span>
         </div>
 
-        <h1 className="text-3xl font-bold text-charcoal tracking-tight mb-2">
-          שפת היוגה בסנסקריט
+        <h1 className="text-2xl sm:text-3xl font-bold text-charcoal tracking-tight mb-1">
+          איינגר יוגה • מדריך תרגול מעמיק
         </h1>
 
-        <p className="text-sm font-sanskrit text-terracotta-dark tracking-wide mb-3 dir-ltr">
+        <p className="text-xs font-sanskrit text-terracotta-dark tracking-wide mb-3 dir-ltr">
           योगेन चित्तस्य पदेन वाचां मलं शरीरस्य च वैद्यकेन
         </p>
 
-        <p className="text-charcoal-light text-sm sm:text-base leading-relaxed max-w-xs mx-auto mb-6">
-          למדו לזהות תנוחות יוגה, לפרק את שמותיהן להברות המשמעותיות ולהעמיק את הבנת התרגול על המזרן.
+        <p className="text-charcoal-light text-xs sm:text-sm leading-relaxed max-w-xs mx-auto mb-6">
+          מדריך מקצועי ומקיף לתרגול יוגה בשיטת איינגר: יישורת אנטומית, שימוש בעזרים (Props), רצפים ביתיים ופירוק שורשי סנסקריט.
         </p>
 
         {/* Feature Cards Grid */}
