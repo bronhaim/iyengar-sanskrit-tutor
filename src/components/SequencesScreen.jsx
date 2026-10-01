@@ -43,10 +43,10 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
   const currentPose = currentStep ? getPoseById(currentStep.poseId) : null;
 
   return (
-    <div className="flex flex-col h-full bg-cream-50 animate-fadeIn overflow-hidden">
+    <div className="flex flex-col h-full bg-[#F5EFEB] animate-fadeIn overflow-hidden">
       
       {/* Header */}
-      <header className="p-4 bg-white border-b border-cream-200 flex items-center justify-between shrink-0">
+      <header className="p-4 bg-[#FAF6F0] border-b border-[#D5C2AF] flex items-center justify-between shrink-0">
         <button
           onClick={() => {
             if (activeSequence) {
@@ -55,14 +55,14 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
               onBackToHome();
             }
           }}
-          className="flex items-center gap-1.5 text-charcoal hover:text-terracotta text-sm font-semibold transition-colors"
+          className="flex items-center gap-1.5 text-[#382417] hover:text-[#74482B] text-sm font-semibold transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           <span>{activeSequence ? 'חזרה לרצפים' : 'חזרה לראשי'}</span>
         </button>
 
-        <h2 className="text-base font-bold text-charcoal flex items-center gap-1.5">
-          <Sparkles className="w-4 h-4 text-terracotta" />
+        <h2 className="text-base font-bold text-[#382417] flex items-center gap-1.5">
+          <Sparkles className="w-4 h-4 text-[#74482B]" />
           <span>{activeSequence ? activeSequence.title : 'רצפי תרגול ביתיים'}</span>
         </h2>
       </header>
@@ -73,11 +73,11 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
         <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
           
           {/* Intro Banner */}
-          <div className="bg-gradient-to-r from-terracotta/10 to-sage/10 border border-terracotta/20 rounded-2xl p-4 text-right">
-            <h3 className="font-bold text-charcoal text-base mb-1">
+          <div className="bg-[#EAE0D3] border border-[#D5C2AF] rounded-2xl p-4 text-right">
+            <h3 className="font-bold text-[#382417] text-base mb-1">
               🧘 רצפי תרגול מותאמים לפי מסורת איינגר
             </h3>
-            <p className="text-xs text-charcoal-light leading-relaxed">
+            <p className="text-xs text-[#674831] leading-relaxed">
               בחרו רצף תנוחות מותאם לפי זמן ביום, מצב עיכול, הפחתת כאבי ראש או הריון. התרחבו לקבלת הנחיות שהות ועזרים.
             </p>
           </div>
@@ -90,8 +90,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-terracotta text-white shadow-sm'
-                    : 'bg-white text-charcoal-light border border-cream-200 hover:bg-cream-50'
+                    ? 'bg-[#74482B] text-white shadow-sm'
+                    : 'bg-[#FAF6F0] text-[#382417] border border-[#D5C2AF] hover:bg-white'
                 }`}
               >
                 {cat.label}
@@ -130,7 +130,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 return (
                   <div 
                     key={seq.id}
-                    className={`bg-white border rounded-3xl p-5 shadow-sm hover:shadow-card transition-all text-right flex flex-col gap-3 ${seq.borderColor}`}
+                    className={`bg-[#FAF6F0] border rounded-3xl p-5 shadow-sm hover:shadow-card transition-all text-right flex flex-col gap-3 ${seq.borderColor}`}
                   >
                     {/* Top Info Header */}
                     <div className="flex items-start justify-between">
@@ -219,7 +219,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 <div className="pt-1 flex items-center justify-start">
                   <button
                     onClick={() => handleStartGuided(seq)}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-duo-terracotta hover:shadow-md transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-[#74482B] hover:bg-[#54321A] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
                   >
                     <Play className="w-4 h-4 fill-current ml-0.5" />
                     <span>התחל תרגול מודרך</span>

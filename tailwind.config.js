@@ -21,9 +21,34 @@ export default {
           400: '#D5C1A6'
         },
         beige: {
-          light: '#FBF8F3',
-          DEFAULT: '#F3ECE1',
+          50: '#FBF9F5',
+          100: '#F5EFEB',
+          200: '#EFE7DC',
+          300: '#E5D9C8',
+          400: '#D8C7B5',
+          light: '#FBF9F5',
+          DEFAULT: '#F5EFEB',
           dark: '#E5D9C8'
+        },
+        coffee: {
+          50: '#F8F5F0',
+          100: '#EFE7DC',
+          light: '#8D5B3A',
+          DEFAULT: '#74482B',
+          dark: '#54321A',
+          deep: '#3B2110'
+        },
+        brown: {
+          50: '#FAF6F1',
+          100: '#F4ECE3',
+          200: '#E7D8C8',
+          300: '#D5BDA6',
+          400: '#BC9D81',
+          500: '#9C7A5E',
+          600: '#805E43',
+          700: '#674831',
+          800: '#4F3523',
+          900: '#382417'
         },
         charcoal: {
           DEFAULT: '#362C24',

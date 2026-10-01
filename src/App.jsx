@@ -90,7 +90,7 @@ export function App() {
   const currentQuestion = quizPool[quizIndex] || POSE_DATABASE[0];
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#2D2D2D] font-assistant flex flex-col selection:bg-terracotta selection:text-white">
+    <div className="min-h-screen bg-[#F5EFEB] text-[#362C24] font-assistant flex flex-col selection:bg-[#74482B] selection:text-white">
       
       {/* 1. Sticky Glassmorphism Header */}
       <Header 
@@ -227,40 +227,40 @@ export function App() {
       </main>
 
       {/* 3. Footer */}
-      <footer className="w-full bg-white border-t border-[#E5D9C8] py-10 mt-auto">
+      <footer className="w-full bg-[#EBE2D5] border-t border-[#D8C7B5] py-10 mt-auto text-[#4A3728]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
           
           <div className="space-y-1">
-            <div className="font-bold text-base text-charcoal">
+            <div className="font-bold text-base text-[#382417]">
               יוגה איינגר לתרגול ביתי
             </div>
-            <p className="text-xs text-charcoal-muted">
+            <p className="text-xs text-[#674831]">
               מרחב אישי לתרגול יוגה איינגר ולימוד שמות התנוחות
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-charcoal-light">
-            <button onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-[#543B27]">
+            <button onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               דף הבית
             </button>
-            <button onClick={() => { setCurrentView('catalog'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+            <button onClick={() => { setCurrentView('catalog'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               קטלוג תנוחות
             </button>
-            <button onClick={() => { setCurrentView('sequences'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-amber-800 transition-colors">
+            <button onClick={() => { setCurrentView('sequences'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               רצפי תרגולים
             </button>
-            <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
+            <button onClick={startQuiz} className="hover:text-[#74482B] transition-colors">
               חידון
             </button>
-            <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-charcoal transition-colors">
+            <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               מילון סנסקריט
             </button>
-            <button onClick={() => { setCurrentView('favorites'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-charcoal transition-colors">
+            <button onClick={() => { setCurrentView('favorites'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               מועדפים
             </button>
           </div>
 
-          <div className="text-[11px] text-charcoal-muted">
+          <div className="text-[11px] text-[#674831]">
             מסורת יוגה איינגר • דיוק, יציבה והעמקה
           </div>
 

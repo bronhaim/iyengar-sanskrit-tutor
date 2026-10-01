@@ -65,26 +65,26 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
   };
 
   return (
-    <div className="flex flex-col h-full bg-cream-50 animate-fadeIn overflow-hidden">
+    <div className="flex flex-col h-full bg-[#F5EFEB] animate-fadeIn overflow-hidden">
       
       {/* Top Header */}
-      <header className="p-4 bg-white border-b border-cream-200 flex items-center justify-between shrink-0">
+      <header className="p-4 bg-[#FAF6F0] border-b border-[#D5C2AF] flex items-center justify-between shrink-0">
         <button
           onClick={onBackToHome}
-          className="flex items-center gap-1.5 text-charcoal hover:text-terracotta text-sm font-semibold transition-colors"
+          className="flex items-center gap-1.5 text-[#382417] hover:text-[#74482B] text-sm font-semibold transition-colors"
         >
           <ArrowRight className="w-4 h-4" />
           <span>חזרה לראשי</span>
         </button>
 
-        <h2 className="text-base font-bold text-charcoal flex items-center gap-1.5">
-          <Compass className="w-4 h-4 text-sage-dark" />
+        <h2 className="text-base font-bold text-[#382417] flex items-center gap-1.5">
+          <Compass className="w-4 h-4 text-[#74482B]" />
           <span>קטלוג תנוחות איינגר</span>
         </h2>
       </header>
 
       {/* Filter Tabs & Search */}
-      <div className="p-4 border-b border-cream-200 bg-cream-100 flex flex-col gap-3 shrink-0">
+      <div className="p-4 border-b border-[#D5C2AF] bg-[#EAE0D3] flex flex-col gap-3 shrink-0">
         
         {/* Search Input */}
         <div className="relative">
@@ -93,9 +93,9 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="חיפוש לפי שם בעברית, סנסקריט או אנגלית..."
-            className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-cream-300 bg-white text-charcoal text-sm focus:outline-none focus:border-sage transition-colors text-right"
+            className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#D5C2AF] bg-[#FAF6F0] text-[#382417] text-sm focus:outline-none focus:border-[#74482B] transition-colors text-right placeholder-[#9C7A5E]"
           />
-          <Search className="w-4 h-4 text-charcoal-muted absolute right-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#9C7A5E] absolute right-3.5 top-1/2 -translate-y-1/2" />
         </div>
 
         {/* Category Pills */}
@@ -106,8 +106,8 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
               onClick={() => setActiveCategory(cat.id)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 activeCategory === cat.id
-                  ? 'bg-sage-dark text-white shadow-sm'
-                  : 'bg-white text-charcoal-light border border-cream-200 hover:bg-cream-50'
+                  ? 'bg-[#74482B] text-white shadow-sm'
+                  : 'bg-[#FAF6F0] text-[#382417] border border-[#D5C2AF] hover:bg-white'
               }`}
             >
               {cat.label}

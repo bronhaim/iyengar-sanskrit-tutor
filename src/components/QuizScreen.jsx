@@ -36,15 +36,15 @@ export const QuizScreen = ({
   const isIdentifyQuestion = question.type === 'identify';
 
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col bg-white rounded-3xl border border-[#E5D9C8] shadow-soft overflow-hidden animate-fadeIn my-2 sm:my-4">
+    <div className="w-full max-w-3xl mx-auto flex flex-col bg-[#FAF6F0] rounded-3xl border border-[#D5C2AF] shadow-card overflow-hidden animate-fadeIn my-2 sm:my-4">
       
       {/* Quiz Top Header */}
-      <header className="px-5 py-4 flex items-center justify-between border-b border-[#E5D9C8] bg-cream-50/70 backdrop-blur-sm shrink-0">
+      <header className="px-5 py-4 flex items-center justify-between border-b border-[#D5C2AF] bg-[#EAE0D3] backdrop-blur-sm shrink-0">
         <button
           onClick={onPrevQuestion}
           disabled={!canGoPrev}
           title="שאלה קודמת"
-          className="duo-button flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-[#E5D9C8] bg-white text-charcoal text-xs font-semibold shadow-xs hover:bg-cream-100 disabled:opacity-30 disabled:pointer-events-none transition-all"
+          className="duo-button flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-[#D5C2AF] bg-[#FAF6F0] text-[#382417] text-xs font-semibold shadow-xs hover:bg-white disabled:opacity-30 disabled:pointer-events-none transition-all"
         >
           <Undo2 className="w-4 h-4" />
           <span>חזור</span>
@@ -52,13 +52,13 @@ export const QuizScreen = ({
 
         {/* Progress Bar & Counter */}
         <div className="flex-1 max-w-[200px] sm:max-w-xs mx-4 flex flex-col items-center gap-1.5">
-          <div className="w-full bg-[#E5D9C8] h-2.5 rounded-full overflow-hidden">
+          <div className="w-full bg-[#D5C2AF] h-2.5 rounded-full overflow-hidden">
             <div 
-              className="bg-terracotta h-full transition-all duration-300 rounded-full" 
+              className="bg-[#74482B] h-full transition-all duration-300 rounded-full" 
               style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%` }}
             />
           </div>
-          <span className="text-xs font-bold text-charcoal-muted">
+          <span className="text-xs font-bold text-[#674831]">
             שאלה {questionIndex + 1} מתוך {totalQuestions}
           </span>
         </div>
@@ -209,15 +209,15 @@ export const QuizScreen = ({
       </div>
 
       {/* Action Footer Bar */}
-      <footer className="w-full p-5 sm:p-6 bg-cream-50/60 border-t border-[#E5D9C8] flex flex-col gap-2 shrink-0">
+      <footer className="w-full p-5 sm:p-6 bg-[#EAE0D3] border-t border-[#D5C2AF] flex flex-col gap-2 shrink-0">
         {!isAnswered ? (
           <button
             disabled={selectedOpt === null}
             onClick={() => onCheckAnswer(selectedOpt)}
             className={`duo-button w-full py-4 px-6 rounded-2xl font-bold text-base sm:text-lg shadow-sm transition-all ${
               selectedOpt !== null
-                ? 'bg-terracotta hover:bg-terracotta-dark text-white shadow-duo-terracotta cursor-pointer'
-                : 'bg-[#E5D9C8] text-charcoal-muted cursor-not-allowed'
+                ? 'bg-[#74482B] hover:bg-[#54321A] text-white shadow-md cursor-pointer'
+                : 'bg-[#D5C2AF] text-[#805E43] cursor-not-allowed'
             }`}
           >
             בדוק תשובה
