@@ -139,6 +139,24 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
                   </div>
                 )}
 
+                {pose.drishti && (
+                  <div className="bg-purple-50/80 border border-purple-200/80 rounded-xl p-2.5 text-xs text-charcoal">
+                    <div className="font-bold text-purple-900 flex items-center gap-1 mb-0.5">
+                      <span>👁️ נקודת מיקוד (Drishti):</span>
+                    </div>
+                    {pose.drishti}
+                  </div>
+                )}
+
+                {pose.cautions && (
+                  <div className="bg-rose-50/80 border border-rose-200/80 rounded-xl p-2.5 text-xs text-charcoal">
+                    <div className="font-bold text-rose-900 flex items-center gap-1 mb-0.5">
+                      <span>⚠️ דגשי בטיחות והתאמות:</span>
+                    </div>
+                    {pose.cautions}
+                  </div>
+                )}
+
                 {pose.propsGuide && (
                   <div className="bg-amber-50/80 border border-amber-200/80 rounded-xl p-2.5 text-xs text-charcoal">
                     <div className="font-bold text-amber-900 flex items-center gap-1 mb-0.5">

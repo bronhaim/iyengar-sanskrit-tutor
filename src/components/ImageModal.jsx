@@ -88,6 +88,15 @@ export const ImageModal = ({ pose, onClose }) => {
             </div>
           )}
 
+          {pose.benefits && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-charcoal">
+              <div className="font-bold text-emerald-900 flex items-center gap-1 mb-1">
+                <span>✨ יתרונות פיזיולוגיים ובריאותיים:</span>
+              </div>
+              {pose.benefits}
+            </div>
+          )}
+
           {pose.anatomicalPointers && pose.anatomicalPointers.length > 0 && (
             <div className="bg-sky-50 border border-sky-200 rounded-xl p-3 text-xs text-charcoal">
               <div className="font-bold text-sky-900 flex items-center gap-1 mb-1.5">
@@ -103,6 +112,24 @@ export const ImageModal = ({ pose, onClose }) => {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {pose.drishti && (
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs text-charcoal">
+              <div className="font-bold text-purple-900 flex items-center gap-1 mb-1">
+                <span>👁️ נקודת מיקוד (Drishti):</span>
+              </div>
+              {pose.drishti}
+            </div>
+          )}
+
+          {pose.cautions && (
+            <div className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-charcoal">
+              <div className="font-bold text-rose-900 flex items-center gap-1 mb-1">
+                <span>⚠️ דגשי בטיחות והתאמות (Cautions):</span>
+              </div>
+              {pose.cautions}
             </div>
           )}
 
