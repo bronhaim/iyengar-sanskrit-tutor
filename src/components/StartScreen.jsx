@@ -35,33 +35,31 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           איינגר יוגה • מדריך תרגול מעמיק
         </h1>
 
-        <p className="text-xs font-sanskrit text-terracotta-dark tracking-wide mb-3 dir-ltr">
+        <p className="text-xs font-sanskrit text-terracotta-dark tracking-wide mb-5 dir-ltr">
           योगेन चित्तस्य पदेन वाचां मलं शरीरस्य च वैद्यकेन
-        </p>
-
-        <p className="text-charcoal-light text-xs sm:text-sm leading-relaxed max-w-xs mx-auto mb-6">
-          מדריך מקצועי ומקיף לתרגול יוגה בשיטת איינגר: יישורת אנטומית, שימוש בעזרים (Props), רצפים ביתיים ופירוק שורשי סנסקריט.
         </p>
 
         {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 gap-3 max-w-xs mx-auto mb-6 text-right">
           
+          {/* 1. קטלוג תנוחות */}
           <button
-            onClick={onStartQuiz}
-            className="group duo-button p-4 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white text-right shadow-duo-terracotta flex items-center justify-between"
+            onClick={onOpenCatalog}
+            className="group duo-button p-4 rounded-2xl bg-white border border-cream-300 hover:border-sage/60 text-charcoal text-right shadow-sm hover:shadow-md transition-all flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white">
-                <Play className="w-5 h-5 fill-current ml-0.5" />
+              <div className="w-10 h-10 rounded-xl bg-sage-light text-sage-dark flex items-center justify-center font-bold">
+                <Compass className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-bold text-base">התחל תרגול חידון</div>
-                <div className="text-xs text-white/80">זיהוי תנוחות, פירוק מילים ושאלות אמריקאיות</div>
+                <div className="font-bold text-base text-charcoal">קטלוג תנוחות</div>
+                <div className="text-xs text-charcoal-muted">עיון בתנוחות, אנטומיה, עזרי יוגה וחיצים</div>
               </div>
             </div>
-            <ArrowLeft className="w-5 h-5 text-white/70 group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-5 h-5 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
           </button>
 
+          {/* 2. רצפי תרגול ביתיים */}
           <button
             onClick={onOpenSequences}
             className="group duo-button p-3.5 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 hover:border-amber-400 text-charcoal text-right shadow-sm flex items-center justify-between"
@@ -71,32 +69,31 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 <Sparkles className="w-4 h-4 text-amber-700" />
               </div>
               <div>
-                <div className="font-bold text-sm text-charcoal flex items-center gap-1">
-                  <span>רצפי תרגול ביתיים</span>
-                  <span className="text-[10px] font-extrabold bg-terracotta text-white px-1.5 py-0.2 rounded-full">חדש</span>
-                </div>
+                <div className="font-bold text-sm text-charcoal">רצפי תרגול ביתיים</div>
                 <div className="text-xs text-charcoal-muted">רצפים לבוקר, ערב, עיכול, כאבי ראש והריון</div>
               </div>
             </div>
             <ArrowLeft className="w-4 h-4 text-amber-800 group-hover:translate-x-[-3px] transition-transform" />
           </button>
 
+          {/* 3. תרגול סנסקריט וזיהוי תנוחות */}
           <button
-            onClick={onOpenCatalog}
-            className="group duo-button p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-sage/40 text-charcoal text-right shadow-sm flex items-center justify-between"
+            onClick={onStartQuiz}
+            className="group duo-button p-3.5 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white text-right shadow-duo-terracotta flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-sage-light text-sage-dark flex items-center justify-center font-bold">
-                <Compass className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white">
+                <Play className="w-4 h-4 fill-current ml-0.5" />
               </div>
               <div>
-                <div className="font-bold text-sm text-charcoal">קטלוג תנוחות איינגר</div>
-                <div className="text-xs text-charcoal-muted">עיון בתנוחות לפי עמידה, הפוכות וכפופות</div>
+                <div className="font-bold text-sm">תרגול סנסקריט וזיהוי תנוחות</div>
+                <div className="text-xs text-white/80">זיהוי תנוחות, פירוק מילים ושאלות אמריקאיות</div>
               </div>
             </div>
-            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-white/70 group-hover:translate-x-[-3px] transition-transform" />
           </button>
 
+          {/* 4. מילון שורשי סנסקריט */}
           <button
             onClick={onOpenRoots}
             className="group duo-button p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-terracotta/40 text-charcoal text-right shadow-sm flex items-center justify-between"
