@@ -4,6 +4,7 @@ import { StartScreen } from './components/StartScreen';
 import { QuizScreen } from './components/QuizScreen';
 import { RootsExplorer } from './components/RootsExplorer';
 import { PoseCatalog } from './components/PoseCatalog';
+import { SequencesScreen } from './components/SequencesScreen';
 import { EndScreen } from './components/EndScreen';
 import { ImageModal } from './components/ImageModal';
 import { POSE_DATABASE } from './data/posesData';
@@ -92,6 +93,7 @@ export function App() {
               onStartQuiz={startQuiz}
               onOpenRoots={() => setCurrentView('roots')}
               onOpenCatalog={() => setCurrentView('catalog')}
+              onOpenSequences={() => setCurrentView('sequences')}
               totalPoses={POSE_DATABASE.length}
             />
           )}
@@ -120,6 +122,13 @@ export function App() {
 
           {currentView === 'catalog' && (
             <PoseCatalog 
+              onBackToHome={() => setCurrentView('home')}
+              onOpenZoomModal={(p) => setZoomedPose(p)}
+            />
+          )}
+
+          {currentView === 'sequences' && (
+            <SequencesScreen 
               onBackToHome={() => setCurrentView('home')}
               onOpenZoomModal={(p) => setZoomedPose(p)}
             />

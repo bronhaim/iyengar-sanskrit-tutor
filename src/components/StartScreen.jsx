@@ -1,7 +1,7 @@
 import React from 'react';
-import { Play, BookOpen, Compass, Award, Heart, ArrowLeft } from 'lucide-react';
+import { Play, BookOpen, Compass, Sparkles, ArrowLeft } from 'lucide-react';
 
-export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, totalPoses }) => {
+export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, totalPoses }) => {
   return (
     <section className="flex flex-col h-full justify-between p-6 sm:p-8 bg-cream-50 select-none text-center animate-fadeIn overflow-y-auto custom-scrollbar">
       
@@ -57,19 +57,22 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, totalPose
           </button>
 
           <button
-            onClick={onOpenRoots}
-            className="group duo-button p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-terracotta/40 text-charcoal text-right shadow-sm flex items-center justify-between"
+            onClick={onOpenSequences}
+            className="group duo-button p-3.5 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 hover:border-amber-400 text-charcoal text-right shadow-sm flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-cream-200 text-terracotta flex items-center justify-center font-bold">
-                <BookOpen className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold">
+                <Sparkles className="w-4 h-4 text-amber-700" />
               </div>
               <div>
-                <div className="font-bold text-sm text-charcoal">מילון שורשי סנסקריט</div>
-                <div className="text-xs text-charcoal-muted">פירוש מילים כמו אדו, מוקה, וירה, וריקשה</div>
+                <div className="font-bold text-sm text-charcoal flex items-center gap-1">
+                  <span>רצפי תרגול ביתיים</span>
+                  <span className="text-[10px] font-extrabold bg-terracotta text-white px-1.5 py-0.2 rounded-full">חדש</span>
+                </div>
+                <div className="text-xs text-charcoal-muted">רצפים לבוקר, ערב, עיכול, כאבי ראש והריון</div>
               </div>
             </div>
-            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-amber-800 group-hover:translate-x-[-3px] transition-transform" />
           </button>
 
           <button
@@ -83,6 +86,22 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, totalPose
               <div>
                 <div className="font-bold text-sm text-charcoal">קטלוג תנוחות איינגר</div>
                 <div className="text-xs text-charcoal-muted">עיון בתנוחות לפי עמידה, הפוכות וכפופות</div>
+              </div>
+            </div>
+            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
+          </button>
+
+          <button
+            onClick={onOpenRoots}
+            className="group duo-button p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-terracotta/40 text-charcoal text-right shadow-sm flex items-center justify-between"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-cream-200 text-terracotta flex items-center justify-center font-bold">
+                <BookOpen className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="font-bold text-sm text-charcoal">מילון שורשי סנסקריט</div>
+                <div className="text-xs text-charcoal-muted">פירוש מילים כמו אדו, מוקה, וירה, וריקשה</div>
               </div>
             </div>
             <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
