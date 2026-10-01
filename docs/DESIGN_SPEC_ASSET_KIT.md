@@ -38,3 +38,22 @@ Setting & Style:
 1. Save generated WebP / JPG assets into `public/images/poses/[pose-id].jpg` (or `.webp`).
 2. Update dataset entry in `src/data/posesData.js` with pose details, action vectors, props guide, and muscle anatomy.
 3. Keep clean white backgrounds to enable SVG/Canvas Action Vector Arrow overlays in `PoseSvgIllustration.jsx` and `ImageModal.jsx`.
+
+## 6. Priority Fixes & Alignment Rectifications (Scheduled for 15:07 Reset)
+
+### Virabhadrasana I (ויראבדראסאנה 1 - Warrior 1) - CRITICAL FIX #1:
+- **Identified Flaws in previous version:**
+  - Back foot was partially lifted on the ball of the foot (Gym lunge/Crescent lunge mistake) instead of rooted flat.
+  - Front thigh was not deep enough at 90 degrees.
+  - Arrow mistakenly pointed forward into the knee, which causes knee shearing.
+- **Strict B.K.S. Iyengar "Light on Yoga" Requirements for Replacement:**
+  1. **Back Foot & Leg:** Back foot MUST be completely flat on the floor, turned inward 45-60 degrees. Outer edge and heel pressing down forcefully into the floor with back knee completely straight and kneecap locked up.
+  2. **Front Thigh & Knee:** Front knee bent to an EXACT 90-degree right angle. Thigh strictly parallel to the floor, shin strictly vertical (knee stacked directly above ankle/heel, NEVER drifting forward past toes).
+  3. **Hips & Pelvis:** Both hips squared completely forward toward the front wall (left hip rolling forward, right hip drawing back).
+  4. **Arms & Spine:** Arms stretched straight up overhead, elbows straight, palms pressed together in Anjali Mudra, chest lifted, head tilted back gazing at thumbs.
+  5. **Action Vector Arrows:**
+     - Downward/backward arrow anchoring the outer back heel firmly to the mat.
+     - Downward arrow descending the pelvic floor to achieve the 90° thigh.
+     - Forward-rolling arrow on back hip squaring the pelvis.
+     - Upward arrow lifting the spine, chest, and arms toward the ceiling.
+
