@@ -171,7 +171,6 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites,
                   }}
                   className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta cursor-pointer"
                 >
-                  <Star className="w-3.5 h-3.5 fill-terracotta text-terracotta" />
                   <span>מעבר לעמוד המועדפים המלא</span>
                 </button>
               </div>

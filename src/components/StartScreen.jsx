@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, ArrowLeft, ChevronRight, ChevronLeft, Star, MessageSquarePlus } from 'lucide-react';
+import { BookOpen, ArrowLeft, ChevronRight, ChevronLeft, MessageSquarePlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const SHOWCASE_POSES = [
@@ -196,12 +196,11 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             <div className="pt-1 flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={onOpenFavorites}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream-100 hover:bg-cream-200 border border-[#E5D9C8] hover:border-amber-300 text-charcoal text-xs font-semibold transition-all shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-cream-100 hover:bg-cream-200 border border-[#E5D9C8] hover:border-[#D4C3AD] text-charcoal text-xs font-semibold transition-all shadow-xs"
               >
-                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                 <span>המועדפים שלי</span>
                 {totalFavs > 0 && (
-                  <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                  <span className="bg-white border border-[#E5D9C8] text-charcoal text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                     {totalFavs}
                   </span>
                 )}
