@@ -77,8 +77,8 @@ export const QuizScreen = ({
         
         {/* Sanskrit Banner & Prompt */}
         <div className="text-right space-y-2">
-          {(isAnswered || !isIdentifyQuestion) && (
-            <div className="text-sm font-sanskrit text-terracotta tracking-wider font-semibold dir-ltr text-right">
+          {isAnswered && (
+            <div className="text-sm font-sanskrit text-terracotta tracking-wider font-semibold dir-ltr text-right animate-fadeIn">
               {question.sanskritScript}
             </div>
           )}
@@ -109,8 +109,12 @@ export const QuizScreen = ({
               {question.sanskritScript.split('•')[0]?.trim() || question.sanskritScript}
             </div>
 
+            {/* Before answering: display ONLY the clean phonetic transliteration (no parenthetical translation spoiler!)
+                After answering: reveal the full Hebrew name with meaning */}
             <div className="text-sm font-semibold text-charcoal-muted">
-              {question.poseHebrewName}
+              {isAnswered 
+                ? question.poseHebrewName 
+                : (question.poseHebrewName?.replace(/\s*\([^)]*\)/g, '').trim() || '')}
             </div>
           </div>
         )}
