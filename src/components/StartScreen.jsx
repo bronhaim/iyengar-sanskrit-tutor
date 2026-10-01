@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, BookOpen, Compass, Sparkles, ArrowLeft, ChevronRight, ChevronLeft, CheckCircle2 } from 'lucide-react';
+import { BookOpen, ArrowLeft, ChevronRight, ChevronLeft } from 'lucide-react';
 
 const SHOWCASE_POSES = [
   {
@@ -145,8 +145,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           <div className="lg:col-span-7 space-y-6 text-center flex flex-col items-center">
             
             {/* Tradition Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E5D9C8] shadow-xs text-charcoal">
-              <span className="text-terracotta">✨</span>
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E5D9C8] shadow-xs text-charcoal">
               <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
@@ -158,51 +157,35 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
 
-            {/* Quick Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            {/* Quick Action Buttons - 4 unified buttons in one line on desktop, stacked on mobile */}
+            <div className="pt-2 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
               <button
                 onClick={onOpenCatalog}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-terracotta hover:bg-terracotta-dark text-white rounded-full text-base font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 gap-2"
+                className="px-5 py-3 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
               >
-                <Compass className="w-5 h-5" />
-                <span>קטלוג תנוחות ({totalPoses})</span>
+                קטלוג תנוחות
               </button>
 
               <button
                 onClick={onOpenSequences}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E5D9C8] hover:border-amber-500 text-charcoal hover:text-amber-800 rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                className="px-5 py-3 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
               >
-                <Sparkles className="w-5 h-5 text-amber-600" />
-                <span>רצפי תרגולים מומלצים</span>
+                רצפי תרגולים
               </button>
 
               <button
                 onClick={onStartQuiz}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                className="px-5 py-3 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
               >
-                <Play className="w-5 h-5 fill-current text-terracotta" />
-                <span>חידון</span>
+                חידון
               </button>
-            </div>
 
-            {/* Quick Feature Perks */}
-            <div className="pt-3 flex flex-wrap items-center justify-center gap-5 text-xs text-charcoal-muted">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>קטלוג תנוחות יוגה</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>רצפי תרגולים מומלצים</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>חידון ותרגול אישי</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>מילון סנסקריט</span>
-              </div>
+              <button
+                onClick={onOpenRoots}
+                className="px-5 py-3 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
+              >
+                מילון סנסקריט
+              </button>
             </div>
 
           </div>
