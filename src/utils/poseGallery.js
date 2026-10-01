@@ -6,6 +6,38 @@
 
 // Mapping of poses that have distinct clean variations available in /images/poses/
 export const KNOWN_POSE_VARIATIONS = {
+  'tadasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'עמידת הר (טדאסאנה) בצילום סטודיו נקי ומדויק',
+      src: '/images/poses/tadasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגלת נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'תצלום מתרגלת להדגמת יציבה וחלוקת משקל שווה',
+      src: '/images/poses/tadasana.png'
+    }
+  ],
+  'utthita-trikonasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו עם בלוק',
+      badge: '📸 הדמות הראשית',
+      description: 'משולש מוארך עם תמיכת בלוק עץ ופתיחה מלאה של בית החזה',
+      src: '/images/poses/utthita-trikonasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגלת נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח משולש מוארך בהדגמת מתרגלת נוספת',
+      src: '/images/poses/utthita-trikonasana.png'
+    }
+  ],
   'paschimottanasana': [
     {
       id: 'classic',
