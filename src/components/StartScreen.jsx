@@ -62,27 +62,27 @@ const SHOWCASE_POSES = [
 
 const IYENGAR_QUOTES = [
   {
-    quote: "היוגה אינה משנה רק את האופן שבו אנו רואים דברים — היא משנה את האדם שרואה.",
+    quote: "היוגה אינה משנה רק את האופן שבו אנו רואים דברים — היא משנה את האדם שרואה",
     highlight: "היא משנה את האדם שרואה"
   },
   {
-    quote: "הגוף הוא הקשת שלך, האסאנה היא החץ, והנשמה היא המטרה.",
+    quote: "הגוף הוא הקשת שלך, האסאנה היא החץ, והנשמה היא המטרה",
     highlight: "והנשמה היא המטרה"
   },
   {
-    quote: "היוגה מלמדת אותנו לרפא את מה שאין צורך לסבול, ולסבול את מה שאי אפשר לרפא.",
+    quote: "היוגה מלמדת אותנו לרפא את מה שאין צורך לסבול, ולסבול את מה שאי אפשר לרפא",
     highlight: "לרפא את מה שאין צורך לסבול"
   },
   {
-    quote: "מילים אינן יכולות להעביר את ערכה של היוגה — יש לחוות אותה ישירות דרך הגוף.",
+    quote: "מילים אינן יכולות להעביר את ערכה של היוגה — יש לחוות אותה ישירות דרך הגוף",
     highlight: "יש לחוות אותה ישירות"
   },
   {
-    quote: "אינטליגנציה ללא פעולה היא עקרה; פעולה ללא אינטליגנציה היא עיוורת.",
+    quote: "אינטליגנציה ללא פעולה היא עקרה; פעולה ללא אינטליגנציה היא עיוורת",
     highlight: "אינטליגנציה בפעולה"
   },
   {
-    quote: "התמדה וסבלנות בתרגול היומי בונות עוגן פנימי של שקט ותודעה בהירה.",
+    quote: "התמדה וסבלנות בתרגול היומי בונות עוגן פנימי של שקט ותודעה בהירה",
     highlight: "עוגן פנימי של שקט"
   }
 ];
@@ -298,45 +298,42 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           onMouseEnter={() => setIsQuotePaused(true)}
           onMouseLeave={() => setIsQuotePaused(false)}
         >
-          <div className="flex items-center justify-between w-full max-w-2xl px-2 mb-1.5">
+          <div className="flex items-center justify-center gap-3 sm:gap-6 w-full max-w-3xl px-2">
             <button 
               onClick={prevQuote} 
               aria-label="ציטוט קודם"
-              className="p-1.5 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors"
+              className="p-2 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors shrink-0"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-5 h-5" />
             </button>
-            <div className="flex items-center gap-1.5 text-xs text-charcoal-muted font-medium">
-              <span className="text-terracotta text-sm">❝</span>
-              <span>ציטוט מתחלף • ב.ק.ס איינגר</span>
+
+            <div 
+              onClick={nextQuote}
+              className="cursor-pointer max-w-2xl px-2 py-1 hover:opacity-90 transition-opacity"
+              title="לחצו לציטוט הבא"
+            >
+              <blockquote 
+                key={currentQuoteIdx}
+                className="font-amatic text-3xl sm:text-4xl lg:text-[42px] font-bold text-charcoal leading-tight tracking-wide animate-fadeIn"
+              >
+                "{IYENGAR_QUOTES[currentQuoteIdx].quote}"
+              </blockquote>
+              <div className="text-xs sm:text-sm text-terracotta font-medium mt-1">
+                — ב.ק.ס איינגר
+              </div>
             </div>
+
             <button 
               onClick={nextQuote} 
               aria-label="ציטוט הבא"
-              className="p-1.5 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors"
+              className="p-2 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors shrink-0"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
           </div>
 
-          <div 
-            onClick={nextQuote}
-            className="cursor-pointer max-w-2xl px-4 py-1 hover:opacity-90 transition-opacity"
-            title="לחצו לציטוט הבא"
-          >
-            <blockquote 
-              key={currentQuoteIdx}
-              className="font-amatic text-3xl sm:text-4xl lg:text-[42px] font-bold text-charcoal leading-tight tracking-wide animate-fadeIn"
-            >
-              "{IYENGAR_QUOTES[currentQuoteIdx].quote}"
-            </blockquote>
-            <div className="text-xs text-terracotta font-medium mt-1">
-              — ב.ק.ס איינגר
-            </div>
-          </div>
-
           {/* Quote Indicator dots */}
-          <div className="flex items-center gap-1 mt-2">
+          <div className="flex items-center gap-1.5 mt-2.5">
             {IYENGAR_QUOTES.map((_, idx) => (
               <button
                 key={idx}

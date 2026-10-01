@@ -19,9 +19,6 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             <div className="font-bold text-base sm:text-lg text-charcoal leading-tight">
               יוגה איינגר לתרגול ביתי
             </div>
-            <div className="text-xs text-soft-green font-semibold leading-tight">
-              תרגול, שמות התנוחות וסנסקריט
-            </div>
           </div>
         </button>
 
