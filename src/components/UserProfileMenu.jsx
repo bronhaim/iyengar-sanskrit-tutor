@@ -1,30 +1,36 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { User, LogOut, Star, Heart, Settings, ChevronDown, Check, ShieldAlert } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, LogOut, Star, Settings, ChevronDown, Check, X, ShieldAlert, Heart, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
   const { currentUser, userProfile, logout, updateSensitivities } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [showPreferences, setShowPreferences] = useState(false);
-  const menuRef = useRef(null);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
-        setShowPreferences(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const sensitivityOptions = [
-    { id: 'knees', label: 'רגישות בברכיים 🦵' },
-    { id: 'lower_back', label: 'רגישות בגב תחתון 🧘' },
-    { id: 'neck', label: 'רגישות בצוואר / כתפיים 💆' },
-    { id: 'high_bp', label: 'לחץ דם גבוה 🩺' }
+    { 
+      id: 'knees', 
+      label: 'רגישות בברכיים', 
+      emoji: '🦵',
+      desc: 'התראות בתנוחות כפיפה עמוקה ופיתולים' 
+    },
+    { 
+      id: 'lower_back', 
+      label: 'רגישות בגב תחתון', 
+      emoji: '🧘',
+      desc: 'התראות בכפיפות לאחור ובמתיחות עמוקות לפנים' 
+    },
+    { 
+      id: 'neck', 
+      label: 'רגישות בצוואר / כתפיים', 
+      emoji: '💆',
+      desc: 'התראות בתנוחות הפוכות והרמת זרועות' 
+    },
+    { 
+      id: 'high_bp', 
+      label: 'לחץ דם גבוה', 
+      emoji: '🩺',
+      desc: 'התאמת תנוחות הפוכות והנחיות שהייה נתמכת' 
+    }
   ];
 
   const handleToggleSensitivity = (id) => {
@@ -35,14 +41,16 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
     updateSensitivities(updated);
   };
 
+  // If not logged in, render simple login trigger button
   if (!currentUser) {
     return (
       <button
         onClick={onOpenAuth}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cream-100 hover:bg-cream-200 border border-cream-300 text-charcoal text-xs font-semibold shadow-sm transition-all hover:border-terracotta"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white hover:bg-cream-100 border border-cream-300 text-charcoal text-xs font-semibold shadow-sm transition-all hover:border-terracotta shrink-0"
+        title="התחברות לחשבון"
       >
         <User className="w-3.5 h-3.5 text-terracotta" />
-        <span>התחברות</span>
+        <span className="hidden sm:inline">התחברות</span>
       </button>
     );
   }
@@ -50,104 +58,188 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
   const displayName = currentUser.displayName || currentUser.email?.split('@')[0] || 'מתרגל';
   const initial = displayName.charAt(0).toUpperCase();
   const favCount = userProfile.favorites?.length || 0;
+  const sensitivitiesCount = (userProfile.sensitivities || []).length;
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative shrink-0">
+      {/* Header Profile Trigger Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-white hover:bg-cream-50 border border-cream-300 text-charcoal text-xs font-semibold shadow-sm transition-all"
+        onClick={() => setIsOpen(true)}
+        className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-white hover:bg-cream-50 border border-cream-300 hover:border-terracotta/50 text-charcoal text-xs font-semibold shadow-sm transition-all"
+        title="פרופיל מתרגל והגדרות"
       >
         {currentUser.photoURL ? (
           <img 
             src={currentUser.photoURL} 
             alt={displayName} 
-            className="w-5 h-5 rounded-full object-cover"
+            className="w-5 h-5 rounded-full object-cover border border-cream-300"
           />
         ) : (
-          <div className="w-5 h-5 rounded-full bg-terracotta text-white flex items-center justify-center text-[10px] font-bold">
+          <div className="w-5 h-5 rounded-full bg-terracotta text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
             {initial}
           </div>
         )}
-        <span className="max-w-[90px] truncate">{displayName}</span>
-        <ChevronDown className="w-3 h-3 text-charcoal-muted" />
+        <span className="max-w-[65px] sm:max-w-[90px] truncate text-xs">{displayName}</span>
+        <ChevronDown className="w-3 h-3 text-charcoal-muted shrink-0" />
       </button>
 
-      {/* Dropdown Menu */}
+      {/* Full Screen / Bottom Sheet Modal - 100% visible on Mobile and Desktop */}
       {isOpen && (
-        <div className="absolute left-0 sm:left-auto sm:right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-cream-200 p-2 z-50 text-right animate-fadeIn">
-          {/* User Info Header */}
-          <div className="px-3 py-2 border-b border-cream-100 mb-1">
-            <div className="font-bold text-charcoal text-sm">{displayName}</div>
-            <div className="text-[11px] text-charcoal-muted truncate dir-ltr text-right">{currentUser.email}</div>
-          </div>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-charcoal/50 backdrop-blur-xs p-0 sm:p-4 animate-fadeIn">
+          
+          {/* Backdrop Click to close */}
+          <div 
+            className="absolute inset-0" 
+            onClick={() => setIsOpen(false)} 
+          />
 
-          {/* Quick Menu Items */}
-          <div className="space-y-0.5">
-            <button
-              onClick={() => {
-                if (onSelectCategory) onSelectCategory('favorites');
-                setIsOpen(false);
-              }}
-              className="w-full px-3 py-2 rounded-xl text-xs text-charcoal hover:bg-cream-100 flex items-center justify-between transition-colors"
-            >
-              <div className="flex items-center gap-2">
-                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                <span>התנוחות המועדפות שלי</span>
-              </div>
-              <span className="bg-cream-200 text-charcoal font-bold px-1.5 py-0.5 rounded-md text-[10px]">
-                {favCount}
-              </span>
-            </button>
-
-            <button
-              onClick={() => setShowPreferences(!showPreferences)}
-              className="w-full px-3 py-2 rounded-xl text-xs text-charcoal hover:bg-cream-100 flex items-center justify-between transition-colors"
-            >
-              <div className="flex items-center gap-2">
-                <Settings className="w-3.5 h-3.5 text-sage-dark" />
-                <span>העדפות ורגישויות גוף</span>
-              </div>
-              <ChevronDown className={`w-3 h-3 transition-transform ${showPreferences ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Sensitivities Submenu */}
-            {showPreferences && (
-              <div className="bg-cream-50 p-2 rounded-xl my-1 space-y-1 border border-cream-200/60">
-                <div className="text-[10px] text-charcoal-muted font-bold px-1 mb-1">
-                  האפליקציה תדגיש זהירות בתנוחות:
+          {/* Modal Container */}
+          <div className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-cream-200 overflow-hidden z-10 max-h-[90vh] flex flex-col animate-slideUp text-right">
+            
+            {/* Header / User Card */}
+            <div className="bg-gradient-to-l from-cream-100 to-cream-50 p-4 sm:p-5 border-b border-cream-200 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {currentUser.photoURL ? (
+                  <img 
+                    src={currentUser.photoURL} 
+                    alt={displayName} 
+                    className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm"
+                  />
+                ) : (
+                  <div className="w-12 h-12 rounded-2xl bg-terracotta text-white flex items-center justify-center text-lg font-bold shadow-sm">
+                    {initial}
+                  </div>
+                )}
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-charcoal text-base">{displayName}</span>
+                    <span className="text-[10px] bg-sage-light text-sage-dark font-medium px-2 py-0.5 rounded-full">
+                      מחובר
+                    </span>
+                  </div>
+                  <div className="text-xs text-charcoal-muted truncate dir-ltr text-right mt-0.5 max-w-[200px] sm:max-w-[240px]">
+                    {currentUser.email}
+                  </div>
                 </div>
-                {sensitivityOptions.map(opt => {
-                  const isChecked = (userProfile.sensitivities || []).includes(opt.id);
-                  return (
-                    <button
-                      key={opt.id}
-                      onClick={() => handleToggleSensitivity(opt.id)}
-                      className="w-full px-2 py-1 rounded-lg text-xs flex items-center justify-between text-right hover:bg-white transition-colors"
-                    >
-                      <span className="text-[11px] text-charcoal">{opt.label}</span>
-                      <div className={`w-4 h-4 rounded border flex items-center justify-center ${
-                        isChecked ? 'bg-terracotta border-terracotta text-white' : 'border-cream-300 bg-white'
-                      }`}>
-                        {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                      </div>
-                    </button>
-                  );
-                })}
               </div>
-            )}
 
-            <div className="border-t border-cream-100 my-1"></div>
+              {/* Close Button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-8 h-8 rounded-full bg-white border border-cream-200 hover:bg-cream-100 flex items-center justify-center text-charcoal-muted hover:text-charcoal transition-colors"
+                title="סגור"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
 
-            <button
-              onClick={() => {
-                logout();
-                setIsOpen(false);
-              }}
-              className="w-full px-3 py-2 rounded-xl text-xs text-rose-700 hover:bg-rose-50 flex items-center gap-2 transition-colors"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span>התנתקות מהחשבון</span>
-            </button>
+            {/* Scrollable Content Body */}
+            <div className="p-4 sm:p-5 space-y-4 overflow-y-auto custom-scrollbar flex-1">
+              
+              {/* Option 1: My Favorites */}
+              <div className="bg-cream-50/70 border border-cream-200 rounded-2xl p-3.5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
+                      <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-sm text-charcoal">תנוחות מועדפות</div>
+                      <div className="text-[11px] text-charcoal-muted">רשימת התנוחות האישית שלך לשמירה ותרגול</div>
+                    </div>
+                  </div>
+                  <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full">
+                    {favCount} תנוחות
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    if (onSelectCategory) onSelectCategory('favorites');
+                  }}
+                  className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta"
+                >
+                  <Star className="w-3.5 h-3.5 fill-terracotta text-terracotta" />
+                  <span>מעבר לתנוחות המועדפות בקטלוג</span>
+                </button>
+              </div>
+
+              {/* Option 2: Body Sensitivities & Iyengar Adjustments */}
+              <div className="bg-cream-50/70 border border-cream-200 rounded-2xl p-3.5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-sage-light text-sage-dark flex items-center justify-center">
+                      <Settings className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-sm text-charcoal">העדפות ורגישויות גוף</div>
+                      <div className="text-[11px] text-charcoal-muted">התאמת דגשי שהות, אזהרות ועזרים לפי מצבך</div>
+                    </div>
+                  </div>
+                  {sensitivitiesCount > 0 && (
+                    <span className="bg-sage-light text-sage-dark text-[11px] font-bold px-2 py-0.5 rounded-full">
+                      {sensitivitiesCount} פעילות
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-[11px] text-charcoal-muted mb-2.5">
+                  סמן רגישויות קיימות. תנוחות שדורשות זהירות יסומנו בקטלוג בהתראה ברורה:
+                </p>
+
+                {/* Sensitivities List */}
+                <div className="space-y-1.5">
+                  {sensitivityOptions.map(opt => {
+                    const isChecked = (userProfile.sensitivities || []).includes(opt.id);
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => handleToggleSensitivity(opt.id)}
+                        className={`w-full p-2.5 rounded-xl border text-right transition-all flex items-center justify-between ${
+                          isChecked 
+                            ? 'bg-cream-100/90 border-terracotta/40 shadow-xs' 
+                            : 'bg-white border-cream-200 hover:border-cream-300'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-base">{opt.emoji}</span>
+                          <div>
+                            <div className="text-xs font-bold text-charcoal">{opt.label}</div>
+                            <div className="text-[10px] text-charcoal-muted">{opt.desc}</div>
+                          </div>
+                        </div>
+
+                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors shrink-0 ${
+                          isChecked 
+                            ? 'bg-terracotta border-terracotta text-white shadow-xs' 
+                            : 'border-cream-300 bg-white'
+                        }`}>
+                          {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Logout Button */}
+              <div className="pt-1">
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="w-full py-2.5 px-4 rounded-xl border border-rose-200 text-rose-700 bg-rose-50/50 hover:bg-rose-100/70 font-semibold text-xs flex items-center justify-center gap-2 transition-colors shadow-xs"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>התנתקות מהחשבון</span>
+                </button>
+              </div>
+
+            </div>
+
           </div>
         </div>
       )}

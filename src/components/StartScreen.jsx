@@ -6,21 +6,24 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     <section className="flex flex-col h-full justify-between p-6 sm:p-8 bg-cream-50 select-none text-center animate-fadeIn overflow-y-auto custom-scrollbar">
       
       <div className="pt-2">
-        {/* Iyengar Studio Hero Badge (Replaces old lotus icon) */}
-        <div className="relative inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-b from-cream-100 to-cream-200 border border-cream-300 shadow-md mb-4 text-terracotta mx-auto overflow-hidden group">
+        {/* Iyengar Studio Hero Card - Portrait Framing for Full Alignment Visibility */}
+        <div className="relative inline-flex flex-col items-center justify-center w-32 h-44 sm:w-36 sm:h-48 rounded-2xl bg-gradient-to-b from-cream-100 to-cream-200 border border-cream-300 shadow-md mb-3 text-terracotta mx-auto overflow-hidden group">
           <img 
             src="/images/poses/tadasana.jpg" 
-            alt="Iyengar Yoga Practice Model"
-            className="w-full h-full object-cover object-top opacity-95 group-hover:scale-105 transition-transform duration-500"
+            alt="Iyengar Yoga Practice Model - Tadasana Strict Alignment"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
               // Graceful fallback to pose photo
               e.target.onerror = null;
               e.target.src = '/images/poses/tadasana.png';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent flex items-end justify-center pb-1.5">
-            <span className="text-[11px] font-bold bg-terracotta text-white px-2.5 py-0.5 rounded-full shadow-sm">
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent flex flex-col justify-end items-center pb-2 px-1">
+            <span className="text-[10px] font-bold bg-terracotta text-white px-2.5 py-0.5 rounded-full shadow-sm">
               {totalPoses} תנוחות איינגר
+            </span>
+            <span className="text-[9px] text-cream-100 font-medium mt-0.5 drop-shadow">
+              טדאסאנה • כפות רגליים צמודות
             </span>
           </div>
         </div>
