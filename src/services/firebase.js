@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { 
   getAuth, 
   GoogleAuthProvider, 
@@ -21,24 +21,34 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyA0r5G50wO7fZMwcgWUp8BcIiqWRZOE6iU",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "iyengar-yoga-app.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "iyengar-yoga-app",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "iyengar-yoga-app.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "182926733949",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:182926733949:web:973b857c81217163e2f714",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-KVL3SR29VX"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Safe initialization
+let app;
+let auth;
+let db;
+let googleProvider;
 
-// Auth & Firestore services
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const googleProvider = new GoogleAuthProvider();
+try {
+  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  googleProvider = new GoogleAuthProvider();
+} catch (error) {
+  console.warn("Firebase initialization warning (running in offline/fallback mode):", error);
+}
 
 export {
+  auth,
+  db,
+  googleProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
