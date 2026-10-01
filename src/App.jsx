@@ -9,6 +9,7 @@ import { EndScreen } from './components/EndScreen';
 import { ImageModal } from './components/ImageModal';
 import { AuthModal } from './components/AuthModal';
 import { FavoritesScreen } from './components/FavoritesScreen';
+import { RequestFeatureModal } from './components/RequestFeatureModal';
 import { POSE_DATABASE } from './data/posesData';
 
 export function App() {
@@ -19,6 +20,7 @@ export function App() {
   const [score, setScore] = useState(0);
   const [zoomedPose, setZoomedPose] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isRequestFeatureModalOpen, setIsRequestFeatureModalOpen] = useState(false);
   const [catalogCategory, setCatalogCategory] = useState('all');
 
   // Helper to shuffle array for non-repetitive quiz session
@@ -105,6 +107,7 @@ export function App() {
         score={score} 
         totalQuestions={quizPool.length || POSE_DATABASE.length} 
         onOpenAuth={() => setIsAuthModalOpen(true)}
+        onRequestFeature={() => setIsRequestFeatureModalOpen(true)}
         onSelectCategory={(cat) => {
           setCatalogCategory(cat);
           setCurrentView('catalog');
@@ -135,6 +138,7 @@ export function App() {
               setCurrentView('favorites');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            onRequestFeature={() => setIsRequestFeatureModalOpen(true)}
             totalPoses={POSE_DATABASE.length}
           />
         )}
@@ -272,6 +276,11 @@ export function App() {
       <AuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
+      />
+
+      <RequestFeatureModal
+        isOpen={isRequestFeatureModalOpen}
+        onClose={() => setIsRequestFeatureModalOpen(false)}
       />
 
     </div>

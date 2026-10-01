@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles } from 'lucide-react';
+import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles, MessageSquarePlus, Send } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites }) => {
+export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites, onRequestFeature }) => {
   const { currentUser, userProfile, logout, updateSensitivities } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -234,6 +234,33 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites 
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Option 3: Request Pose or Feature */}
+              <div className="bg-cream-50/70 border border-cream-200 rounded-2xl p-3.5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                      <MessageSquarePlus className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-sm text-charcoal">בקשת תנוחה או פיצ׳ר חדש</div>
+                      <div className="text-[11px] text-charcoal-muted">שלחו בקשה ישירות ליניב כדי שיוכל לעבוד על זה</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false);
+                    if (onRequestFeature) onRequestFeature();
+                  }}
+                  className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta cursor-pointer"
+                >
+                  <Send className="w-3.5 h-3.5 text-terracotta" />
+                  <span>שליחת בקשה אישית במייל</span>
+                </button>
               </div>
 
               {/* Logout Button */}

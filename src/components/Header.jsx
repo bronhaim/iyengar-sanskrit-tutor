@@ -2,7 +2,7 @@ import React from 'react';
 import { BookOpen, Compass, Home, Play, Sparkles, Star } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
-export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory }) => {
+export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
   return (
     <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E5D9C8] sticky top-0 z-40 px-4 sm:px-8 py-3 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -124,6 +124,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           <UserProfileMenu 
             onOpenAuth={onOpenAuth} 
             onOpenFavorites={() => setCurrentView('favorites')}
+            onRequestFeature={onRequestFeature}
             onSelectCategory={(cat) => {
               setCurrentView('catalog');
               if (onSelectCategory) onSelectCategory(cat);

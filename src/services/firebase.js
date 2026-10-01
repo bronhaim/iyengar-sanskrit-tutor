@@ -17,7 +17,9 @@ import {
   getDoc, 
   updateDoc, 
   arrayUnion, 
-  arrayRemove 
+  arrayRemove,
+  collection,
+  addDoc
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -61,7 +63,9 @@ export {
   getDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove
+  arrayRemove,
+  collection,
+  addDoc
 };
 
 export default app;
