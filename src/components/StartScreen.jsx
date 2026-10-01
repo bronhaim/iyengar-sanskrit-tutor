@@ -150,8 +150,8 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-[1.18] tracking-tight">
-              יוגה איינגר <span className="text-terracotta">לתרגול ביתי</span>
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-charcoal leading-tight tracking-tight whitespace-nowrap">
+              יוגה איינגר לתרגול ביתי
             </h1>
 
             <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl">
