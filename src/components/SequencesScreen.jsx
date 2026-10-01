@@ -165,13 +165,15 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal }) => {
                 </div>
 
                 {/* Start Guided Button */}
-                <button
-                  onClick={() => handleStartGuided(seq)}
-                  className="w-full py-3 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-duo-terracotta flex items-center justify-center gap-2 transition-all mt-1"
-                >
-                  <Play className="w-4 h-4 fill-current ml-0.5" />
-                  <span>התחל תרגול מודרך step-by-step</span>
-                </button>
+                <div className="pt-1 flex items-center justify-start">
+                  <button
+                    onClick={() => handleStartGuided(seq)}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white font-bold text-sm shadow-duo-terracotta hover:shadow-md transition-all"
+                  >
+                    <Play className="w-4 h-4 fill-current ml-0.5" />
+                    <span>התחל תרגול מודרך</span>
+                  </button>
+                </div>
 
               </div>
             ))}
