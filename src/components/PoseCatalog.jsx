@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search } from 'lucide-react';
+import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search, Layers } from 'lucide-react';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
+import { getPoseGallery } from '../utils/poseGallery';
 
 export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -92,7 +93,15 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
             >
               <PoseSvgIllustration poseId={pose.id} className="w-full h-full" />
               
-              <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-2xl">
+              {/* Badge indicating multiple images are available to browse */}
+              {getPoseGallery(pose).length > 1 && (
+                <div className="absolute top-2 right-2 bg-charcoal/75 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm z-10 group-hover:scale-105 transition-transform">
+                  <Layers className="w-2.5 h-2.5 text-terracotta-light" />
+                  <span>{getPoseGallery(pose).length} תמונות</span>
+                </div>
+              )}
+
+              <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-2xl z-20">
                 <span>🔍 לחץ להגדלה</span>
               </div>
             </div>

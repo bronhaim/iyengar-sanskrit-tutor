@@ -5,8 +5,8 @@ import React, { useState, useEffect } from 'react';
  * Tries loading real high-res images from /images/poses/{poseId}.(png|jpg|jpeg|webp) first,
  * and gracefully falls back to vector illustrations if no photo exists yet.
  */
-export const PoseSvgIllustration = ({ poseId, className = "w-full h-full text-terracotta" }) => {
-  const formats = ['.png', '.jpg', '.jpeg', '.webp'];
+export const PoseSvgIllustration = ({ poseId, className = "w-full h-full text-terracotta", customSrc = null }) => {
+  const formats = ['.jpg', '.png', '.webp', '.jpeg'];
   const [formatIndex, setFormatIndex] = useState(0);
   const [hasImageError, setHasImageError] = useState(false);
 
@@ -23,8 +23,8 @@ export const PoseSvgIllustration = ({ poseId, className = "w-full h-full text-te
     }
   };
 
-  if (!hasImageError && poseId) {
-    const imageSrc = `/images/poses/${poseId}${formats[formatIndex]}`;
+  if (!hasImageError && (customSrc || poseId)) {
+    const imageSrc = customSrc || `/images/poses/${poseId}${formats[formatIndex]}`;
     return (
       <img
         src={imageSrc}
