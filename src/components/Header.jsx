@@ -1,5 +1,4 @@
 import React from 'react';
-import { BookOpen, Compass, Home, Play, Sparkles, Star } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
@@ -10,15 +9,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
         {/* Brand / Logo (Right in RTL) */}
         <button 
           onClick={() => setCurrentView('home')} 
-          className="flex items-center gap-3 text-charcoal hover:opacity-85 transition-opacity text-right group"
+          className="text-charcoal hover:opacity-85 transition-opacity text-right"
         >
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-cream-100 border border-[#E5D9C8] flex items-center justify-center text-lg sm:text-xl shadow-xs group-hover:scale-105 transition-transform">
-            🕉️
-          </div>
-          <div>
-            <div className="font-bold text-base sm:text-lg text-charcoal leading-tight">
-              יוגה איינגר לתרגול ביתי
-            </div>
+          <div className="font-bold text-base sm:text-lg text-charcoal leading-tight tracking-tight">
+            יוגה איינגר לתרגול ביתי
           </div>
         </button>
 
@@ -26,74 +20,68 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
         <nav className="hidden md:flex items-center gap-1.5 bg-cream-100/80 p-1 rounded-2xl border border-[#E5D9C8] text-sm">
           <button
             onClick={() => setCurrentView('home')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'home' 
                 ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <Home className="w-4 h-4 text-soft-green" />
-            <span>ראשי</span>
+            ראשי
           </button>
 
           <button
             onClick={() => setCurrentView('catalog')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'catalog' 
                 ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <Compass className="w-4 h-4 text-soft-green" />
-            <span>קטלוג תנוחות</span>
+            קטלוג תנוחות
           </button>
 
           <button
             onClick={() => setCurrentView('sequences')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'sequences' 
                 ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <Sparkles className="w-4 h-4 text-amber-600" />
-            <span>רצפי תרגולים</span>
+            רצפי תרגולים
           </button>
 
           <button
             onClick={() => setCurrentView('favorites')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'favorites' 
-                ? 'bg-white text-charcoal shadow-xs font-bold' 
+                ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-            <span>מועדפים</span>
+            מועדפים
           </button>
 
           <button
             onClick={onStartQuiz || (() => setCurrentView('quiz'))}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'quiz' 
-                ? 'bg-white text-terracotta shadow-xs font-bold' 
+                ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <Play className="w-4 h-4 fill-current text-terracotta" />
-            <span>חידון</span>
+            חידון
           </button>
 
           <button
             onClick={() => setCurrentView('roots')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
               currentView === 'roots' 
                 ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
           >
-            <BookOpen className="w-4 h-4 text-soft-green" />
-            <span>מילון סנסקריט</span>
+            מילון סנסקריט
           </button>
         </nav>
 
@@ -103,19 +91,19 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           <div className="flex md:hidden items-center gap-1 bg-cream-100 p-0.5 rounded-xl border border-[#E5D9C8] text-xs">
             <button
               onClick={() => setCurrentView('catalog')}
-              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'catalog' ? 'bg-white shadow-xs font-bold text-soft-green' : 'text-charcoal-muted'}`}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'catalog' ? 'bg-white shadow-xs font-bold text-charcoal' : 'text-charcoal-muted'}`}
             >
               תנוחות
             </button>
             <button
               onClick={() => setCurrentView('sequences')}
-              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'sequences' ? 'bg-white shadow-xs font-bold text-amber-700' : 'text-charcoal-muted'}`}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'sequences' ? 'bg-white shadow-xs font-bold text-charcoal' : 'text-charcoal-muted'}`}
             >
               תרגולים
             </button>
             <button
               onClick={() => setCurrentView('favorites')}
-              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'favorites' ? 'bg-white shadow-xs font-bold text-amber-600' : 'text-charcoal-muted'}`}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'favorites' ? 'bg-white shadow-xs font-bold text-charcoal' : 'text-charcoal-muted'}`}
             >
               מועדפים
             </button>

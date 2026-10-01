@@ -47,11 +47,10 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites,
     return (
       <button
         onClick={onOpenAuth}
-        className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-full bg-white hover:bg-cream-100 border border-cream-300 text-charcoal text-xs font-semibold shadow-xs transition-all hover:border-terracotta shrink-0"
+        className="px-3 py-1.5 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] text-charcoal text-xs font-semibold shadow-xs transition-all hover:border-terracotta shrink-0"
         title="התחברות לחשבון"
       >
-        <User className="w-3.5 h-3.5 text-terracotta shrink-0" />
-        <span className="hidden sm:inline">התחברות</span>
+        <span>התחברות</span>
       </button>
     );
   }

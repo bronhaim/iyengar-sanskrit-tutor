@@ -231,9 +231,8 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
           
           <div className="space-y-1">
-            <div className="flex items-center justify-center md:justify-start gap-2 font-bold text-base text-charcoal">
-              <span>🕉️</span>
-              <span>יוגה איינגר לתרגול ביתי</span>
+            <div className="font-bold text-base text-charcoal">
+              יוגה איינגר לתרגול ביתי
             </div>
             <p className="text-xs text-charcoal-muted">
               מרחב אישי לתרגול יוגה איינגר ולימוד שמות התנוחות
