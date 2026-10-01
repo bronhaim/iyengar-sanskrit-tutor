@@ -9,7 +9,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
         {/* Iyengar Studio Hero Badge (Replaces old lotus icon) */}
         <div className="relative inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-b from-cream-100 to-cream-200 border border-cream-300 shadow-md mb-4 text-terracotta mx-auto overflow-hidden group">
           <img 
-            src="/assets/character-references/reference_hero_standing.jpg" 
+            src="/images/poses/tadasana.jpg" 
             alt="Iyengar Yoga Practice Model"
             className="w-full h-full object-cover object-top opacity-95 group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {

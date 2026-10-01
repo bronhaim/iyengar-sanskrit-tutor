@@ -15,24 +15,34 @@ export const AuthModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const getHebrewErrorMessage = (errorCode) => {
+  const getHebrewErrorMessage = (err) => {
+    const errorCode = err?.code || '';
+    console.error('Firebase Auth Error:', err);
+
     switch (errorCode) {
       case 'auth/invalid-credential':
       case 'auth/wrong-password':
+        return 'כתובת אימייל או סיסמה שגויים. אם זו הפעם הראשונה שלך, עבור ללשונית "הירשם בחינם" כדי ליצור חשבון.';
       case 'auth/user-not-found':
-        return 'כתובת אימייל או סיסמה שגויים';
+        return 'חשבון זה עדיין אינו קיים במערכת. לחץ למטה על "הירשם בחינם" כדי ליצור סיסמה.';
+      case 'auth/operation-not-allowed':
+        return 'שיטת התחברות זו אינה מופעלת עדיין ב-Firebase Console. ודא שהפעלת את Email/Password או Google ב-Sign-in method.';
+      case 'auth/unauthorized-domain':
+        return 'דומיין זה טרם אושר ב-Firebase Console (יש להוסיף את הדומיין ב-Authentication > Settings > Authorized Domains).';
+      case 'auth/popup-blocked':
+        return 'חלון ההתחברות נחסם על ידי הדפדפן. אנא אשר חלונות קופצים (Pop-ups) עבור אתר זה.';
       case 'auth/email-already-in-use':
-        return 'כתובת אימייל זו כבר רשומה במערכת';
+        return 'כתובת אימייל זו כבר רשומה במערכת. נסה להתחבר או אפס סיסמה.';
       case 'auth/weak-password':
-        return 'הסיסמה צריכה להכיל לפחות 6 תווים';
+        return 'הסיסמה צריכה להכיל לפחות 6 תווים.';
       case 'auth/invalid-email':
-        return 'כתובת אימייל לא תקינה';
+        return 'כתובת אימייל לא תקינה.';
       case 'auth/popup-closed-by-user':
-        return 'ההתחברות בוטלה (החלון נסגר)';
+        return 'ההתחברות בוטלה (החלון נסגר לפני סיום).';
       case 'auth/network-request-failed':
-        return 'שגיאת תקשורת, בדוק את החיבור לרשת';
+        return 'שגיאת תקשורת, בדוק את החיבור לרשת ונסה שוב.';
       default:
-        return 'אירעה שגיאה בעת ההתחברות. נסה שוב';
+        return `אירעה שגיאה בעת ההתחברות: ${err?.message || errorCode} (${errorCode || 'general-error'})`;
     }
   };
 
@@ -43,7 +53,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
       await loginWithGoogle();
       onClose();
     } catch (err) {
-      setError(getHebrewErrorMessage(err.code));
+      setError(getHebrewErrorMessage(err));
     } finally {
       setIsLoading(false);
     }
@@ -77,7 +87,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
         setSuccessMsg('קישור לאיפוס סיסמה נשלח לתיבת המייל שלך!');
       }
     } catch (err) {
-      setError(getHebrewErrorMessage(err.code));
+      setError(getHebrewErrorMessage(err));
     } finally {
       setIsLoading(false);
     }
