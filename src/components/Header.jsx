@@ -17,7 +17,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           </div>
           <div>
             <div className="font-bold text-base sm:text-lg text-charcoal leading-tight">
-              יוגה איינגר בבית
+              יוגה איינגר לתרגול ביתי
             </div>
             <div className="text-xs text-soft-green font-semibold leading-tight">
               תרגול, שמות התנוחות וסנסקריט
@@ -60,7 +60,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             }`}
           >
             <Sparkles className="w-4 h-4 text-amber-600" />
-            <span>רצפי שיעורים</span>
+            <span>רצפי תרגולים</span>
           </button>
 
           <button
@@ -102,7 +102,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
               onClick={() => setCurrentView('sequences')}
               className={`px-2 py-1 rounded-lg font-medium ${currentView === 'sequences' ? 'bg-white shadow-xs font-bold text-amber-700' : 'text-charcoal-muted'}`}
             >
-              שיעורים
+              תרגולים
             </button>
             <button
               onClick={onStartQuiz || (() => setCurrentView('quiz'))}

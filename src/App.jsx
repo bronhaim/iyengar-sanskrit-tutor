@@ -204,10 +204,10 @@ export function App() {
           <div className="space-y-1">
             <div className="flex items-center justify-center md:justify-start gap-2 font-bold text-base text-charcoal">
               <span>🕉️</span>
-              <span>יוגה איינגר בבית • תרגול ושמות התנוחות</span>
+              <span>יוגה איינגר לתרגול ביתי</span>
             </div>
             <p className="text-xs text-charcoal-muted">
-              תרגול יוגה איינגר ביתי ולימוד שמות התנוחות בהשראת הספר "אור על היוגה"
+              מרחב אישי לתרגול יוגה איינגר ולימוד שמות התנוחות
             </p>
           </div>
 
@@ -219,10 +219,10 @@ export function App() {
               קטלוג תנוחות
             </button>
             <button onClick={() => { setCurrentView('sequences'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-amber-800 transition-colors">
-              רצפי שיעורים
+              רצפי תרגולים
             </button>
             <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
-              חידון שמות ותנוחות
+              חידון
             </button>
             <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
               מילון סנסקריט
@@ -230,7 +230,7 @@ export function App() {
           </div>
 
           <div className="text-[11px] text-charcoal-muted">
-            בהשראת הספר "אור על היוגה" • ב.ק.ס איינגר
+            מסורת יוגה איינגר • דיוק, יציבה והעמקה
           </div>
 
         </div>

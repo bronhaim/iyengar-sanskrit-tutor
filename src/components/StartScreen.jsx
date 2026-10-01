@@ -68,11 +68,41 @@ const SHOWCASE_POSES = [
   }
 ];
 
+const IYENGAR_QUOTES = [
+  {
+    quote: "היוגה אינה משנה רק את האופן שבו אנו רואים דברים — היא משנה את האדם שרואה.",
+    highlight: "היא משנה את האדם שרואה"
+  },
+  {
+    quote: "הגוף הוא הקשת שלך, האסאנה היא החץ, והנשמה היא המטרה.",
+    highlight: "והנשמה היא המטרה"
+  },
+  {
+    quote: "היוגה מלמדת אותנו לרפא את מה שאין צורך לסבול, ולסבול את מה שאי אפשר לרפא.",
+    highlight: "לרפא את מה שאין צורך לסבול"
+  },
+  {
+    quote: "מילים אינן יכולות להעביר את ערכה של היוגה — יש לחוות אותה ישירות דרך הגוף.",
+    highlight: "יש לחוות אותה ישירות"
+  },
+  {
+    quote: "אינטליגנציה ללא פעולה היא עקרה; פעולה ללא אינטליגנציה היא עיוורת.",
+    highlight: "אינטליגנציה בפעולה"
+  },
+  {
+    quote: "התמדה וסבלנות בתרגול היומי בונות עוגן פנימי של שקט ותודעה בהירה.",
+    highlight: "עוגן פנימי של שקט"
+  }
+];
+
 export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, totalPoses }) => {
   const [currentPoseIdx, setCurrentPoseIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-advance showcase every 4.5 seconds unless paused
+  const [currentQuoteIdx, setCurrentQuoteIdx] = useState(0);
+  const [isQuotePaused, setIsQuotePaused] = useState(false);
+
+  // Auto-advance showcase poses every 4.5 seconds unless paused
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -80,6 +110,15 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     }, 4500);
     return () => clearInterval(interval);
   }, [isPaused]);
+
+  // Auto-advance quotes every 6.5 seconds unless paused
+  useEffect(() => {
+    if (isQuotePaused) return;
+    const interval = setInterval(() => {
+      setCurrentQuoteIdx((prev) => (prev + 1) % IYENGAR_QUOTES.length);
+    }, 6500);
+    return () => clearInterval(interval);
+  }, [isQuotePaused]);
 
   const nextPose = (e) => {
     e?.stopPropagation();
@@ -91,27 +130,36 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     setCurrentPoseIdx((prev) => (prev - 1 + SHOWCASE_POSES.length) % SHOWCASE_POSES.length);
   };
 
+  const nextQuote = (e) => {
+    e?.stopPropagation();
+    setCurrentQuoteIdx((prev) => (prev + 1) % IYENGAR_QUOTES.length);
+  };
+
+  const prevQuote = (e) => {
+    e?.stopPropagation();
+    setCurrentQuoteIdx((prev) => (prev - 1 + IYENGAR_QUOTES.length) % IYENGAR_QUOTES.length);
+  };
+
   const currentPose = SHOWCASE_POSES[currentPoseIdx];
 
   return (
-    <div className="w-full flex flex-col gap-12 sm:gap-16 animate-fadeIn pb-12">
+    <div className="w-full flex flex-col gap-10 sm:gap-14 animate-fadeIn pb-12">
       
-      {/* 1. HERO SECTION (Editorial 2-Column on Desktop) */}
-      <section className="relative overflow-hidden py-8 sm:py-14 bg-gradient-to-b from-white via-beige-light/80 to-transparent rounded-3xl border border-[#E8E0D6]/60 p-6 sm:p-12 shadow-soft">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      {/* 1. HERO SECTION (Editorial 2-Column on Desktop + Interactive Quotes Bar) */}
+      <section className="relative overflow-hidden py-8 sm:py-12 bg-gradient-to-b from-white via-beige-light/80 to-transparent rounded-3xl border border-[#E8E0D6]/60 p-6 sm:p-10 shadow-soft">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Text & Action Column (Right in RTL - 7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-right">
             
-            {/* Iyengar Tradition Badge */}
+            {/* Tradition Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E8E0D6] shadow-xs text-charcoal">
-              <span className="text-terracotta">🌸</span>
-              <span>בהשראת הספר "אור על היוגה" • ב.ק.ס איינגר</span>
+              <span className="text-terracotta">✨</span>
+              <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-[1.18] tracking-tight">
-              יוגה איינגר בבית <br className="hidden sm:inline" />
-              <span className="text-terracotta font-serifHebrew">תרגול ושמות התנוחות</span>
+              יוגה איינגר <span className="text-terracotta font-serifHebrew">לתרגול ביתי</span>
             </h1>
 
             <p className="text-sm sm:text-base font-sanskrit text-terracotta-dark tracking-wide dir-ltr text-right font-medium">
@@ -119,41 +167,49 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </p>
 
             <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl">
-              מרחב מקיף לתרגול יוגה איינגר אישי בבית ולימוד שמות התנוחות: קטלוג תנוחות יוגה מפורט, רצפי שיעורים ביתיים מובנים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
+              מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
 
             {/* Quick Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={onOpenCatalog}
-                className="inline-flex items-center justify-center px-8 py-4 bg-terracotta hover:bg-terracotta-dark text-white rounded-full text-base font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 gap-2.5"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-terracotta hover:bg-terracotta-dark text-white rounded-full text-base font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 gap-2"
               >
                 <Compass className="w-5 h-5" />
-                <span>קטלוג תנוחות יוגה ({totalPoses})</span>
+                <span>קטלוג תנוחות ({totalPoses})</span>
+              </button>
+
+              <button
+                onClick={onOpenSequences}
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E8E0D6] hover:border-amber-500 text-charcoal hover:text-amber-800 rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+              >
+                <Sparkles className="w-5 h-5 text-amber-600" />
+                <span>רצפי תרגולים מומלצים</span>
               </button>
 
               <button
                 onClick={onStartQuiz}
-                className="inline-flex items-center justify-center px-7 py-4 bg-white border border-[#E8E0D6] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E8E0D6] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
               >
                 <Play className="w-5 h-5 fill-current text-terracotta" />
-                <span>חידון שמות ותנוחות</span>
+                <span>חידון</span>
               </button>
             </div>
 
             {/* Quick Feature Perks */}
-            <div className="pt-4 flex flex-wrap items-center gap-5 text-xs text-charcoal-muted">
+            <div className="pt-3 flex flex-wrap items-center gap-5 text-xs text-charcoal-muted">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
                 <span>קטלוג תנוחות יוגה</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>רצפי שיעורים ביתיים</span>
+                <span>רצפי תרגולים מומלצים</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
-                <span>חידון סנסקריט ואימון</span>
+                <span>חידון ותרגול אישי</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
@@ -174,10 +230,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               {/* Outer decorative glowing ring */}
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               
-              {/* Main Circular Image Frame:
-                  Uses pure white background + max-w-[76%] max-h-[76%] object-contain 
-                  so every pose (including Salamba Sarvangasana & Supta Baddha Konasana)
-                  is displayed 100% in full without ANY clipping or cut off! */}
+              {/* Main Circular Image Frame */}
               <div 
                 onClick={nextPose}
                 title="לחצו להחלפת תנוחה"
@@ -195,7 +248,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 />
               </div>
 
-              {/* Left / Right Interactive Arrow Overlays - on outer frame so they never obscure the pose */}
+              {/* Left / Right Interactive Arrow Overlays */}
               <button
                 onClick={(e) => { e.stopPropagation(); prevPose(); }}
                 aria-label="תנוחה קודמת"
@@ -246,6 +299,67 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           </div>
 
         </div>
+
+        {/* Interactive B.K.S. Iyengar Quote Bar (Prominently positioned with main screen) */}
+        <div 
+          className="mt-8 sm:mt-10 pt-6 border-t border-[#E8E0D6]/70 flex flex-col items-center text-center relative select-none"
+          onMouseEnter={() => setIsQuotePaused(true)}
+          onMouseLeave={() => setIsQuotePaused(false)}
+        >
+          <div className="flex items-center justify-between w-full max-w-2xl px-2 mb-1.5">
+            <button 
+              onClick={prevQuote} 
+              aria-label="ציטוט קודם"
+              className="p-1.5 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+            <div className="flex items-center gap-1.5 text-xs text-charcoal-muted font-medium">
+              <span className="text-terracotta text-sm">❝</span>
+              <span>ציטוט מתחלף • ב.ק.ס איינגר</span>
+            </div>
+            <button 
+              onClick={nextQuote} 
+              aria-label="ציטוט הבא"
+              className="p-1.5 rounded-full hover:bg-cream-100 text-charcoal-muted hover:text-terracotta transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div 
+            onClick={nextQuote}
+            className="cursor-pointer max-w-2xl px-4 py-1 hover:opacity-90 transition-opacity"
+            title="לחצו לציטוט הבא"
+          >
+            <blockquote 
+              key={currentQuoteIdx}
+              className="font-amatic text-2xl sm:text-3xl font-bold text-charcoal leading-snug tracking-wide animate-fadeIn"
+            >
+              "{IYENGAR_QUOTES[currentQuoteIdx].quote}"
+            </blockquote>
+            <div className="text-xs text-terracotta font-medium mt-1">
+              — ב.ק.ס איינגר
+            </div>
+          </div>
+
+          {/* Quote Indicator dots */}
+          <div className="flex items-center gap-1 mt-2">
+            {IYENGAR_QUOTES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentQuoteIdx(idx)}
+                aria-label={`ציטוט ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  idx === currentQuoteIdx 
+                    ? 'w-5 bg-terracotta' 
+                    : 'w-1.5 bg-[#E8E0D6] hover:bg-charcoal-muted'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
       </section>
 
       {/* 2. THE 4 PILLARS OF THE PLATFORM */}
@@ -283,7 +397,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </div>
           </div>
 
-          {/* Card 2: רצפי שיעורים ביתיים */}
+          {/* Card 2: רצפי תרגולים מומלצים */}
           <div 
             onClick={onOpenSequences}
             className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-amber-400 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
@@ -293,19 +407,19 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 ✨
               </div>
               <h3 className="text-xl font-bold text-charcoal mb-2.5 group-hover:text-amber-800 transition-colors">
-                רצפי שיעורים ביתיים
+                רצפי תרגולים מומלצים
               </h3>
               <p className="text-charcoal-muted text-sm font-light leading-relaxed mb-6">
                 תוכניות תרגול מובנות לבית לפי מסורת איינגר: רצף בוקר מעורר, רצף ערב להרפיה, שיקום, כאבי גב ועיכול.
               </p>
             </div>
             <div className="flex items-center text-amber-800 font-semibold text-sm gap-2">
-              <span>לכל השיעורים</span>
+              <span>לרצפי התרגול</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
           </div>
 
-          {/* Card 3: חידון שמות ותנוחות */}
+          {/* Card 3: חידון */}
           <div 
             onClick={onStartQuiz}
             className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-terracotta/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
@@ -352,22 +466,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
         </div>
       </section>
 
-      {/* 3. INSPIRATIONAL QUOTE SECTION */}
-      <section className="py-12 px-6 sm:px-12 bg-white rounded-3xl border border-[#E8E0D6] text-center shadow-xs">
-        <div className="max-w-3xl mx-auto space-y-4">
-          <div className="w-12 h-12 rounded-full bg-cream-100 flex items-center justify-center mx-auto text-xl text-terracotta">
-            🕉️
-          </div>
-          <blockquote className="font-amatic text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal leading-tight">
-            "היוגה אינה משנה רק את האופן שבו אנו רואים דברים — <br className="hidden sm:inline" />
-            <span className="text-soft-green font-extrabold">היא משנה את האדם שרואה."</span>
-          </blockquote>
-          <div className="text-xs sm:text-sm text-charcoal-muted font-medium pt-1">
-            ב.ק.ס איינגר • מתוך הספר "אור על היוגה"
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 };
+
