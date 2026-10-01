@@ -151,7 +151,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-charcoal leading-[1.18] tracking-tight">
-              יוגה איינגר <span className="text-terracotta font-serifHebrew">לתרגול ביתי</span>
+              יוגה איינגר <span className="text-terracotta">לתרגול ביתי</span>
             </h1>
 
             <p className="text-sm sm:text-base font-sanskrit text-terracotta-dark tracking-wide dir-ltr text-right font-medium">
@@ -326,7 +326,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           >
             <blockquote 
               key={currentQuoteIdx}
-              className="font-amatic text-2xl sm:text-3xl font-bold text-charcoal leading-snug tracking-wide animate-fadeIn"
+              className="font-amatic text-3xl sm:text-4xl lg:text-[42px] font-bold text-charcoal leading-tight tracking-wide animate-fadeIn"
             >
               "{IYENGAR_QUOTES[currentQuoteIdx].quote}"
             </blockquote>

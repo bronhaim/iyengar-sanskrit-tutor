@@ -7,10 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        assistant: ['Assistant', 'Rubik', 'sans-serif'],
-        amatic: ['"Amatic SC"', 'cursive'],
-        serifHebrew: ['"Frank Ruhl Libre"', 'serif'],
-        rubik: ['Rubik', 'sans-serif'],
+        sans: ['Assistant', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        assistant: ['Assistant', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        amatic: ['"Amatic SC"', 'cursive', 'sans-serif'],
         sanskrit: ['"Noto Serif Devanagari"', 'serif'],
       },
       colors: {
