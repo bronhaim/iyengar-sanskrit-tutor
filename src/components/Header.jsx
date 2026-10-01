@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Lock body scrolling when mobile drawer is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { id: 'home', label: 'ראשי', desc: 'עמוד הבית וסקירה כללית' },
@@ -135,35 +148,35 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           {/* Hamburger / Pizza Menu Button (Mobile only) */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex md:hidden items-center justify-center w-8 h-8 rounded-xl bg-[#FAF6F0] border border-[#DECFC0] text-[#382417] hover:bg-white shadow-xs transition-colors shrink-0"
+            className="flex md:hidden items-center justify-center w-9 h-9 rounded-xl bg-[#FAF6F0] border border-[#DECFC0] text-[#382417] active:bg-[#EAE0D3] shadow-xs transition-colors shrink-0"
             title="תפריט ניווט"
             aria-label="תפריט ניווט"
           >
-            {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
       </div>
 
-      {/* Mobile Drawer / Pizza Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex flex-col justify-start">
+      {/* Mobile Drawer / Pizza Menu Dropdown mounted to body via portal */}
+      {isMobileMenuOpen && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[9999] md:hidden flex flex-col justify-start">
           {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs animate-fadeIn"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs animate-fadeIn"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           {/* Drawer Card */}
-          <div className="relative z-10 m-3 bg-[#FAF6F0] border border-[#DECFC0] rounded-3xl p-5 shadow-2xl flex flex-col gap-3.5 animate-fadeIn text-right max-h-[85vh] overflow-y-auto custom-scrollbar">
+          <div className="relative z-10 m-3 sm:m-4 bg-[#FAF6F0] border border-[#DECFC0] rounded-3xl p-5 shadow-2xl flex flex-col gap-3.5 animate-fadeIn text-right max-h-[85vh] overflow-y-auto custom-scrollbar">
             {/* Top Bar of drawer */}
             <div className="flex items-center justify-between border-b border-[#DECFC0] pb-3">
-              <div className="font-bold text-sm text-[#382417]">
+              <div className="font-bold text-base text-[#382417]">
                 תפריט האתר
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-7 h-7 rounded-lg bg-[#EAE0D3] text-[#382417] flex items-center justify-center hover:bg-white transition-colors"
+                className="w-8 h-8 rounded-xl bg-[#EAE0D3] text-[#382417] flex items-center justify-center hover:bg-white active:scale-95 transition-all"
                 aria-label="סגור תפריט"
               >
                 <X className="w-4 h-4" />
@@ -178,15 +191,15 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`w-full flex items-center justify-between p-3 rounded-2xl transition-all text-right ${
+                    className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all text-right active:scale-[0.99] ${
                       isActive
-                        ? 'bg-[#74482B] text-white font-bold shadow-xs'
+                        ? 'bg-[#67442B] text-[#FFFDF9] font-bold shadow-xs'
                         : 'bg-[#EAE0D3]/60 hover:bg-[#EAE0D3] text-[#382417]'
                     }`}
                   >
                     <div className="flex flex-col">
                       <span className="text-sm font-bold leading-tight">{item.label}</span>
-                      <span className={`text-[11px] leading-tight mt-0.5 ${isActive ? 'text-[#FAF6F0]/80' : 'text-[#674831]'}`}>
+                      <span className={`text-[11px] leading-tight mt-0.5 ${isActive ? 'text-[#FAF6F0]/85' : 'text-[#674831]'}`}>
                         {item.desc}
                       </span>
                     </div>
@@ -206,14 +219,15 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
                     setIsMobileMenuOpen(false);
                     onRequestFeature();
                   }}
-                  className="w-full py-2.5 px-3 rounded-xl bg-white border border-[#D5C2AF] text-[#74482B] hover:bg-[#FAF6F0] text-xs font-semibold text-center transition-all shadow-xs"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white border border-[#D5C2AF] text-[#67442B] hover:bg-[#FAF6F0] text-xs font-semibold text-center transition-all shadow-xs"
                 >
-                  ✨ בקשת תנוחה או פיצ׳ר חדש
+                  בקשת תנוחה או פיצ׳ר חדש
                 </button>
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );
