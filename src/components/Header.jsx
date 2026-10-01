@@ -63,9 +63,9 @@ export const Header = ({ currentView, setCurrentView, onOpenAuth, onSelectCatego
           onClick={() => setCurrentView('home')} 
           className="flex items-center gap-2 text-charcoal hover:opacity-80 transition-opacity text-right shrink-0"
         >
-          <div className="hidden sm:block text-right">
-            <div className="text-xs font-semibold text-charcoal tracking-tight">לימודי סנסקריט</div>
-            <div className="text-[10px] text-terracotta-dark font-medium">מסורת איינגר יוגה</div>
+          <div className="text-right">
+            <div className="text-xs font-bold text-charcoal tracking-tight">איינגר יוגה</div>
+            <div className="text-[10px] text-terracotta-dark font-medium">מדריך תרגול מעמיק</div>
           </div>
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-terracotta/10 border border-terracotta/30 flex items-center justify-center text-terracotta font-bold text-sm">
             🕉️

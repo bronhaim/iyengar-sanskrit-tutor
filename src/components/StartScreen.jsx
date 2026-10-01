@@ -9,13 +9,13 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
         {/* Iyengar Studio Hero Badge (Replaces old lotus icon) */}
         <div className="relative inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-b from-cream-100 to-cream-200 border border-cream-300 shadow-md mb-4 text-terracotta mx-auto overflow-hidden group">
           <img 
-            src="/images/poses/tadasana.jpg" 
+            src="/assets/character-references/reference_hero_standing.jpg" 
             alt="Iyengar Yoga Practice Model"
-            className="w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full object-cover object-top opacity-95 group-hover:scale-105 transition-transform duration-500"
             onError={(e) => {
-              // Graceful fallback if photograph is loading
+              // Graceful fallback to pose photo
               e.target.onerror = null;
-              e.target.style.display = 'none';
+              e.target.src = '/images/poses/tadasana.png';
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent flex items-end justify-center pb-1.5">
@@ -53,7 +53,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               </div>
               <div>
                 <div className="font-bold text-base text-charcoal">קטלוג תנוחות</div>
-                <div className="text-xs text-charcoal-muted">עיון בתנוחות, אנטומיה, עזרי יוגה וחיצים</div>
+                <div className="text-xs text-charcoal-muted">עיון בתנוחות, אנטומיה, עזרי יוגה ודגשי שהות</div>
               </div>
             </div>
             <ArrowLeft className="w-5 h-5 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
