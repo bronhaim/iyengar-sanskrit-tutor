@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { User, LogOut, Star, Settings, ChevronDown, Check, X, ShieldAlert, Heart, Sparkles } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
@@ -41,15 +42,15 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
     updateSensitivities(updated);
   };
 
-  // If not logged in, render simple login trigger button
+  // If not logged in, render compact login button
   if (!currentUser) {
     return (
       <button
         onClick={onOpenAuth}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white hover:bg-cream-100 border border-cream-300 text-charcoal text-xs font-semibold shadow-sm transition-all hover:border-terracotta shrink-0"
+        className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-full bg-white hover:bg-cream-100 border border-cream-300 text-charcoal text-xs font-semibold shadow-xs transition-all hover:border-terracotta shrink-0"
         title="התחברות לחשבון"
       >
-        <User className="w-3.5 h-3.5 text-terracotta" />
+        <User className="w-3.5 h-3.5 text-terracotta shrink-0" />
         <span className="hidden sm:inline">התחברות</span>
       </button>
     );
@@ -62,31 +63,38 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
 
   return (
     <div className="relative shrink-0">
-      {/* Header Profile Trigger Button */}
+      {/* Header Profile Trigger Button: Compact Avatar Circle on Mobile */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-white hover:bg-cream-50 border border-cream-300 hover:border-terracotta/50 text-charcoal text-xs font-semibold shadow-sm transition-all"
-        title="פרופיל מתרגל והגדרות"
+        className="flex items-center gap-1 sm:gap-1.5 p-1 sm:px-2.5 sm:py-1 rounded-full bg-white hover:bg-cream-50 border border-cream-300 hover:border-terracotta/50 text-charcoal text-xs font-semibold shadow-xs transition-all"
+        title={`פרופיל מתרגל: ${displayName}`}
       >
-        {currentUser.photoURL ? (
-          <img 
-            src={currentUser.photoURL} 
-            alt={displayName} 
-            className="w-5 h-5 rounded-full object-cover border border-cream-300"
-          />
-        ) : (
-          <div className="w-5 h-5 rounded-full bg-terracotta text-white flex items-center justify-center text-[10px] font-bold shadow-xs">
-            {initial}
-          </div>
-        )}
-        <span className="max-w-[65px] sm:max-w-[90px] truncate text-xs">{displayName}</span>
-        <ChevronDown className="w-3 h-3 text-charcoal-muted shrink-0" />
+        <div className="relative">
+          {currentUser.photoURL ? (
+            <img 
+              src={currentUser.photoURL} 
+              alt={displayName} 
+              className="w-6 h-6 sm:w-5 sm:h-5 rounded-full object-cover border border-cream-300"
+            />
+          ) : (
+            <div className="w-6 h-6 sm:w-5 sm:h-5 rounded-full bg-terracotta text-white flex items-center justify-center text-xs sm:text-[10px] font-bold shadow-xs">
+              {initial}
+            </div>
+          )}
+          {/* Active online dot */}
+          <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-white"></span>
+        </div>
+        
+        {/* Name is hidden on small mobile screens to prevent bar overflow */}
+        <span className="hidden sm:inline max-w-[80px] truncate text-xs">{displayName}</span>
       </button>
 
-      {/* Full Screen / Bottom Sheet Modal - 100% visible on Mobile and Desktop */}
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-charcoal/50 backdrop-blur-xs p-0 sm:p-4 animate-fadeIn">
-          
+      {/* React Portal: Render modal directly in document.body to avoid being trapped by parent transforms or backdrop filters */}
+      {isOpen && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-xs p-0 sm:p-4 animate-fadeIn" 
+          dir="rtl"
+        >
           {/* Backdrop Click to close */}
           <div 
             className="absolute inset-0" 
@@ -94,7 +102,7 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
           />
 
           {/* Modal Container */}
-          <div className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-cream-200 overflow-hidden z-10 max-h-[90vh] flex flex-col animate-slideUp text-right">
+          <div className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-cream-200 overflow-hidden z-10 max-h-[88vh] flex flex-col animate-slideUp text-right">
             
             {/* Header / User Card */}
             <div className="bg-gradient-to-l from-cream-100 to-cream-50 p-4 sm:p-5 border-b border-cream-200 flex items-center justify-between">
@@ -126,7 +134,7 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-8 h-8 rounded-full bg-white border border-cream-200 hover:bg-cream-100 flex items-center justify-center text-charcoal-muted hover:text-charcoal transition-colors"
+                className="w-8 h-8 rounded-full bg-white border border-cream-200 hover:bg-cream-100 flex items-center justify-center text-charcoal-muted hover:text-charcoal transition-colors cursor-pointer"
                 title="סגור"
               >
                 <X className="w-4 h-4" />
@@ -158,7 +166,7 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
                     setIsOpen(false);
                     if (onSelectCategory) onSelectCategory('favorites');
                   }}
-                  className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta"
+                  className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta cursor-pointer"
                 >
                   <Star className="w-3.5 h-3.5 fill-terracotta text-terracotta" />
                   <span>מעבר לתנוחות המועדפות בקטלוג</span>
@@ -197,7 +205,7 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
                         key={opt.id}
                         type="button"
                         onClick={() => handleToggleSensitivity(opt.id)}
-                        className={`w-full p-2.5 rounded-xl border text-right transition-all flex items-center justify-between ${
+                        className={`w-full p-2.5 rounded-xl border text-right transition-all flex items-center justify-between cursor-pointer ${
                           isChecked 
                             ? 'bg-cream-100/90 border-terracotta/40 shadow-xs' 
                             : 'bg-white border-cream-200 hover:border-cream-300'
@@ -231,7 +239,7 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
                     logout();
                     setIsOpen(false);
                   }}
-                  className="w-full py-2.5 px-4 rounded-xl border border-rose-200 text-rose-700 bg-rose-50/50 hover:bg-rose-100/70 font-semibold text-xs flex items-center justify-center gap-2 transition-colors shadow-xs"
+                  className="w-full py-2.5 px-4 rounded-xl border border-rose-200 text-rose-700 bg-rose-50/50 hover:bg-rose-100/70 font-semibold text-xs flex items-center justify-center gap-2 transition-colors shadow-xs cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>התנתקות מהחשבון</span>
@@ -241,7 +249,8 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
             </div>
 
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

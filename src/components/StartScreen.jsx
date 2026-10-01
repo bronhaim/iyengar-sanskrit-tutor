@@ -48,61 +48,61 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* 1. קטלוג תנוחות */}
           <button
             onClick={onOpenCatalog}
-            className="group duo-button p-4 rounded-2xl bg-white border border-cream-300 hover:border-sage/60 text-charcoal text-right shadow-sm hover:shadow-md transition-all flex items-center justify-between"
+            className="group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-sage/60 text-charcoal text-right shadow-xs hover:shadow-sm transition-all flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-sage-light text-sage-dark flex items-center justify-center font-bold">
-                <Compass className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl bg-sage-light text-sage-dark flex items-center justify-center font-bold shrink-0">
+                <Compass className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-bold text-base text-charcoal">קטלוג תנוחות</div>
+                <div className="font-bold text-sm text-charcoal">קטלוג תנוחות איינגר</div>
                 <div className="text-xs text-charcoal-muted">עיון בתנוחות, אנטומיה, עזרי יוגה ודגשי שהות</div>
               </div>
             </div>
-            <ArrowLeft className="w-5 h-5 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:text-charcoal group-hover:translate-x-[-3px] transition-all shrink-0" />
           </button>
 
-          {/* 2. רצפי תרגול ביתיים */}
+          {/* 2. תרגול סנסקריט וזיהוי תנוחות */}
           <button
-            onClick={onOpenSequences}
-            className="group duo-button p-3.5 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-300 hover:border-amber-400 text-charcoal text-right shadow-sm flex items-center justify-between"
+            onClick={onStartQuiz}
+            className="group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-terracotta/50 text-charcoal text-right shadow-xs hover:shadow-sm transition-all flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold">
-                <Sparkles className="w-4 h-4 text-amber-700" />
+              <div className="w-9 h-9 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center font-bold shrink-0">
+                <Play className="w-4 h-4 fill-current ml-0.5" />
+              </div>
+              <div>
+                <div className="font-bold text-sm text-charcoal">תרגול סנסקריט וחידון זיהוי</div>
+                <div className="text-xs text-charcoal-muted">זיהוי תנוחות, פירוק מילים ושאלות אמריקאיות</div>
+              </div>
+            </div>
+            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:text-terracotta group-hover:translate-x-[-3px] transition-all shrink-0" />
+          </button>
+
+          {/* 3. רצפי תרגול ביתיים */}
+          <button
+            onClick={onOpenSequences}
+            className="group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-right shadow-xs hover:shadow-sm transition-all flex items-center justify-between"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-100/70 text-amber-800 flex items-center justify-center font-bold shrink-0">
+                <Sparkles className="w-4 h-4" />
               </div>
               <div>
                 <div className="font-bold text-sm text-charcoal">רצפי תרגול ביתיים</div>
                 <div className="text-xs text-charcoal-muted">רצפים לבוקר, ערב, עיכול, כאבי ראש והריון</div>
               </div>
             </div>
-            <ArrowLeft className="w-4 h-4 text-amber-800 group-hover:translate-x-[-3px] transition-transform" />
-          </button>
-
-          {/* 3. תרגול סנסקריט וזיהוי תנוחות */}
-          <button
-            onClick={onStartQuiz}
-            className="group duo-button p-3.5 rounded-2xl bg-terracotta hover:bg-terracotta-dark text-white text-right shadow-duo-terracotta flex items-center justify-between"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white">
-                <Play className="w-4 h-4 fill-current ml-0.5" />
-              </div>
-              <div>
-                <div className="font-bold text-sm">תרגול סנסקריט וזיהוי תנוחות</div>
-                <div className="text-xs text-white/80">זיהוי תנוחות, פירוק מילים ושאלות אמריקאיות</div>
-              </div>
-            </div>
-            <ArrowLeft className="w-4 h-4 text-white/70 group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:text-amber-800 group-hover:translate-x-[-3px] transition-all shrink-0" />
           </button>
 
           {/* 4. מילון שורשי סנסקריט */}
           <button
             onClick={onOpenRoots}
-            className="group duo-button p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-terracotta/40 text-charcoal text-right shadow-sm flex items-center justify-between"
+            className="group p-3.5 rounded-2xl bg-white border border-cream-300 hover:border-charcoal/40 text-charcoal text-right shadow-xs hover:shadow-sm transition-all flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-cream-200 text-terracotta flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-cream-200 text-charcoal flex items-center justify-center font-bold shrink-0">
                 <BookOpen className="w-4 h-4" />
               </div>
               <div>
@@ -110,7 +110,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 <div className="text-xs text-charcoal-muted">פירוש מילים כמו אדו, מוקה, וירה, וריקשה</div>
               </div>
             </div>
-            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:translate-x-[-3px] transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-charcoal-muted group-hover:text-charcoal group-hover:translate-x-[-3px] transition-all shrink-0" />
           </button>
 
         </div>
