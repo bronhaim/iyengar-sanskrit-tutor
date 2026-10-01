@@ -11,6 +11,22 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/utthita-trikonasana.png'
   },
   {
+    id: 'salamba-sarvangasana',
+    hebrewName: 'סאלמבה סרוואנגאסאנה',
+    sanskrit: 'Sālamba Sarvāṅgāsana',
+    meaning: 'עמידת כתפיים נתמכת',
+    image: '/images/poses/salamba-sarvangasana.jpg',
+    fallback: '/images/poses/salamba-sarvangasana.png'
+  },
+  {
+    id: 'virabhadrasana-2',
+    hebrewName: 'ויראבדראסאנה II',
+    sanskrit: 'Vīrabhadrāsana II',
+    meaning: 'תנוחת הלוחם השנייה',
+    image: '/images/poses/virabhadrasana-2.jpg',
+    fallback: '/images/poses/virabhadrasana-2.png'
+  },
+  {
     id: 'supta-baddha-konasana',
     hebrewName: 'סופטה באדהה קונאסאנה',
     sanskrit: 'Supta Baddhakoṇāsana',
@@ -27,12 +43,12 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/adho-mukha-svanasana.png'
   },
   {
-    id: 'virabhadrasana-2',
-    hebrewName: 'ויראבדראסאנה II',
-    sanskrit: 'Vīrabhadrāsana II',
-    meaning: 'תנוחת הלוחם השנייה',
-    image: '/images/poses/virabhadrasana-2.jpg',
-    fallback: '/images/poses/virabhadrasana-2.png'
+    id: 'ardha-chandrasana',
+    hebrewName: "ארדהה צ'נדראסאנה",
+    sanskrit: 'Ardha Chandrāsana',
+    meaning: 'תנוחת חצי ירח',
+    image: '/images/poses/ardha-chandrasana.jpg',
+    fallback: '/images/poses/ardha-chandrasana.png'
   },
   {
     id: 'vriksasana',
@@ -43,12 +59,12 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/vriksasana.png'
   },
   {
-    id: 'salamba-sarvangasana',
-    hebrewName: 'סאלמבה סרוואנגאסאנה',
-    sanskrit: 'Sālamba Sarvāṅgāsana',
-    meaning: 'עמידת כתפיים נתמכת',
-    image: '/images/poses/salamba-sarvangasana.jpg',
-    fallback: '/images/poses/salamba-sarvangasana.png'
+    id: 'tadasana',
+    hebrewName: 'טדאסאנה',
+    sanskrit: 'Tādāsana',
+    meaning: 'תנוחת ההר',
+    image: '/images/poses/tadasana.jpg',
+    fallback: '/images/poses/tadasana.png'
   }
 ];
 
@@ -153,44 +169,51 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative group cursor-pointer" onClick={nextPose}>
+            <div className="relative group max-w-sm sm:max-w-md mx-auto">
               
               {/* Outer decorative glowing ring */}
-              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-terracotta/20 via-cream-200 to-soft-green/20 blur-xl opacity-75 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               
-              {/* Main Circular Image Frame (Interactive pose switcher) */}
-              <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-92 lg:h-92 rounded-full border-8 border-white shadow-2xl overflow-hidden bg-white mx-auto flex items-center justify-center">
+              {/* Main Circular Image Frame:
+                  Uses pure white background + max-w-[76%] max-h-[76%] object-contain 
+                  so every pose (including Salamba Sarvangasana & Supta Baddha Konasana)
+                  is displayed 100% in full without ANY clipping or cut off! */}
+              <div 
+                onClick={nextPose}
+                title="לחצו להחלפת תנוחה"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-92 lg:h-92 rounded-full border-8 border-white shadow-2xl overflow-hidden bg-white mx-auto flex items-center justify-center cursor-pointer p-4 sm:p-6"
+              >
                 <img 
                   key={currentPose.id}
                   src={currentPose.image} 
                   alt={currentPose.hebrewName}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700 animate-fadeIn"
+                  className="w-full h-full max-w-[76%] max-h-[76%] object-contain object-center group-hover:scale-[1.03] transition-transform duration-500 animate-fadeIn drop-shadow-sm select-none"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = currentPose.fallback;
                   }}
                 />
-
-                {/* Left / Right Interactive Arrow Overlays */}
-                <button
-                  onClick={prevPose}
-                  aria-label="תנוחה קודמת"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-charcoal flex items-center justify-center shadow-md backdrop-blur-sm opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:scale-110"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-
-                <button
-                  onClick={nextPose}
-                  aria-label="תנוחה הבאה"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-charcoal flex items-center justify-center shadow-md backdrop-blur-sm opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-all hover:scale-110"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
               </div>
 
+              {/* Left / Right Interactive Arrow Overlays - on outer frame so they never obscure the pose */}
+              <button
+                onClick={(e) => { e.stopPropagation(); prevPose(); }}
+                aria-label="תנוחה קודמת"
+                className="absolute -right-2 sm:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-charcoal hover:text-terracotta flex items-center justify-center shadow-lg border border-cream-200 transition-all hover:scale-110 z-20"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={(e) => { e.stopPropagation(); nextPose(); }}
+                aria-label="תנוחה הבאה"
+                className="absolute -left-2 sm:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/95 hover:bg-white text-charcoal hover:text-terracotta flex items-center justify-center shadow-lg border border-cream-200 transition-all hover:scale-110 z-20"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
               {/* Floating Pose Badge */}
-              <div className="absolute -bottom-3 sm:bottom-2 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E8E0D6] rounded-2xl px-5 py-2.5 shadow-lg text-center whitespace-nowrap transition-all">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E8E0D6] rounded-2xl px-5 py-2 shadow-lg text-center whitespace-nowrap z-20">
                 <div className="font-bold text-sm text-charcoal">
                   {currentPose.hebrewName}
                 </div>
@@ -202,14 +225,14 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </div>
 
             {/* Interactive Carousel Indicator Dots */}
-            <div className="flex items-center justify-center gap-2 mt-6">
+            <div className="flex items-center justify-center gap-1.5 mt-8">
               {SHOWCASE_POSES.map((pose, idx) => (
                 <button
                   key={pose.id}
                   onClick={() => setCurrentPoseIdx(idx)}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     idx === currentPoseIdx 
-                      ? 'w-7 bg-terracotta shadow-xs' 
+                      ? 'w-6 bg-terracotta shadow-xs' 
                       : 'w-2 bg-[#E8E0D6] hover:bg-charcoal-muted'
                   }`}
                   aria-label={`עבור לתנוחת ${pose.hebrewName}`}
@@ -217,7 +240,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               ))}
             </div>
             <div className="text-[11px] text-charcoal-muted mt-1.5 font-light">
-              לחצו על התמונה כדי להחליף תנוחה
+              לחצו על התמונה או החיצים כדי להחליף תנוחה
             </div>
 
           </div>
