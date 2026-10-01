@@ -154,10 +154,6 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               יוגה איינגר <span className="text-terracotta">לתרגול ביתי</span>
             </h1>
 
-            <p className="text-sm sm:text-base font-sanskrit text-terracotta-dark tracking-wide dir-ltr text-right font-medium">
-              योगेन चित्तस्य पदेन वाचां मलं शरीरस्य च वैद्यकेन
-            </p>
-
             <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl">
               מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
