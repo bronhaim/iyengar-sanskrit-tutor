@@ -142,51 +142,51 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     <div className="w-full flex flex-col gap-10 sm:gap-14 animate-fadeIn pb-12">
       
       {/* 1. HERO SECTION (Editorial 2-Column on Desktop + Interactive Quotes Bar) */}
-      <section className="relative overflow-hidden py-8 sm:py-12 bg-gradient-to-b from-[#FAF6F0] via-[#F2EAE0] to-[#EAE0D3] rounded-3xl border border-[#D8C7B5] p-6 sm:p-10 shadow-card">
+      <section className="relative overflow-hidden py-8 sm:py-12 bg-gradient-to-b from-[#F7F2EB] via-[#EFE5D7] to-[#E5D7C5] rounded-3xl border border-[#CBB8A1] p-6 sm:p-10 shadow-card">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Text & Action Column (Right in RTL - 7 cols) */}
           <div className="lg:col-span-7 space-y-6 text-center flex flex-col items-center">
             
-            {/* Tradition Badge */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-[#EAE0D3] border border-[#D5C2AF] shadow-xs text-[#4A3525]">
+            {/* Tradition Badge - Earth element tone */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-[#E6D7C3] border border-[#CBB8A1] shadow-xs text-[#422716]">
               <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-[60px] font-light text-[#382417] leading-[1.15] tracking-tight text-center">
+            <h1 className="text-3xl sm:text-5xl lg:text-[60px] font-light text-[#422716] leading-[1.15] tracking-tight text-center">
               יוגה איינגר לתרגול ביתי
             </h1>
 
-            <p className="text-lg sm:text-xl text-[#674831] font-light leading-relaxed max-w-xl text-center">
+            <p className="text-lg sm:text-xl text-[#624530] font-light leading-relaxed max-w-xl text-center">
               מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
 
-            {/* Quick Action Buttons - 4 unified buttons in one line on desktop, stacked on mobile */}
+            {/* Quick Action Buttons - 4 Rich Earth-Brown Buttons */}
             <div className="pt-2 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
               <button
                 onClick={onOpenCatalog}
-                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#74482B] border border-[#D5C2AF] hover:border-[#74482B] text-[#382417] hover:text-white text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#67442B] hover:bg-[#52331E] border border-[#482A15]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 קטלוג תנוחות
               </button>
 
               <button
                 onClick={onOpenSequences}
-                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#74482B] border border-[#D5C2AF] hover:border-[#74482B] text-[#382417] hover:text-white text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#7B5336] hover:bg-[#623F27] border border-[#54341E]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 רצפי תרגולים
               </button>
 
               <button
                 onClick={onStartQuiz}
-                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#74482B] border border-[#D5C2AF] hover:border-[#74482B] text-[#382417] hover:text-white text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#8D5838] hover:bg-[#724326] border border-[#63391F]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 חידון
               </button>
 
               <button
                 onClick={onOpenRoots}
-                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#74482B] border border-[#D5C2AF] hover:border-[#74482B] text-[#382417] hover:text-white text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#5A3822] hover:bg-[#452714] border border-[#3A2010]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 מילון סנסקריט
               </button>
@@ -196,11 +196,11 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             <div className="pt-1 flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={onOpenFavorites}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#EAE0D3] hover:bg-[#DECFC0] border border-[#D5C2AF] text-[#382417] text-xs font-semibold transition-all shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E6D7C3] hover:bg-[#D8C4AB] border border-[#CBB8A1] text-[#422716] text-xs font-bold transition-all shadow-xs"
               >
                 <span>המועדפים שלי</span>
                 {totalFavs > 0 && (
-                  <span className="bg-[#FAF6F0] border border-[#D5C2AF] text-[#382417] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                  <span className="bg-[#FAF6F0] border border-[#CBB8A1] text-[#422716] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                     {totalFavs}
                   </span>
                 )}
@@ -209,9 +209,9 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               {currentUser && (
                 <button
                   onClick={onRequestFeature}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF6F0] hover:bg-[#EAE0D3] border border-[#D5C2AF] hover:border-[#74482B] text-[#382417] hover:text-[#74482B] text-xs font-semibold transition-all shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E6D7C3] hover:bg-[#D8C4AB] border border-[#CBB8A1] text-[#422716] text-xs font-bold transition-all shadow-xs"
                 >
-                  <MessageSquarePlus className="w-3.5 h-3.5 text-[#74482B]" />
+                  <MessageSquarePlus className="w-3.5 h-3.5 text-[#67442B]" />
                   <span>בקשת תנוחה או פיצ׳ר</span>
                 </button>
               )}
@@ -359,10 +359,10 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
       {/* 2. THE 4 PILLARS OF THE PLATFORM */}
       <section className="space-y-6">
         <div className="text-right">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#382417]">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#3E2616]">
             מרחב התרגול והלימוד שלך
           </h2>
-          <p className="text-[#674831] text-sm sm:text-base font-light">
+          <p className="text-[#624530] text-sm sm:text-base font-light">
             כל מה שדרוש להעמקת תרגול יוגה איינגר בבית
           </p>
         </div>
@@ -372,20 +372,20 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 1: קטלוג תנוחות יוגה */}
           <div 
             onClick={onOpenCatalog}
-            className="group bg-[#FAF6F0] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#74482B]/70 hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-[#FBF8F4] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#67442B] hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-[#EAE0D3] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[#E8DCCF] border border-[#CBB8A1] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
                 🧘‍♂️
               </div>
-              <h3 className="text-xl font-bold text-[#382417] mb-2.5 group-hover:text-[#74482B] transition-colors">
+              <h3 className="text-xl font-bold text-[#3E2616] mb-2.5 group-hover:text-[#67442B] transition-colors">
                 קטלוג תנוחות יוגה
               </h3>
-              <p className="text-[#674831] text-sm font-light leading-relaxed mb-6">
+              <p className="text-[#5A3E2B] text-sm font-light leading-relaxed mb-6">
                 צילומי סטודיו מפורטים, עבודה עם פרופס (בלוקים, בולסטר, חגורות), דגשי אנטומיה והתוויות נגד לכל תנוחה.
               </p>
             </div>
-            <div className="flex items-center text-[#74482B] font-semibold text-sm gap-2">
+            <div className="flex items-center text-[#67442B] group-hover:text-[#422716] font-bold text-sm gap-2">
               <span>לקטלוג התנוחות</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
@@ -394,20 +394,20 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 2: רצפי תרגולים מומלצים */}
           <div 
             onClick={onOpenSequences}
-            className="group bg-[#FAF6F0] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#74482B]/70 hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-[#FBF8F4] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#7B5336] hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-[#EAE0D3] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[#E8DCCF] border border-[#CBB8A1] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
                 ✨
               </div>
-              <h3 className="text-xl font-bold text-[#382417] mb-2.5 group-hover:text-[#74482B] transition-colors">
+              <h3 className="text-xl font-bold text-[#3E2616] mb-2.5 group-hover:text-[#7B5336] transition-colors">
                 רצפי תרגולים מומלצים
               </h3>
-              <p className="text-[#674831] text-sm font-light leading-relaxed mb-6">
+              <p className="text-[#5A3E2B] text-sm font-light leading-relaxed mb-6">
                 תוכניות תרגול מובנות לבית לפי מסורת איינגר: רצף בוקר מעורר, רצף ערב להרפיה, שיקום, כאבי גב ועיכול.
               </p>
             </div>
-            <div className="flex items-center text-[#74482B] font-semibold text-sm gap-2">
+            <div className="flex items-center text-[#7B5336] group-hover:text-[#422716] font-bold text-sm gap-2">
               <span>לרצפי התרגול</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
@@ -416,20 +416,20 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 3: חידון */}
           <div 
             onClick={onStartQuiz}
-            className="group bg-[#FAF6F0] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#74482B]/70 hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-[#FBF8F4] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#8D5838] hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-[#EAE0D3] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform text-[#74482B]">
+              <div className="w-14 h-14 rounded-2xl bg-[#E8DCCF] border border-[#CBB8A1] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform text-[#8D5838]">
                 🎯
               </div>
-              <h3 className="text-xl font-bold text-[#382417] mb-2.5 group-hover:text-[#74482B] transition-colors">
+              <h3 className="text-xl font-bold text-[#3E2616] mb-2.5 group-hover:text-[#8D5838] transition-colors">
                 חידון שמות ותנוחות
               </h3>
-              <p className="text-[#674831] text-sm font-light leading-relaxed mb-6">
+              <p className="text-[#5A3E2B] text-sm font-light leading-relaxed mb-6">
                 אימון יומי לזיהוי תנוחות מתוך צילומי סטודיו, שאלות על שמות בסנסקריט, פירוק מילים ומעקב התקדמות אישי.
               </p>
             </div>
-            <div className="flex items-center text-[#74482B] font-semibold text-sm gap-2">
+            <div className="flex items-center text-[#8D5838] group-hover:text-[#422716] font-bold text-sm gap-2">
               <span>התחל חידון</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>
@@ -438,20 +438,20 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 4: מילון סנסקריט */}
           <div 
             onClick={onOpenRoots}
-            className="group bg-[#FAF6F0] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#74482B]/70 hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-[#FBF8F4] hover:bg-[#FFFDFB] rounded-3xl p-7 transition-all duration-300 border border-[#D5C2AF] hover:border-[#5A3822] hover:shadow-xl shadow-xs flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-[#EAE0D3] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 rounded-2xl bg-[#E8DCCF] border border-[#CBB8A1] flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
                 📖
               </div>
-              <h3 className="text-xl font-bold text-[#382417] mb-2.5 group-hover:text-[#74482B] transition-colors">
+              <h3 className="text-xl font-bold text-[#3E2616] mb-2.5 group-hover:text-[#5A3822] transition-colors">
                 מילון סנסקריט
               </h3>
-              <p className="text-[#674831] text-sm font-light leading-relaxed mb-6">
+              <p className="text-[#5A3E2B] text-sm font-light leading-relaxed mb-6">
                 פירוק והבנה של מילות המפתח: אדו (מטה), מוקה (פנים), שוואנה (כלב), וירה (גיבור), וריקשה (עץ) וקונה (זווית).
               </p>
             </div>
-            <div className="flex items-center text-[#74482B] font-semibold text-sm gap-2">
+            <div className="flex items-center text-[#5A3822] group-hover:text-[#422716] font-bold text-sm gap-2">
               <span>למילון הסנסקריט</span>
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             </div>

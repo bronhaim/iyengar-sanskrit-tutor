@@ -52,13 +52,13 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
         </button>
 
         {/* Mode Navigation (Center on Desktop) */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-[#EAE0D3] p-1 rounded-2xl border border-[#DECFC0] text-sm">
+        <nav className="hidden md:flex items-center gap-1.5 bg-[#EAE0D3] p-1.5 rounded-2xl border border-[#DECFC0] text-sm">
           <button
             onClick={() => setCurrentView('home')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'home' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             ראשי
@@ -66,10 +66,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           <button
             onClick={() => setCurrentView('catalog')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'catalog' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             קטלוג תנוחות
@@ -77,10 +77,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           <button
             onClick={() => setCurrentView('sequences')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'sequences' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             רצפי תרגולים
@@ -88,10 +88,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           <button
             onClick={onStartQuiz || (() => setCurrentView('quiz'))}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'quiz' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             חידון
@@ -99,10 +99,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           <button
             onClick={() => setCurrentView('roots')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'roots' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             מילון סנסקריט
@@ -110,10 +110,10 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           <button
             onClick={() => setCurrentView('favorites')}
-            className={`px-3.5 py-1.5 rounded-xl font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'favorites' 
-                ? 'bg-[#FAF6F0] text-[#382417] shadow-xs font-bold' 
-                : 'text-[#674831] hover:text-[#382417]'
+                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
             }`}
           >
             מועדפים
