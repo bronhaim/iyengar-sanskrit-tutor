@@ -583,6 +583,38 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'מנח סופטה ויראסאנה נתמך באיכות מלאה',
       src: '/images/poses/supta-virasana.png'
     }
+  ],
+  'viparita-karani': [
+    {
+      id: 'wall-props',
+      title: 'תרגול נתמך מול קיר עם בולסטר',
+      badge: '🧱 תרגול נתמך',
+      description: 'ויפריטה קראני: רגליים מורמות אנכית על הקיר, אגן נתמך ומוגבה על בולסטר ושמיכה מקופלת, בית חזה רפוי ופתוח',
+      src: '/images/poses/viparita-karani.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה באיכות גבוהה',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח ויפריטה קראני נתמכת קיר באיכות מלאה',
+      src: '/images/poses/viparita-karani.png'
+    }
+  ],
+  'adho-mukha-vrikshasana': [
+    {
+      id: 'studio',
+      title: 'עמידת ידיים (אדו מוקה וריקשאסאנה)',
+      badge: '📸 הדגמת סטודיו',
+      description: 'אדו מוקה וריקשאסאנה: עמידת ידיים ישרה ויציבה, זרועות ישרות ורגליים זקופות מעלה מול קיר',
+      src: '/images/poses/adho-mukha-vrikshasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה באיכות גבוהה',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח אדו מוקה וריקשאסאנה באיכות מלאה',
+      src: '/images/poses/adho-mukha-vrikshasana.png'
+    }
   ]
 };
 
