@@ -3,24 +3,28 @@ import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
   return (
-    <header className="w-full bg-[#F5EFEB]/90 backdrop-blur-md border-b border-[#DECFC0] sticky top-0 z-40 px-4 sm:px-8 py-2 sm:py-2.5 transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+    <header className="w-full bg-[#F5EFEB]/90 backdrop-blur-md border-b border-[#DECFC0] sticky top-0 z-40 px-3 sm:px-8 py-2 sm:py-2.5 transition-all">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
         
-        {/* Brand / Logo (Right in RTL) - Styled emblem */}
+        {/* Brand / Logo (Right in RTL) */}
         <button 
           onClick={() => setCurrentView('home')} 
-          className="flex flex-col items-center sm:items-start justify-center text-[#382417] hover:opacity-85 transition-opacity text-right group py-0.5"
+          className="flex items-center gap-1.5 sm:gap-2 text-[#382417] hover:opacity-85 transition-opacity group py-0.5 shrink-0"
           title="חזרה לדף הבית"
         >
-          {/* Purple Icon on top */}
-          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md sm:rounded-lg bg-gradient-to-br from-[#7B4B85] to-[#542B5E] text-white flex items-center justify-center text-xs shadow-xs mb-1 group-hover:scale-105 transition-transform border border-[#542B5E]/30">
-            <span className="leading-none text-[11px] sm:text-xs">🕉️</span>
+          {/* Centered Text: title and subtitle centered one under the other */}
+          <div className="flex flex-col items-center text-center">
+            <div className="font-bold text-[11px] sm:text-[13px] text-[#382417] leading-tight tracking-tight whitespace-nowrap">
+              יוגה איינגר לתרגול ביתי
+            </div>
+            <div className="text-[8.5px] sm:text-[10px] text-[#674831] font-normal tracking-wide leading-tight whitespace-nowrap mt-0.5">
+              דיוק, יציבה והעמקה
+            </div>
           </div>
-          <div className="font-bold text-[12px] sm:text-[13px] text-[#382417] leading-tight tracking-tight">
-            יוגה איינגר לתרגול ביתי
-          </div>
-          <div className="text-[9px] sm:text-[10px] text-[#674831] font-normal tracking-wide leading-tight">
-            דיוק, יציבה והעמקה
+
+          {/* Purple Icon placed to the LEFT of the text */}
+          <div className="w-5 h-5 sm:w-6.5 sm:h-6.5 rounded-md sm:rounded-lg bg-gradient-to-br from-[#7B4B85] to-[#542B5E] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform border border-[#542B5E]/30 shrink-0">
+            <span className="leading-none text-[10px] sm:text-xs">🕉️</span>
           </div>
         </button>
 
