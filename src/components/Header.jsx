@@ -4,7 +4,7 @@ import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory }) => {
   return (
-    <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E8E0D6] sticky top-0 z-40 px-4 sm:px-8 py-3 transition-all">
+    <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E5D9C8] sticky top-0 z-40 px-4 sm:px-8 py-3 transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         
         {/* Brand / Logo (Right in RTL) */}
@@ -12,7 +12,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           onClick={() => setCurrentView('home')} 
           className="flex items-center gap-3 text-charcoal hover:opacity-85 transition-opacity text-right group"
         >
-          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-cream-100 border border-[#E8E0D6] flex items-center justify-center text-lg sm:text-xl shadow-xs group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-cream-100 border border-[#E5D9C8] flex items-center justify-center text-lg sm:text-xl shadow-xs group-hover:scale-105 transition-transform">
             🕉️
           </div>
           <div>
@@ -23,7 +23,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
         </button>
 
         {/* Mode Navigation (Center) */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-cream-100/80 p-1 rounded-2xl border border-[#E8E0D6] text-sm">
+        <nav className="hidden md:flex items-center gap-1.5 bg-cream-100/80 p-1 rounded-2xl border border-[#E5D9C8] text-sm">
           <button
             onClick={() => setCurrentView('home')}
             className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
@@ -88,7 +88,7 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
         {/* User Profile / Auth (Left in RTL) */}
         <div className="flex items-center gap-2">
           {/* Quick Mobile Navigation Bar */}
-          <div className="flex md:hidden items-center gap-1 bg-cream-100 p-0.5 rounded-xl border border-[#E8E0D6] text-xs">
+          <div className="flex md:hidden items-center gap-1 bg-cream-100 p-0.5 rounded-xl border border-[#E5D9C8] text-xs">
             <button
               onClick={() => setCurrentView('catalog')}
               className={`px-2 py-1 rounded-lg font-medium ${currentView === 'catalog' ? 'bg-white shadow-xs font-bold text-soft-green' : 'text-charcoal-muted'}`}

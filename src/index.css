@@ -18,12 +18,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #E4D6C3;
+  background-color: #E5D9C8;
   border-radius: 9999px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #D5C3AB;
+  background-color: #D5C1A6;
 }
 
 .duo-button {
@@ -34,10 +34,10 @@
 
 .duo-button:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 0 rgba(0,0,0,0.1) !important;
+  box-shadow: 0 1px 0 0 rgba(54, 44, 36, 0.1) !important;
 }
 
 button:focus-visible {
-  outline: 3px solid #C07373;
+  outline: 3px solid #9E6746;
   outline-offset: 2px;
 }

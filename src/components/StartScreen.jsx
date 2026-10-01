@@ -138,28 +138,28 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
     <div className="w-full flex flex-col gap-10 sm:gap-14 animate-fadeIn pb-12">
       
       {/* 1. HERO SECTION (Editorial 2-Column on Desktop + Interactive Quotes Bar) */}
-      <section className="relative overflow-hidden py-8 sm:py-12 bg-gradient-to-b from-white via-beige-light/80 to-transparent rounded-3xl border border-[#E8E0D6]/60 p-6 sm:p-10 shadow-soft">
+      <section className="relative overflow-hidden py-8 sm:py-12 bg-gradient-to-b from-white via-beige-light/80 to-transparent rounded-3xl border border-[#E5D9C8]/70 p-6 sm:p-10 shadow-soft">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* Text & Action Column (Right in RTL - 7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-right">
+          <div className="lg:col-span-7 space-y-6 text-center flex flex-col items-center">
             
             {/* Tradition Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E8E0D6] shadow-xs text-charcoal">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-[#E5D9C8] shadow-xs text-charcoal">
               <span className="text-terracotta">✨</span>
               <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-charcoal leading-tight tracking-tight whitespace-nowrap">
+            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-light text-charcoal leading-[1.15] tracking-tight text-center">
               יוגה איינגר לתרגול ביתי
             </h1>
 
-            <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl">
+            <p className="text-lg sm:text-xl text-charcoal-light font-light leading-relaxed max-w-xl text-center">
               מרחב מקיף לתרגול יוגה איינגר אישי: קטלוג תנוחות מפורט עם צילומי סטודיו, רצפי תרגולים מומלצים, חידון שמות ותנוחות, ומילון סנסקריט עשיר.
             </p>
 
             {/* Quick Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={onOpenCatalog}
                 className="inline-flex items-center justify-center px-6 py-3.5 bg-terracotta hover:bg-terracotta-dark text-white rounded-full text-base font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 gap-2"
@@ -170,7 +170,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
 
               <button
                 onClick={onOpenSequences}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E8E0D6] hover:border-amber-500 text-charcoal hover:text-amber-800 rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E5D9C8] hover:border-amber-500 text-charcoal hover:text-amber-800 rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
               >
                 <Sparkles className="w-5 h-5 text-amber-600" />
                 <span>רצפי תרגולים מומלצים</span>
@@ -178,7 +178,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
 
               <button
                 onClick={onStartQuiz}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E8E0D6] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-white border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta rounded-full text-base font-bold shadow-xs hover:shadow-md transition-all gap-2"
               >
                 <Play className="w-5 h-5 fill-current text-terracotta" />
                 <span>חידון</span>
@@ -186,7 +186,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             </div>
 
             {/* Quick Feature Perks */}
-            <div className="pt-3 flex flex-wrap items-center gap-5 text-xs text-charcoal-muted">
+            <div className="pt-3 flex flex-wrap items-center justify-center gap-5 text-xs text-charcoal-muted">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-soft-green" />
                 <span>קטלוג תנוחות יוגה</span>
@@ -254,7 +254,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               </button>
 
               {/* Floating Pose Badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E8E0D6] rounded-2xl px-5 py-2 shadow-lg text-center whitespace-nowrap z-20">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-[#E5D9C8] rounded-2xl px-5 py-2 shadow-lg text-center whitespace-nowrap z-20">
                 <div className="font-bold text-sm text-charcoal">
                   {currentPose.hebrewName}
                 </div>
@@ -274,7 +274,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                   className={`h-2 rounded-full transition-all duration-300 ${
                     idx === currentPoseIdx 
                       ? 'w-6 bg-terracotta shadow-xs' 
-                      : 'w-2 bg-[#E8E0D6] hover:bg-charcoal-muted'
+                      : 'w-2 bg-[#E5D9C8] hover:bg-charcoal-muted'
                   }`}
                   aria-label={`עבור לתנוחת ${pose.hebrewName}`}
                 />
@@ -287,7 +287,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
 
         {/* Interactive B.K.S. Iyengar Quote Bar (Prominently positioned with main screen) */}
         <div 
-          className="mt-8 sm:mt-10 pt-6 border-t border-[#E8E0D6]/70 flex flex-col items-center text-center relative select-none"
+          className="mt-8 sm:mt-10 pt-6 border-t border-[#E5D9C8]/70 flex flex-col items-center text-center relative select-none"
           onMouseEnter={() => setIsQuotePaused(true)}
           onMouseLeave={() => setIsQuotePaused(false)}
         >
@@ -335,7 +335,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   idx === currentQuoteIdx 
                     ? 'w-5 bg-terracotta' 
-                    : 'w-1.5 bg-[#E8E0D6] hover:bg-charcoal-muted'
+                    : 'w-1.5 bg-[#E5D9C8] hover:bg-charcoal-muted'
                 }`}
               />
             ))}
@@ -360,7 +360,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 1: קטלוג תנוחות יוגה */}
           <div 
             onClick={onOpenCatalog}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-soft-green/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E5D9C8] hover:border-soft-green/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
               <div className="w-14 h-14 rounded-2xl bg-sage-light flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
@@ -382,7 +382,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 2: רצפי תרגולים מומלצים */}
           <div 
             onClick={onOpenSequences}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-amber-400 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E5D9C8] hover:border-amber-400 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
               <div className="w-14 h-14 rounded-2xl bg-amber-100/70 flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">
@@ -404,7 +404,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 3: חידון */}
           <div 
             onClick={onStartQuiz}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-terracotta/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E5D9C8] hover:border-terracotta/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
               <div className="w-14 h-14 rounded-2xl bg-terracotta-light flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform text-terracotta">
@@ -426,7 +426,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
           {/* Card 4: מילון סנסקריט */}
           <div 
             onClick={onOpenRoots}
-            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E8E0D6] hover:border-charcoal/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
+            className="group bg-white hover:bg-cream-50/60 rounded-3xl p-7 transition-all duration-300 border border-[#E5D9C8] hover:border-charcoal/60 hover:shadow-xl flex flex-col justify-between cursor-pointer text-right"
           >
             <div>
               <div className="w-14 h-14 rounded-2xl bg-cream-200 flex items-center justify-center mb-6 text-2xl shadow-xs group-hover:scale-110 transition-transform">

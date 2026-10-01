@@ -36,15 +36,15 @@ export const QuizScreen = ({
   const isIdentifyQuestion = question.type === 'identify';
 
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col bg-white rounded-3xl border border-[#E8E0D6] shadow-soft overflow-hidden animate-fadeIn my-2 sm:my-4">
+    <div className="w-full max-w-3xl mx-auto flex flex-col bg-white rounded-3xl border border-[#E5D9C8] shadow-soft overflow-hidden animate-fadeIn my-2 sm:my-4">
       
       {/* Quiz Top Header */}
-      <header className="px-5 py-4 flex items-center justify-between border-b border-[#E8E0D6] bg-cream-50/70 backdrop-blur-sm shrink-0">
+      <header className="px-5 py-4 flex items-center justify-between border-b border-[#E5D9C8] bg-cream-50/70 backdrop-blur-sm shrink-0">
         <button
           onClick={onPrevQuestion}
           disabled={!canGoPrev}
           title="שאלה קודמת"
-          className="duo-button flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-[#E8E0D6] bg-white text-charcoal text-xs font-semibold shadow-xs hover:bg-cream-100 disabled:opacity-30 disabled:pointer-events-none transition-all"
+          className="duo-button flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-[#E5D9C8] bg-white text-charcoal text-xs font-semibold shadow-xs hover:bg-cream-100 disabled:opacity-30 disabled:pointer-events-none transition-all"
         >
           <Undo2 className="w-4 h-4" />
           <span>חזור</span>
@@ -52,7 +52,7 @@ export const QuizScreen = ({
 
         {/* Progress Bar & Counter */}
         <div className="flex-1 max-w-[200px] sm:max-w-xs mx-4 flex flex-col items-center gap-1.5">
-          <div className="w-full bg-[#E8E0D6] h-2.5 rounded-full overflow-hidden">
+          <div className="w-full bg-[#E5D9C8] h-2.5 rounded-full overflow-hidden">
             <div 
               className="bg-terracotta h-full transition-all duration-300 rounded-full" 
               style={{ width: `${((questionIndex + 1) / totalQuestions) * 100}%` }}
@@ -91,7 +91,7 @@ export const QuizScreen = ({
             1. If IDENTIFY question: Render large, clear, well-proportioned pose photo (not tiny on mobile!)
             2. If ROOT question (no pose image needed): Render a serene Sanskrit calligraphy focus card instead of a cropped empty box! */}
         {isIdentifyQuestion ? (
-          <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-3xl overflow-hidden bg-cream-50/50 border border-[#E8E0D6] shadow-xs flex items-center justify-center p-3">
+          <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-3xl overflow-hidden bg-cream-50/50 border border-[#E5D9C8] shadow-xs flex items-center justify-center p-3">
             <PoseSvgIllustration 
               poseId={question.id} 
               className="w-full h-full object-contain" 
@@ -99,7 +99,7 @@ export const QuizScreen = ({
           </div>
         ) : (
           /* Sanskrit Calligraphy Card for Root Meaning Questions */
-          <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-cream-100 via-white to-sage-light/30 border border-[#E8E0D6] p-6 sm:p-8 text-center shadow-xs space-y-2">
+          <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-cream-100 via-white to-sage-light/30 border border-[#E5D9C8] p-6 sm:p-8 text-center shadow-xs space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-terracotta-light text-terracotta-deep mb-1">
               <span>🪷</span>
               <span>שורש מילה בסנסקריט</span>
@@ -118,8 +118,8 @@ export const QuizScreen = ({
         {/* Options List */}
         <div className="flex flex-col gap-3">
           {question.options.map((optText, idx) => {
-            let optionStyle = "border-[#E8E0D6] bg-white hover:bg-cream-50 text-charcoal hover:border-cream-300";
-            let circleStyle = "border-[#E8E0D6] text-charcoal-muted bg-cream-50";
+            let optionStyle = "border-[#E5D9C8] bg-white hover:bg-cream-50 text-charcoal hover:border-cream-300";
+            let circleStyle = "border-[#E5D9C8] text-charcoal-muted bg-cream-50";
 
             if (isAnswered) {
               if (idx === question.correctIndex) {
@@ -129,7 +129,7 @@ export const QuizScreen = ({
                 optionStyle = "border-terracotta bg-terracotta-light text-terracotta-deep font-bold opacity-85 ring-2 ring-terracotta/30";
                 circleStyle = "bg-terracotta text-white font-bold";
               } else {
-                optionStyle = "border-[#E8E0D6] bg-white/50 text-charcoal-muted opacity-40";
+                optionStyle = "border-[#E5D9C8] bg-white/50 text-charcoal-muted opacity-40";
               }
             } else if (selectedOpt === idx) {
               optionStyle = "border-terracotta bg-terracotta-light/70 text-charcoal font-bold shadow-[0_2px_0_0_#C07373]";
@@ -173,14 +173,14 @@ export const QuizScreen = ({
             </div>
 
             {/* Sanskrit Roots Breakdown */}
-            <div className="bg-cream-50 border border-[#E8E0D6] rounded-2xl p-4 text-right">
+            <div className="bg-cream-50 border border-[#E5D9C8] rounded-2xl p-4 text-right">
               <div className="text-xs font-bold text-charcoal uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4 text-terracotta" />
                 <span>פירוק השם בסנסקריט:</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {question.breakdown.map((item, bIdx) => (
-                  <div key={bIdx} className="px-3.5 py-1.5 rounded-xl bg-white border border-[#E8E0D6] shadow-xs flex items-center gap-1.5 text-xs sm:text-sm">
+                  <div key={bIdx} className="px-3.5 py-1.5 rounded-xl bg-white border border-[#E5D9C8] shadow-xs flex items-center gap-1.5 text-xs sm:text-sm">
                     <span className="font-bold text-terracotta-dark">{item.root}:</span>
                     <span className="text-charcoal font-medium">{item.meaning}</span>
                   </div>
@@ -205,7 +205,7 @@ export const QuizScreen = ({
       </div>
 
       {/* Action Footer Bar */}
-      <footer className="w-full p-5 sm:p-6 bg-cream-50/60 border-t border-[#E8E0D6] flex flex-col gap-2 shrink-0">
+      <footer className="w-full p-5 sm:p-6 bg-cream-50/60 border-t border-[#E5D9C8] flex flex-col gap-2 shrink-0">
         {!isAnswered ? (
           <button
             disabled={selectedOpt === null}
@@ -213,7 +213,7 @@ export const QuizScreen = ({
             className={`duo-button w-full py-4 px-6 rounded-2xl font-bold text-base sm:text-lg shadow-sm transition-all ${
               selectedOpt !== null
                 ? 'bg-terracotta hover:bg-terracotta-dark text-white shadow-duo-terracotta cursor-pointer'
-                : 'bg-[#E8E0D6] text-charcoal-muted cursor-not-allowed'
+                : 'bg-[#E5D9C8] text-charcoal-muted cursor-not-allowed'
             }`}
           >
             בדוק תשובה

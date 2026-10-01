@@ -15,48 +15,48 @@ export default {
       colors: {
         cream: {
           50: '#FDFBF7',
-          100: '#FAF5EE',
-          200: '#F2E9DC',
-          300: '#E4D6C3',
-          400: '#D5C3AB'
+          100: '#FAF4EB',
+          200: '#F3EAD9',
+          300: '#E5D6C1',
+          400: '#D5C1A6'
         },
         beige: {
-          light: '#FAF8F5',
-          DEFAULT: '#F5EFE6',
-          dark: '#E8E0D6'
+          light: '#FBF8F3',
+          DEFAULT: '#F3ECE1',
+          dark: '#E5D9C8'
         },
         charcoal: {
-          DEFAULT: '#2D2D2D',
-          light: '#524C46',
-          muted: '#7A726B'
+          DEFAULT: '#362C24',
+          light: '#5C4B40',
+          muted: '#8C7B6E'
         },
         terracotta: {
-          light: '#FBF0EE',
-          DEFAULT: '#C07373',
-          dark: '#A65A5A',
-          deep: '#853F3F'
+          light: '#F7EFE9',
+          DEFAULT: '#9E6746',
+          dark: '#845133',
+          deep: '#63391F'
         },
         sage: {
-          light: '#EFF5EE',
-          DEFAULT: '#8FB385',
-          dark: '#728C74',
-          deep: '#566E58'
+          light: '#F2F4ED',
+          DEFAULT: '#8A997E',
+          dark: '#6F7E64',
+          deep: '#515F48'
         },
-        'soft-green': '#8FB385',
-        'light-green': '#EFF5EE',
+        'soft-green': '#8A997E',
+        'light-green': '#F2F4ED',
         ochre: {
-          light: '#FDF6EB',
-          DEFAULT: '#D89B54',
-          dark: '#B87A36'
+          light: '#FAF3E8',
+          DEFAULT: '#B87F4D',
+          dark: '#996334'
         }
       },
       boxShadow: {
-        'duo': '0 4px 0 0 rgba(0,0,0,0.12)',
-        'duo-terracotta': '0 4px 0 0 #853F3F',
-        'duo-sage': '0 4px 0 0 #566E58',
-        'duo-active': '0 1px 0 0 rgba(0,0,0,0.12)',
-        'card': '0 10px 30px -5px rgba(45, 45, 45, 0.06)',
-        'soft': '0 4px 20px -2px rgba(45, 45, 45, 0.05)'
+        'duo': '0 4px 0 0 rgba(54, 44, 36, 0.14)',
+        'duo-terracotta': '0 4px 0 0 #63391F',
+        'duo-sage': '0 4px 0 0 #515F48',
+        'duo-active': '0 1px 0 0 rgba(54, 44, 36, 0.14)',
+        'card': '0 10px 30px -5px rgba(54, 44, 36, 0.07)',
+        'soft': '0 4px 20px -2px rgba(54, 44, 36, 0.05)'
       },
       keyframes: {
         fadeIn: {

@@ -198,7 +198,7 @@ export function App() {
       </main>
 
       {/* 3. Footer */}
-      <footer className="w-full bg-white border-t border-[#E8E0D6] py-10 mt-auto">
+      <footer className="w-full bg-white border-t border-[#E5D9C8] py-10 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
           
           <div className="space-y-1">
