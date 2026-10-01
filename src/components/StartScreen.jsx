@@ -153,7 +153,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               <span>מסורת יוגה איינגר • דיוק, יציבה והעמקה</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-light text-charcoal leading-[1.15] tracking-tight text-center">
+            <h1 className="text-3xl sm:text-5xl lg:text-[60px] font-light text-charcoal leading-[1.15] tracking-tight text-center">
               יוגה איינגר לתרגול ביתי
             </h1>
 
