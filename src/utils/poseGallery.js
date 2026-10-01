@@ -133,6 +133,86 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'תרגול משקם ונתמך עם בולסטר מתחת לחזה והרפיית המצח',
       src: '/images/poses/paschimottanasana-props.png'
     }
+  ],
+  'utthita-parsvakonasana': [
+    {
+      id: 'studio',
+      title: 'סטודיו + חיצי פעולה',
+      badge: '🎯 סטודיו ואנטומיה',
+      description: 'הדגמת סטודיו עם 90 מעלות בברך קדמית, תמיכת בלוק וקו אלכסוני מלא מהעקב ליד',
+      src: '/images/poses/utthita-parsvakonasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגלת נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'תצלום מתרגלת להדגמת פתיחת בית החזה והארכת הצלע העליונה',
+      src: '/images/poses/utthita-parsvakonasana.png'
+    }
+  ],
+  'utkatasana': [
+    {
+      id: 'studio',
+      title: 'סטודיו + חיצי פעולה',
+      badge: '🎯 סטודיו ואנטומיה',
+      description: 'הדגמת סטודיו של תנוחת הכיסא עם ירידת אגן, עקבים מושרשים וזרועות מתוחות מעלה',
+      src: '/images/poses/utkatasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגל/ת נוסף/ת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'תצלום נוסף המדגים את זווית השוקיים ומנח הזרועות לצד האוזניים',
+      src: '/images/poses/utkatasana.png'
+    }
+  ],
+  'uttanasana': [
+    {
+      id: 'studio',
+      title: 'סטודיו + חיצי פעולה',
+      badge: '🎯 סטודיו ואנטומיה',
+      description: 'כפיפה עזה לפנים עם כפות ידיים שטוחות ברצפה, רגליים צמודות וחיצי הארכת עמוד שדרה',
+      src: '/images/poses/uttanasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגל/ת נוסף/ת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מבט צדדי נוסף על תנוחת אוטאנאסאנה וגמישות שרירי הירך האחורית (Hamstrings)',
+      src: '/images/poses/uttanasana.png'
+    }
+  ],
+  'ardha-chandrasana': [
+    {
+      id: 'studio',
+      title: 'סטודיו + חיצי פעולה',
+      badge: '🎯 סטודיו ואנטומיה',
+      description: 'הדגמת סטודיו של חצי ירח עם בלוק עץ, רגל מונפת מקבילה לרצפה וחיצי פתיחת אגן',
+      src: '/images/poses/ardha-chandrasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגל/ת נוסף/ת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'הדגמה נוספת להשוואת שיווי משקל ופריסת בית החזה במרחב',
+      src: '/images/poses/ardha-chandrasana.png'
+    }
+  ],
+  'parsvottanasana': [
+    {
+      id: 'studio',
+      title: 'סטודיו + חיצי פעולה',
+      badge: '🎯 סטודיו ואנטומיה',
+      description: 'הדגמת סטודיו עם כפות ידיים בתפילה מאחורי הגב (פסצ׳ימה נמסקר) וחיצי ריבוע אגן',
+      src: '/images/poses/parsvottanasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמת מתרגל/ת נוסף/ת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'תצלום נוסף המדגים את מתיחת הצד והתארכות הגו מעל הרגל הקדמית',
+      src: '/images/poses/parsvottanasana.png'
+    }
   ]
 };
 
