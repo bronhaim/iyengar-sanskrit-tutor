@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2 } from 'lucide-react';
+import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2, Star } from 'lucide-react';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
+import { useAuth } from '../context/AuthContext';
 
 export const ImageModal = ({ pose, onClose }) => {
+  const { toggleFavoritePose, isFavorite } = useAuth();
   const [activeIndex, setActiveIndex] = useState(0);
   const [imgError, setImgError] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -110,6 +112,19 @@ export const ImageModal = ({ pose, onClose }) => {
                   ))}
                 </div>
               )}
+
+              {/* Favorite Star Button */}
+              <button
+                onClick={() => toggleFavoritePose(pose.id)}
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors shadow-lg ${
+                  isFavorite(pose.id)
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-400/40'
+                    : 'bg-white/15 hover:bg-white/25 text-white'
+                }`}
+                title={isFavorite(pose.id) ? 'הסר ממועדפים' : 'הוסף למועדפים'}
+              >
+                <Star className={`w-5 h-5 ${isFavorite(pose.id) ? 'fill-amber-400' : ''}`} />
+              </button>
 
               {/* Close Fullscreen Button */}
               <button
@@ -224,13 +239,28 @@ export const ImageModal = ({ pose, onClose }) => {
               </div>
             </div>
 
-            <button 
-              onClick={onClose}
-              className="w-9 h-9 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal flex items-center justify-center transition-colors shadow-sm"
-              aria-label="סגור חלון"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-1.5">
+              <button 
+                onClick={() => toggleFavoritePose(pose.id)}
+                className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+                  isFavorite(pose.id) 
+                    ? 'bg-amber-50 text-amber-500 border border-amber-300 shadow-sm' 
+                    : 'bg-cream-100 hover:bg-cream-200 text-charcoal-muted hover:text-amber-500'
+                }`}
+                title={isFavorite(pose.id) ? 'הסר ממועדפים' : 'הוסף לתנוחות המועדפות'}
+                aria-label="מועדף"
+              >
+                <Star className={`w-4 h-4 ${isFavorite(pose.id) ? 'fill-amber-500' : ''}`} />
+              </button>
+
+              <button 
+                onClick={onClose}
+                className="w-9 h-9 rounded-full bg-cream-100 hover:bg-cream-200 text-charcoal flex items-center justify-center transition-colors shadow-sm"
+                aria-label="סגור חלון"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Gallery Variation Switcher Tabs (if multiple images available) */}

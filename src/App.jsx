@@ -7,6 +7,7 @@ import { PoseCatalog } from './components/PoseCatalog';
 import { SequencesScreen } from './components/SequencesScreen';
 import { EndScreen } from './components/EndScreen';
 import { ImageModal } from './components/ImageModal';
+import { AuthModal } from './components/AuthModal';
 import { POSE_DATABASE } from './data/posesData';
 
 export function App() {
@@ -16,6 +17,8 @@ export function App() {
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
   const [zoomedPose, setZoomedPose] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [catalogCategory, setCatalogCategory] = useState('all');
 
   // Helper to shuffle array for non-repetitive quiz session
   const shuffleArray = (array) => {
@@ -75,14 +78,19 @@ export function App() {
     <div className="min-h-screen bg-[#EDE8E1] flex justify-center items-center p-0 sm:p-4 text-[#383330]">
       
       {/* App Container Frame */}
-      <main className="w-full max-w-[500px] h-[100dvh] sm:h-[92vh] sm:max-h-[880px] bg-[#FAF5EE] sm:rounded-3xl sm:shadow-2xl sm:border sm:border-cream-300 relative overflow-hidden flex flex-col">
+      <main className="w-full max-w-[540px] h-[100dvh] sm:h-[92vh] sm:max-h-[890px] bg-[#FAF5EE] sm:rounded-3xl sm:shadow-2xl sm:border sm:border-cream-300 relative overflow-hidden flex flex-col">
         
-        {/* Header */}
+        {/* Header with User Auth and Navigation */}
         <Header 
           currentView={currentView} 
           setCurrentView={setCurrentView} 
           score={score} 
           totalQuestions={quizPool.length} 
+          onOpenAuth={() => setIsAuthModalOpen(true)}
+          onSelectCategory={(cat) => {
+            setCatalogCategory(cat);
+            setCurrentView('catalog');
+          }}
         />
 
         {/* View Switcher */}
@@ -92,7 +100,10 @@ export function App() {
             <StartScreen 
               onStartQuiz={startQuiz}
               onOpenRoots={() => setCurrentView('roots')}
-              onOpenCatalog={() => setCurrentView('catalog')}
+              onOpenCatalog={() => {
+                setCatalogCategory('all');
+                setCurrentView('catalog');
+              }}
               onOpenSequences={() => setCurrentView('sequences')}
               totalPoses={POSE_DATABASE.length}
             />
@@ -124,6 +135,7 @@ export function App() {
             <PoseCatalog 
               onBackToHome={() => setCurrentView('home')}
               onOpenZoomModal={(p) => setZoomedPose(p)}
+              initialCategory={catalogCategory}
             />
           )}
 
@@ -152,6 +164,12 @@ export function App() {
             onClose={() => setZoomedPose(null)} 
           />
         )}
+
+        {/* Auth / Login Modal */}
+        <AuthModal 
+          isOpen={isAuthModalOpen} 
+          onClose={() => setIsAuthModalOpen(false)} 
+        />
 
       </main>
 
