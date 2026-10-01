@@ -85,9 +85,16 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal }) => {
             key={pose.id}
             className="bg-white border border-cream-300 rounded-3xl p-4 shadow-sm hover:shadow-card transition-shadow flex flex-col sm:flex-row gap-4"
           >
-            {/* SVG Illustration Thumbnail */}
-            <div className="w-full sm:w-36 h-36 rounded-2xl bg-cream-50 border border-cream-200 p-2 shrink-0 flex items-center justify-center">
+            {/* Image Thumbnail with Click-to-Zoom */}
+            <div 
+              onClick={() => onOpenZoomModal(pose)}
+              className="w-full sm:w-36 h-36 rounded-2xl bg-cream-50 border border-cream-200 p-2 shrink-0 flex items-center justify-center relative group cursor-pointer overflow-hidden hover:border-terracotta transition-all"
+            >
               <PoseSvgIllustration poseId={pose.id} className="w-full h-full" />
+              
+              <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-2xl">
+                <span>🔍 לחץ להגדלה</span>
+              </div>
             </div>
 
             {/* Info */}
