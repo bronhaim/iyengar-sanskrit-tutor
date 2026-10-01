@@ -286,6 +286,15 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'פינצ\'ה מאיוראסאנה (עמידת אמות / נוצת הטווס): עמידת אמות יציבה, אמות מקבילות, בית חזה מורם ורגליים מתוחות מעלה',
       src: '/images/poses/pincha-mayurasana.jpg'
     }
+  ],
+  'savasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'שאוואסאנה (תנוחת הרפיה / גופה): הרפיה מודעת ושקטה בשכיבה על הגב, כפות ידיים פונות מעלה וגוף שליו לחלוטין',
+      src: '/images/poses/savasana.jpg'
+    }
   ]
 };
 
