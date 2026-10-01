@@ -567,6 +567,22 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'מנח סאטו באנדהה סרוואנגאסאנה בקימור מלא',
       src: '/images/poses/setu-bandha-sarvangasana.png'
     }
+  ],
+  'supta-virasana': [
+    {
+      id: 'props',
+      title: 'תרגול נתמך עם פרופס (איינגר)',
+      badge: '🛋️ תרגול נתמך',
+      description: 'סופטה ויראסאנה: שכיבה לאחור מעל בולסטר מוגבה, תמיכת בלוקים מתחת לחזה והראש, ורצועה מהודקת סביב הירכיים',
+      src: '/images/poses/supta-virasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה באיכות גבוהה',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח סופטה ויראסאנה נתמך באיכות מלאה',
+      src: '/images/poses/supta-virasana.png'
+    }
   ]
 };
 
