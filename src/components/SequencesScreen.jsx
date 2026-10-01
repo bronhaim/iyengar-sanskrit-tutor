@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { ArrowRight, Clock, Sparkles, Play, CheckCircle2, ChevronRight, ChevronLeft, Info, Sun, Moon, Brain, Heart, Apple } from 'lucide-react';
+import { ArrowRight, Clock, Sparkles, Play, CheckCircle2, ChevronRight, ChevronLeft, Info, Star, Sun, Moon, Brain, Heart, Apple } from 'lucide-react';
 import { YOGA_SEQUENCES } from '../data/sequencesData';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
+import { useAuth } from '../context/AuthContext';
 
-export const SequencesScreen = ({ onBackToHome, onOpenZoomModal }) => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory = 'all' }) => {
+  const { userProfile, toggleFavoriteSequence, isFavoriteSequence } = useAuth();
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [activeSequence, setActiveSequence] = useState(null);
   const [guidedStepIndex, setGuidedStepIndex] = useState(0);
 
+  const favSeqCount = userProfile.favoriteSequences?.length || 0;
+
   const categoryFilters = [
     { id: 'all', label: 'הכל' },
+    { id: 'favorites', label: `⭐ מועדפים (${favSeqCount})` },
     { id: 'morning', label: '🌅 בוקר' },
     { id: 'evening', label: '🌙 ערב' },
     { id: 'remedial', label: '💆 כאבי ראש ומתח' },
@@ -18,9 +23,11 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal }) => {
     { id: 'pregnancy', label: '🤰 הריון' }
   ];
 
-  const filteredSequences = YOGA_SEQUENCES.filter(seq => 
-    selectedCategory === 'all' || seq.category === selectedCategory
-  );
+  const filteredSequences = YOGA_SEQUENCES.filter(seq => {
+    if (selectedCategory === 'all') return true;
+    if (selectedCategory === 'favorites') return isFavoriteSequence(seq.id);
+    return seq.category === selectedCategory;
+  });
 
   // Helper to resolve pose object from ID
   const getPoseById = (poseId) => {
@@ -94,22 +101,66 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal }) => {
 
           {/* Sequences List */}
           <div className="space-y-4">
-            {filteredSequences.map(seq => (
-              <div 
-                key={seq.id}
-                className={`bg-white border rounded-3xl p-5 shadow-sm hover:shadow-card transition-all text-right flex flex-col gap-3 ${seq.borderColor}`}
-              >
-                {/* Top Info Header */}
-                <div className="flex items-start justify-between">
-                  <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${seq.badgeColor}`}>
-                    {seq.timing}
-                  </span>
-
-                  <div className="flex items-center gap-1 text-xs font-semibold text-charcoal-muted">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{seq.duration}</span>
-                  </div>
+            {filteredSequences.length === 0 ? (
+              <div className="text-center py-12 bg-white rounded-3xl border border-cream-200 p-6">
+                <div className="text-4xl mb-3">
+                  {selectedCategory === 'favorites' ? '⭐' : '🔍'}
                 </div>
+                <h3 className="font-bold text-charcoal text-base mb-1">
+                  {selectedCategory === 'favorites' ? 'עדיין לא סימנת רצפי תרגול מועדפים' : 'לא נמצאו רצפים בקטגוריה זו'}
+                </h3>
+                <p className="text-xs text-charcoal-muted max-w-xs mx-auto mb-4">
+                  {selectedCategory === 'favorites' 
+                    ? 'לחצו על סמל הכוכב בכל כרטיס רצף כדי לשמור אותו לרשימת המועדפים האישית שלכם.' 
+                    : 'נסו לבחור קטגוריה אחרת.'}
+                </p>
+                {selectedCategory === 'favorites' && (
+                  <button
+                    onClick={() => setSelectedCategory('all')}
+                    className="px-4 py-2 rounded-xl bg-cream-100 hover:bg-cream-200 text-charcoal text-xs font-semibold transition-all"
+                  >
+                    הצג את כל הרצפים
+                  </button>
+                )}
+              </div>
+            ) : (
+              filteredSequences.map(seq => {
+                const isFav = isFavoriteSequence(seq.id);
+
+                return (
+                  <div 
+                    key={seq.id}
+                    className={`bg-white border rounded-3xl p-5 shadow-sm hover:shadow-card transition-all text-right flex flex-col gap-3 ${seq.borderColor}`}
+                  >
+                    {/* Top Info Header */}
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${seq.badgeColor}`}>
+                          {seq.timing}
+                        </span>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleFavoriteSequence(seq.id);
+                          }}
+                          className={`p-1.5 rounded-xl border transition-all ${
+                            isFav
+                              ? 'bg-amber-50 border-amber-300 text-amber-500 shadow-xs'
+                              : 'bg-cream-50 border-cream-200 text-charcoal-muted hover:text-amber-500 hover:border-amber-300'
+                          }`}
+                          title={isFav ? 'הסר מרצפים מועדפים' : 'הוסף לרצפים מועדפים'}
+                          aria-label="מועדף"
+                        >
+                          <Star className={`w-3.5 h-3.5 ${isFav ? 'fill-amber-500 text-amber-500' : ''}`} />
+                        </button>
+                      </div>
+
+                      <div className="flex items-center gap-1 text-xs font-semibold text-charcoal-muted">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{seq.duration}</span>
+                      </div>
+                    </div>
 
                 <div>
                   <h3 className="text-xl font-bold text-charcoal mb-0.5">
@@ -176,7 +227,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal }) => {
                 </div>
 
               </div>
-            ))}
+            );
+          }))}
           </div>
 
         </div>

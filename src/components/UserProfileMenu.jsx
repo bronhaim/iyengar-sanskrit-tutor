@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
+export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites }) => {
   const { currentUser, userProfile, logout, updateSensitivities } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -152,24 +152,28 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory }) => {
                       <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-charcoal">תנוחות מועדפות</div>
-                      <div className="text-[11px] text-charcoal-muted">רשימת התנוחות האישית שלך לשמירה ותרגול</div>
+                      <div className="font-bold text-sm text-charcoal">המועדפים שלי</div>
+                      <div className="text-[11px] text-charcoal-muted">רצפי תרגול ותנוחות שמורות בחשבונך</div>
                     </div>
                   </div>
                   <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded-full">
-                    {favCount} תנוחות
+                    {favCount + (userProfile.favoriteSequences?.length || 0)} פריטים
                   </span>
                 </div>
 
                 <button
                   onClick={() => {
                     setIsOpen(false);
-                    if (onSelectCategory) onSelectCategory('favorites');
+                    if (onOpenFavorites) {
+                      onOpenFavorites();
+                    } else if (onSelectCategory) {
+                      onSelectCategory('favorites');
+                    }
                   }}
                   className="w-full mt-1.5 py-2 px-3 rounded-xl bg-white border border-cream-300 hover:border-amber-400 text-charcoal text-xs font-bold shadow-xs hover:shadow-sm flex items-center justify-center gap-1.5 transition-all text-terracotta cursor-pointer"
                 >
                   <Star className="w-3.5 h-3.5 fill-terracotta text-terracotta" />
-                  <span>מעבר לתנוחות המועדפות בקטלוג</span>
+                  <span>מעבר לעמוד המועדפים המלא</span>
                 </button>
               </div>
 

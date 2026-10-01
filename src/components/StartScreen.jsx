@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, ArrowLeft, ChevronRight, ChevronLeft } from 'lucide-react';
+import { BookOpen, ArrowLeft, ChevronRight, ChevronLeft, Star } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const SHOWCASE_POSES = [
   {
@@ -87,12 +88,15 @@ const IYENGAR_QUOTES = [
   }
 ];
 
-export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, totalPoses }) => {
+export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, onOpenFavorites, totalPoses }) => {
+  const { userProfile, currentUser } = useAuth();
   const [currentPoseIdx, setCurrentPoseIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   const [currentQuoteIdx, setCurrentQuoteIdx] = useState(0);
   const [isQuotePaused, setIsQuotePaused] = useState(false);
+
+  const totalFavs = (userProfile?.favorites?.length || 0) + (userProfile?.favoriteSequences?.length || 0);
 
   // Auto-advance showcase poses every 4.5 seconds unless paused
   useEffect(() => {
@@ -185,6 +189,22 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                 className="px-5 py-3 rounded-full bg-white hover:bg-cream-100 border border-[#E5D9C8] hover:border-terracotta text-charcoal hover:text-terracotta text-sm sm:text-base font-semibold shadow-xs hover:shadow-md transition-all text-center whitespace-nowrap"
               >
                 מילון סנסקריט
+              </button>
+            </div>
+
+            {/* Direct Access to Favorites */}
+            <div className="pt-1 flex items-center justify-center">
+              <button
+                onClick={onOpenFavorites}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream-100 hover:bg-cream-200 border border-[#E5D9C8] hover:border-amber-300 text-charcoal text-xs font-semibold transition-all shadow-xs"
+              >
+                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                <span>המועדפים שלי</span>
+                {totalFavs > 0 && (
+                  <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                    {totalFavs}
+                  </span>
+                )}
               </button>
             </div>
 

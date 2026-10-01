@@ -8,6 +8,7 @@ import { SequencesScreen } from './components/SequencesScreen';
 import { EndScreen } from './components/EndScreen';
 import { ImageModal } from './components/ImageModal';
 import { AuthModal } from './components/AuthModal';
+import { FavoritesScreen } from './components/FavoritesScreen';
 import { POSE_DATABASE } from './data/posesData';
 
 export function App() {
@@ -130,7 +131,31 @@ export function App() {
               setCurrentView('sequences');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            onOpenFavorites={() => {
+              setCurrentView('favorites');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             totalPoses={POSE_DATABASE.length}
+          />
+        )}
+
+        {currentView === 'favorites' && (
+          <FavoritesScreen 
+            onBackToHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenCatalog={() => {
+              setCatalogCategory('all');
+              setCurrentView('catalog');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenSequences={() => {
+              setCurrentView('sequences');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenZoomModal={(p) => setZoomedPose(p)}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
           />
         )}
 

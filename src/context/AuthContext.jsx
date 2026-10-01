@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userProfile, setUserProfile] = useState(() => ({
     favorites: JSON.parse(localStorage.getItem('guest_favorites') || '[]'),
+    favoriteSequences: JSON.parse(localStorage.getItem('guest_favorite_sequences') || '[]'),
     sensitivities: JSON.parse(localStorage.getItem('guest_sensitivities') || '[]'),
     experienceLevel: localStorage.getItem('guest_experience') || 'beginner',
     customSequences: []
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children }) => {
                 displayName: user.displayName || user.email.split('@')[0],
                 photoURL: user.photoURL || null,
                 favorites: JSON.parse(localStorage.getItem('guest_favorites') || '[]'),
+                favoriteSequences: JSON.parse(localStorage.getItem('guest_favorite_sequences') || '[]'),
                 sensitivities: JSON.parse(localStorage.getItem('guest_sensitivities') || '[]'),
                 experienceLevel: localStorage.getItem('guest_experience') || 'beginner',
                 customSequences: [],
@@ -75,6 +77,7 @@ export const AuthProvider = ({ children }) => {
           // Fallback to local storage for guest
           setUserProfile({
             favorites: JSON.parse(localStorage.getItem('guest_favorites') || '[]'),
+            favoriteSequences: JSON.parse(localStorage.getItem('guest_favorite_sequences') || '[]'),
             sensitivities: JSON.parse(localStorage.getItem('guest_sensitivities') || '[]'),
             experienceLevel: localStorage.getItem('guest_experience') || 'beginner',
             customSequences: []
@@ -181,6 +184,34 @@ export const AuthProvider = ({ children }) => {
     return userProfile.favorites?.includes(poseId) || false;
   };
 
+  // Toggle Favorite Practice Sequence
+  const toggleFavoriteSequence = async (sequenceId) => {
+    const isCurrentlyFav = userProfile.favoriteSequences?.includes(sequenceId);
+    const newFavSequences = isCurrentlyFav
+      ? (userProfile.favoriteSequences || []).filter(id => id !== sequenceId)
+      : [...(userProfile.favoriteSequences || []), sequenceId];
+
+    // Immediate state update
+    setUserProfile(prev => ({ ...prev, favoriteSequences: newFavSequences }));
+
+    if (currentUser && db) {
+      try {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        await updateDoc(userDocRef, {
+          favoriteSequences: isCurrentlyFav ? arrayRemove(sequenceId) : arrayUnion(sequenceId)
+        });
+      } catch (err) {
+        console.warn('Failed to sync favorite sequence to cloud (saved locally):', err);
+      }
+    } else {
+      localStorage.setItem('guest_favorite_sequences', JSON.stringify(newFavSequences));
+    }
+  };
+
+  const isFavoriteSequence = (sequenceId) => {
+    return userProfile.favoriteSequences?.includes(sequenceId) || false;
+  };
+
   // Update Body Sensitivities (e.g. knees, lower-back)
   const updateSensitivities = async (sensitivities) => {
     setUserProfile(prev => ({ ...prev, sensitivities }));
@@ -222,6 +253,8 @@ export const AuthProvider = ({ children }) => {
     resetPassword,
     toggleFavoritePose,
     isFavorite,
+    toggleFavoriteSequence,
+    isFavoriteSequence,
     updateSensitivities,
     updateExperienceLevel
   };

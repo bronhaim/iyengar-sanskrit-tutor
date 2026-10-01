@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Compass, Home, Play, Sparkles } from 'lucide-react';
+import { BookOpen, Compass, Home, Play, Sparkles, Star } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory }) => {
@@ -61,6 +61,18 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
           </button>
 
           <button
+            onClick={() => setCurrentView('favorites')}
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+              currentView === 'favorites' 
+                ? 'bg-white text-charcoal shadow-xs font-bold' 
+                : 'text-charcoal-muted hover:text-charcoal'
+            }`}
+          >
+            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+            <span>מועדפים</span>
+          </button>
+
+          <button
             onClick={onStartQuiz || (() => setCurrentView('quiz'))}
             className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
               currentView === 'quiz' 
@@ -102,15 +114,16 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
               תרגולים
             </button>
             <button
-              onClick={onStartQuiz || (() => setCurrentView('quiz'))}
-              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'quiz' ? 'bg-white shadow-xs font-bold text-terracotta' : 'text-charcoal-muted'}`}
+              onClick={() => setCurrentView('favorites')}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'favorites' ? 'bg-white shadow-xs font-bold text-amber-600' : 'text-charcoal-muted'}`}
             >
-              חידון
+              מועדפים
             </button>
           </div>
 
           <UserProfileMenu 
             onOpenAuth={onOpenAuth} 
+            onOpenFavorites={() => setCurrentView('favorites')}
             onSelectCategory={(cat) => {
               setCurrentView('catalog');
               if (onSelectCategory) onSelectCategory(cat);
