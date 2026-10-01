@@ -277,6 +277,15 @@ export const KNOWN_POSE_VARIATIONS = {
       description: 'תרגול משקם ונתמך עם בולסטר מתחת לחזה והרפיית המצח',
       src: '/images/poses/paschimottanasana-props.png'
     }
+  ],
+  'pincha-mayurasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'פינצ\'ה מאיוראסאנה (עמידת אמות / נוצת הטווס): עמידת אמות יציבה, אמות מקבילות, בית חזה מורם ורגליים מתוחות מעלה',
+      src: '/images/poses/pincha-mayurasana.jpg'
+    }
   ]
 };
 
