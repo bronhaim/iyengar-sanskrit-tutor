@@ -27,12 +27,12 @@ const SHOWCASE_POSES = [
     fallback: '/images/poses/ardha-chandrasana.png'
   },
   {
-    id: 'utthita-parsvakonasana',
-    hebrewName: 'אוטיטה פארשוואקונאסאנה',
-    sanskrit: 'Utthita Pārśvakoṇāsana',
-    meaning: 'תנוחת הזווית הצידית המוארכת',
-    image: '/images/poses/utthita-parsvakonasana.jpg',
-    fallback: '/images/poses/utthita-parsvakonasana.png'
+    id: 'utkatasana',
+    hebrewName: 'אוטקטאסאנה',
+    sanskrit: 'Utkaṭāsana',
+    meaning: 'התנוחה העוצמתית (כיסא)',
+    image: '/images/poses/utkatasana.jpg',
+    fallback: '/images/poses/utkatasana.png'
   },
   {
     id: 'parivrtta-trikonasana',
