@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { StartScreen } from './components/StartScreen';
 import { QuizScreen } from './components/QuizScreen';
@@ -37,7 +37,15 @@ export function App() {
     setUserAnswers({});
     setScore(0);
     setCurrentView('quiz');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Safe fallback: if view is 'quiz' but pool is empty, initialize immediately
+  useEffect(() => {
+    if (currentView === 'quiz' && quizPool.length === 0) {
+      startQuiz();
+    }
+  }, [currentView, quizPool.length]);
 
   const handleSelectOption = (optionIndex) => {
     // Stored temporarily when clicking on an option
@@ -46,6 +54,7 @@ export function App() {
   const handleCheckAnswer = (selectedIndex) => {
     if (userAnswers[quizIndex] !== undefined) return;
     const currentQuestion = quizPool[quizIndex];
+    if (!currentQuestion) return;
     const isCorrect = selectedIndex === currentQuestion.correctIndex;
 
     setUserAnswers(prev => ({
@@ -61,117 +70,184 @@ export function App() {
   const handleNextQuestion = () => {
     if (quizIndex < quizPool.length - 1) {
       setQuizIndex(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setCurrentView('end');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevQuestion = () => {
     if (quizIndex > 0) {
       setQuizIndex(prev => prev - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const currentQuestion = quizPool[quizIndex];
+  const currentQuestion = quizPool[quizIndex] || POSE_DATABASE[0];
 
   return (
-    <div className="min-h-screen bg-[#EDE8E1] flex justify-center items-center p-0 sm:p-4 text-[#383330]">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#2D2D2D] font-assistant flex flex-col selection:bg-terracotta selection:text-white">
       
-      {/* App Container Frame */}
-      <main className="w-full max-w-[540px] h-[100dvh] sm:h-[92vh] sm:max-h-[890px] bg-[#FAF5EE] sm:rounded-3xl sm:shadow-2xl sm:border sm:border-cream-300 relative overflow-hidden flex flex-col">
+      {/* 1. Sticky Glassmorphism Header */}
+      <Header 
+        currentView={currentView} 
+        setCurrentView={(view) => {
+          if (view === 'quiz') {
+            startQuiz();
+          } else {
+            setCurrentView(view);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }} 
+        onStartQuiz={startQuiz}
+        score={score} 
+        totalQuestions={quizPool.length || POSE_DATABASE.length} 
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onSelectCategory={(cat) => {
+          setCatalogCategory(cat);
+          setCurrentView('catalog');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+
+      {/* 2. Main Content Container (Full Width & Spacious) */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex flex-col">
         
-        {/* Header with User Auth and Navigation */}
-        <Header 
-          currentView={currentView} 
-          setCurrentView={setCurrentView} 
-          score={score} 
-          totalQuestions={quizPool.length} 
-          onOpenAuth={() => setIsAuthModalOpen(true)}
-          onSelectCategory={(cat) => {
-            setCatalogCategory(cat);
-            setCurrentView('catalog');
-          }}
-        />
-
-        {/* View Switcher */}
-        <div className="flex-1 overflow-hidden relative">
-          
-          {currentView === 'home' && (
-            <StartScreen 
-              onStartQuiz={startQuiz}
-              onOpenRoots={() => setCurrentView('roots')}
-              onOpenCatalog={() => {
-                setCatalogCategory('all');
-                setCurrentView('catalog');
-              }}
-              onOpenSequences={() => setCurrentView('sequences')}
-              totalPoses={POSE_DATABASE.length}
-            />
-          )}
-
-          {currentView === 'quiz' && currentQuestion && (
-            <QuizScreen 
-              question={currentQuestion}
-              questionIndex={quizIndex}
-              totalQuestions={quizPool.length}
-              answerState={userAnswers[quizIndex] || null}
-              onSelectOption={handleSelectOption}
-              onCheckAnswer={handleCheckAnswer}
-              onNextQuestion={handleNextQuestion}
-              onPrevQuestion={handlePrevQuestion}
-              onExit={() => setCurrentView('home')}
-              onOpenZoomModal={(p) => setZoomedPose(p)}
-              canGoPrev={quizIndex > 0}
-            />
-          )}
-
-          {currentView === 'roots' && (
-            <RootsExplorer 
-              onBackToHome={() => setCurrentView('home')}
-            />
-          )}
-
-          {currentView === 'catalog' && (
-            <PoseCatalog 
-              onBackToHome={() => setCurrentView('home')}
-              onOpenZoomModal={(p) => setZoomedPose(p)}
-              initialCategory={catalogCategory}
-            />
-          )}
-
-          {currentView === 'sequences' && (
-            <SequencesScreen 
-              onBackToHome={() => setCurrentView('home')}
-              onOpenZoomModal={(p) => setZoomedPose(p)}
-            />
-          )}
-
-          {currentView === 'end' && (
-            <EndScreen 
-              score={score}
-              totalQuestions={quizPool.length}
-              onRestart={startQuiz}
-              onGoHome={() => setCurrentView('home')}
-            />
-          )}
-
-        </div>
-
-        {/* Zoom Modal */}
-        {zoomedPose && (
-          <ImageModal 
-            pose={zoomedPose} 
-            onClose={() => setZoomedPose(null)} 
+        {currentView === 'home' && (
+          <StartScreen 
+            onStartQuiz={startQuiz}
+            onOpenRoots={() => {
+              setCurrentView('roots');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenCatalog={() => {
+              setCatalogCategory('all');
+              setCurrentView('catalog');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenSequences={() => {
+              setCurrentView('sequences');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            totalPoses={POSE_DATABASE.length}
           />
         )}
 
-        {/* Auth / Login Modal */}
-        <AuthModal 
-          isOpen={isAuthModalOpen} 
-          onClose={() => setIsAuthModalOpen(false)} 
-        />
+        {currentView === 'quiz' && (
+          <QuizScreen 
+            question={currentQuestion}
+            questionIndex={quizIndex}
+            totalQuestions={quizPool.length || POSE_DATABASE.length}
+            answerState={userAnswers[quizIndex] || null}
+            onSelectOption={handleSelectOption}
+            onCheckAnswer={handleCheckAnswer}
+            onNextQuestion={handleNextQuestion}
+            onPrevQuestion={handlePrevQuestion}
+            onExit={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenZoomModal={(p) => setZoomedPose(p)}
+            canGoPrev={quizIndex > 0}
+          />
+        )}
+
+        {currentView === 'roots' && (
+          <RootsExplorer 
+            onBackToHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
+        {currentView === 'catalog' && (
+          <PoseCatalog 
+            onBackToHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenZoomModal={(p) => setZoomedPose(p)}
+            initialCategory={catalogCategory}
+          />
+        )}
+
+        {currentView === 'sequences' && (
+          <SequencesScreen 
+            onBackToHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenZoomModal={(p) => setZoomedPose(p)}
+          />
+        )}
+
+        {currentView === 'end' && (
+          <EndScreen 
+            score={score}
+            totalQuestions={quizPool.length || POSE_DATABASE.length}
+            onRestart={startQuiz}
+            onGoHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
 
       </main>
+
+      {/* 3. Footer */}
+      <footer className="w-full bg-white border-t border-[#E8E0D6] py-10 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
+          
+          <div className="space-y-1">
+            <div className="flex items-center justify-center md:justify-start gap-2 font-bold text-base text-charcoal">
+              <span>🕉️</span>
+              <span>לימוד סנסקריט ליוגה • מסורת איינגר</span>
+            </div>
+            <p className="text-xs text-charcoal-muted">
+              מוקדש ללימוד שפת היוגה, דגשי אנטומיה ותרגול מעמיק
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-charcoal-light">
+            <button onClick={() => { setCurrentView('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+              דף הבית
+            </button>
+            <button onClick={() => { setCurrentView('catalog'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+              קטלוג תנוחות
+            </button>
+            <button onClick={startQuiz} className="hover:text-terracotta transition-colors">
+              חידון סנסקריט
+            </button>
+            <button onClick={() => { setCurrentView('sequences'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-amber-800 transition-colors">
+              רצפים ביתיים
+            </button>
+            <button onClick={() => { setCurrentView('roots'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-soft-green transition-colors">
+              מילון שורשים
+            </button>
+          </div>
+
+          <div className="text-[11px] text-charcoal-muted">
+            מסורת ב.ק.ס איינגר
+          </div>
+
+        </div>
+      </footer>
+
+      {/* Modals */}
+      {zoomedPose && (
+        <ImageModal 
+          pose={zoomedPose} 
+          onClose={() => setZoomedPose(null)} 
+        />
+      )}
+
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
 
     </div>
   );

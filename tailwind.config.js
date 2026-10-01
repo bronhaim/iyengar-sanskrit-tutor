@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        assistant: ['Assistant', 'Rubik', 'sans-serif'],
+        amatic: ['"Amatic SC"', 'cursive'],
+        serifHebrew: ['"Frank Ruhl Libre"', 'serif'],
         rubik: ['Rubik', 'sans-serif'],
         sanskrit: ['"Noto Serif Devanagari"', 'serif'],
       },
@@ -18,22 +21,30 @@ export default {
           300: '#E4D6C3',
           400: '#D5C3AB'
         },
+        beige: {
+          light: '#FAF8F5',
+          DEFAULT: '#F5EFE6',
+          dark: '#E8E0D6'
+        },
         charcoal: {
-          DEFAULT: '#383330',
-          light: '#5E5752',
-          muted: '#8C837C'
+          DEFAULT: '#2D2D2D',
+          light: '#524C46',
+          muted: '#7A726B'
         },
         terracotta: {
-          light: '#F8ECEB',
+          light: '#FBF0EE',
           DEFAULT: '#C07373',
           dark: '#A65A5A',
           deep: '#853F3F'
         },
         sage: {
-          light: '#EFF4F0',
-          DEFAULT: '#728C74',
-          dark: '#566E58'
+          light: '#EFF5EE',
+          DEFAULT: '#8FB385',
+          dark: '#728C74',
+          deep: '#566E58'
         },
+        'soft-green': '#8FB385',
+        'light-green': '#EFF5EE',
         ochre: {
           light: '#FDF6EB',
           DEFAULT: '#D89B54',
@@ -45,7 +56,8 @@ export default {
         'duo-terracotta': '0 4px 0 0 #853F3F',
         'duo-sage': '0 4px 0 0 #566E58',
         'duo-active': '0 1px 0 0 rgba(0,0,0,0.12)',
-        'card': '0 8px 24px -4px rgba(56, 51, 48, 0.08)'
+        'card': '0 10px 30px -5px rgba(45, 45, 45, 0.06)',
+        'soft': '0 4px 20px -2px rgba(45, 45, 45, 0.05)'
       },
       keyframes: {
         fadeIn: {

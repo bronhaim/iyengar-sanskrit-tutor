@@ -1,11 +1,43 @@
 /**
  * Configuration and resolution of multiple gallery images for Iyengar Yoga poses.
  * Allows viewing clean studio photography alongside supported props variations
- * and alternative practitioner views (without visual arrow clutter).
+ * and alternative practitioner views.
  */
 
 // Mapping of poses that have distinct clean variations available in /images/poses/
 export const KNOWN_POSE_VARIATIONS = {
+  'supta-baddha-konasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'סופטה באדהה קונאסאנה (זווית קשורה בשכיבה): שכיבה נינוחה על הגב, כפות רגליים צמודות וברכיים פתוחות לצדדים',
+      src: '/images/poses/supta-baddha-konasana.jpg'
+    },
+    {
+      id: 'guide',
+      title: 'מדריך דגשי יציבה ואנטומיה',
+      badge: '📐 דגשי יציבה',
+      description: 'דגשי יציבה ואנטומיה בסופטה באדהה קונאסאנה: הרמת החזה, כפות ידיים פנויות מעלה, הרפיית הברכיים לאדמה',
+      src: '/images/poses/supta-baddha-konasana-guide.jpg'
+    }
+  ],
+  'baddha-konasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'באדהה קונאסאנה (זווית קשורה): ישיבה זקופה, כפות רגליים צמודות ליד האגן וברכיים יורדות לצדדים',
+      src: '/images/poses/baddha-konasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח באדהה קונאסאנה בהדגמה נוספת',
+      src: '/images/poses/baddha-konasana.png'
+    }
+  ],
   'tadasana': [
     {
       id: 'studio',
@@ -52,6 +84,22 @@ export const KNOWN_POSE_VARIATIONS = {
       badge: '🧘 הדגמה נוספת',
       description: 'מנח לוחם 2 בהדגמה נוספת',
       src: '/images/poses/virabhadrasana-2.png'
+    }
+  ],
+  'virabhadrasana-3': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'ויראבדראסאנה III: איזון על רגל אחת, גו וזרועות מתוחים ישר במקביל לרצפה',
+      src: '/images/poses/virabhadrasana-3.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח לוחם 3 בהדגמה נוספת',
+      src: '/images/poses/virabhadrasana-3.png'
     }
   ],
   'vriksasana': [
@@ -303,6 +351,205 @@ export const KNOWN_POSE_VARIATIONS = {
       badge: '📸 תצלום התנוחה',
       description: 'בהוג\'אנגאסאנה (תנוחת הנחש / קוברה): פתיחת בית החזה, הארכת הגב התחתון ורוחב בכתפיים',
       src: '/images/poses/bhujangasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח בהוג\'אנגאסאנה בהדגמה נוספת',
+      src: '/images/poses/bhujangasana.png'
+    }
+  ],
+  'supta-padangusthasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'סופטה פאדאנגושטהאסאנה: מתיחת רגל ישרה מעלה בשכיבה על הגב עם אחיזת הבוהן/חגורה',
+      src: '/images/poses/supta-padangusthasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח סופטה פאדאנגושטהאסאנה בהדגמה נוספת',
+      src: '/images/poses/supta-padangusthasana.png'
+    }
+  ],
+  'virasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'ויראסאנה (תנוחת הגיבור): ישיבה בין העקבים, ברכיים צמודות וגב זקוף',
+      src: '/images/poses/virasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח ויראסאנה בהדגמה נוספת',
+      src: '/images/poses/virasana.png'
+    }
+  ],
+  'ustrasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'אושטראסאנה (תנוחת הגמל): פתיחת בית החזה והטיה לאחור בעמידת ברכיים, ידיים אוחזות בעקבים',
+      src: '/images/poses/ustrasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח אושטראסאנה בהדגמה נוספת',
+      src: '/images/poses/ustrasana.png'
+    }
+  ],
+  'dhanurasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'דהנוראסאנה (תנוחת הקשת): הרמת החזה והירכיים מכיפה על הבטן עם אחיזה בקרסוליים',
+      src: '/images/poses/dhanurasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח דהנוראסאנה בהדגמה נוספת',
+      src: '/images/poses/dhanurasana.png'
+    }
+  ],
+  'gomukhasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'גומוקהאסאנה (פני פרה): ברכיים מוצלבות זו מעל זו ואחיזת ידיים מאחורי הגב',
+      src: '/images/poses/gomukhasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח גומוקהאסאנה בהדגמה נוספת',
+      src: '/images/poses/gomukhasana.png'
+    }
+  ],
+  'salamba-sarvangasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'סרוואנגאסאנה (עמידת כתפיים): הרמת הגוף אנכית מעלה עם תמיכת הידיים במעלה הגב',
+      src: '/images/poses/salamba-sarvangasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח סרוואנגאסאנה בהדגמה נוספת',
+      src: '/images/poses/salamba-sarvangasana.png'
+    }
+  ],
+  'salamba-sirsasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'שירשאסאנה (עמידת ראש): עמידת ראש יציבה ואנכית עם תמיכת אמות שלובות',
+      src: '/images/poses/salamba-sarvangasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח עמידת ראש בהדגמה נוספת',
+      src: '/images/poses/salamba-sirsasana.png'
+    }
+  ],
+  'halasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'הלאסאנה (מחרשה): הרמת הרגליים והורדתן ישרות מעבר לראש',
+      src: '/images/poses/halasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח הלאסאנה בהדגמה נוספת',
+      src: '/images/poses/halasana.png'
+    }
+  ],
+  'chaturanga-dandasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'צ\'טורנגה דנדאסאנה: גוף ישר במקביל לרצפה הנתמך על 4 גפיים, מרפקים ב-90 מעלות',
+      src: '/images/poses/chaturanga-dandasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח צ\'טורנגה בהדגמה נוספת',
+      src: '/images/poses/chaturanga-dandasana.png'
+    }
+  ],
+  'urdhva-dhanurasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'אורדווה דהנוראסאנה (קשת מורמת / גלגל): קימור עמוק לאחור בעמידה על הידיים וכפות הרגליים',
+      src: '/images/poses/urdhva-dhanurasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח קשת מורמת בהדגמה נוספת',
+      src: '/images/poses/urdhva-dhanurasana.png'
+    }
+  ],
+  'urdhva-mukha-svanasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'אורדווה מוקה שוואנאסאנה (כלב מביט למעלה): הרמת החזה והירכיים מהרצפה בנתמך על הזרועות',
+      src: '/images/poses/urdhva-mukha-svanasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח כלב מביט למעלה בהדגמה נוספת',
+      src: '/images/poses/urdhva-mukha-svanasana.png'
+    }
+  ],
+  'pavanamuktasana': [
+    {
+      id: 'studio',
+      title: 'הדגמת סטודיו רשמית',
+      badge: '📸 הדמות הראשית',
+      description: 'פאוואנמוקטאסאנה: הידוק הברכיים אל החזה בשכיבה על הגב',
+      src: '/images/poses/pavanamuktasana.jpg'
+    },
+    {
+      id: 'alt',
+      title: 'הדגמה נוספת',
+      badge: '🧘 הדגמה נוספת',
+      description: 'מנח פאוואנמוקטאסאנה בהדגמה נוספת',
+      src: '/images/poses/pavanamuktasana.png'
     }
   ]
 };

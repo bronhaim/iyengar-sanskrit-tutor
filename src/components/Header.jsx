@@ -1,72 +1,125 @@
 import React from 'react';
-import { BookOpen, Compass, Home } from 'lucide-react';
+import { BookOpen, Compass, Home, Play, Sparkles } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
-export const Header = ({ currentView, setCurrentView, onOpenAuth, onSelectCategory }) => {
+export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory }) => {
   return (
-    <header className="w-full bg-cream-50/95 border-b border-cream-200 sticky top-0 z-30 px-2 py-2">
-      <div className="w-full flex items-center justify-between gap-1 flex-nowrap">
+    <header className="w-full bg-white/90 backdrop-blur-md border-b border-[#E8E0D6] sticky top-0 z-40 px-4 sm:px-8 py-3 transition-all">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         
-        {/* User Profile / Auth Button (Right in RTL) */}
-        <UserProfileMenu 
-          onOpenAuth={onOpenAuth} 
-          onSelectCategory={(cat) => {
-            setCurrentView('catalog');
-            if (onSelectCategory) onSelectCategory(cat);
-          }}
-        />
+        {/* Brand / Logo (Right in RTL) */}
+        <button 
+          onClick={() => setCurrentView('home')} 
+          className="flex items-center gap-3 text-charcoal hover:opacity-85 transition-opacity text-right group"
+        >
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-cream-100 border border-[#E8E0D6] flex items-center justify-center text-lg sm:text-xl shadow-xs group-hover:scale-105 transition-transform">
+            🕉️
+          </div>
+          <div>
+            <div className="font-bold text-base sm:text-lg text-charcoal leading-tight">
+              לימוד סנסקריט ליוגה
+            </div>
+            <div className="text-xs text-soft-green font-semibold leading-tight">
+              מסורת איינגר
+            </div>
+          </div>
+        </button>
 
-        {/* Mode Navigation (Center) - Compact & never wraps */}
-        <nav className="flex items-center gap-0.5 bg-cream-100 p-0.5 rounded-xl border border-cream-200 text-xs shrink-0">
+        {/* Mode Navigation (Center) */}
+        <nav className="hidden md:flex items-center gap-1.5 bg-cream-100/80 p-1 rounded-2xl border border-[#E8E0D6] text-sm">
           <button
             onClick={() => setCurrentView('home')}
-            className={`px-2 py-1 rounded-lg font-medium flex items-center gap-1 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
               currentView === 'home' 
-                ? 'bg-white text-terracotta-dark shadow-xs font-bold' 
+                ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
-            title="בית"
           >
-            <Home className="w-3.5 h-3.5 shrink-0" />
+            <Home className="w-4 h-4 text-soft-green" />
             <span>ראשי</span>
           </button>
 
           <button
             onClick={() => setCurrentView('catalog')}
-            className={`px-2 py-1 rounded-lg font-medium flex items-center gap-1 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
               currentView === 'catalog' 
-                ? 'bg-white text-terracotta-dark shadow-xs font-bold' 
+                ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
-            title="קטלוג תנוחות איינגר"
           >
-            <Compass className="w-3.5 h-3.5 shrink-0" />
-            <span>תנוחות</span>
+            <Compass className="w-4 h-4 text-soft-green" />
+            <span>קטלוג תנוחות</span>
+          </button>
+
+          <button
+            onClick={onStartQuiz || (() => setCurrentView('quiz'))}
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+              currentView === 'quiz' 
+                ? 'bg-white text-terracotta shadow-xs font-bold' 
+                : 'text-charcoal-muted hover:text-charcoal'
+            }`}
+          >
+            <Play className="w-4 h-4 fill-current text-terracotta" />
+            <span>חידון סנסקריט</span>
+          </button>
+
+          <button
+            onClick={() => setCurrentView('sequences')}
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
+              currentView === 'sequences' 
+                ? 'bg-white text-charcoal shadow-xs' 
+                : 'text-charcoal-muted hover:text-charcoal'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-amber-600" />
+            <span>רצפים</span>
           </button>
 
           <button
             onClick={() => setCurrentView('roots')}
-            className={`px-2 py-1 rounded-lg font-medium flex items-center gap-1 transition-all ${
+            className={`px-3.5 py-1.5 rounded-xl font-semibold flex items-center gap-1.5 transition-all ${
               currentView === 'roots' 
-                ? 'bg-white text-terracotta-dark shadow-xs font-bold' 
+                ? 'bg-white text-charcoal shadow-xs' 
                 : 'text-charcoal-muted hover:text-charcoal'
             }`}
-            title="מילון שורשים בסנסקריט"
           >
-            <BookOpen className="w-3.5 h-3.5 shrink-0" />
-            <span>מילון</span>
+            <BookOpen className="w-4 h-4 text-soft-green" />
+            <span>מילון שורשים</span>
           </button>
         </nav>
 
-        {/* Brand / Logo (Left in RTL) - Single line, super compact */}
-        <button 
-          onClick={() => setCurrentView('home')} 
-          className="flex items-center gap-1 text-charcoal hover:opacity-80 transition-opacity text-right shrink-0 pr-1"
-          title="איינגר יוגה - עמוד ראשי"
-        >
-          <span className="text-xs sm:text-sm font-bold text-charcoal tracking-tight whitespace-nowrap">איינגר יוגה</span>
-          <span className="text-sm shrink-0">🕉️</span>
-        </button>
+        {/* User Profile / Auth (Left in RTL) */}
+        <div className="flex items-center gap-2">
+          {/* Quick Mobile Navigation Bar */}
+          <div className="flex md:hidden items-center gap-1 bg-cream-100 p-0.5 rounded-xl border border-[#E8E0D6] text-xs">
+            <button
+              onClick={() => setCurrentView('catalog')}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'catalog' ? 'bg-white shadow-xs font-bold text-soft-green' : 'text-charcoal-muted'}`}
+            >
+              תנוחות
+            </button>
+            <button
+              onClick={onStartQuiz || (() => setCurrentView('quiz'))}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'quiz' ? 'bg-white shadow-xs font-bold text-terracotta' : 'text-charcoal-muted'}`}
+            >
+              חידון
+            </button>
+            <button
+              onClick={() => setCurrentView('roots')}
+              className={`px-2 py-1 rounded-lg font-medium ${currentView === 'roots' ? 'bg-white shadow-xs font-bold text-soft-green' : 'text-charcoal-muted'}`}
+            >
+              שורשים
+            </button>
+          </div>
+
+          <UserProfileMenu 
+            onOpenAuth={onOpenAuth} 
+            onSelectCategory={(cat) => {
+              setCurrentView('catalog');
+              if (onSelectCategory) onSelectCategory(cat);
+            }}
+          />
+        </div>
 
       </div>
     </header>
