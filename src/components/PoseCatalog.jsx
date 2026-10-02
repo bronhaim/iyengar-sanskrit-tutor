@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search, Layers, Star, AlertTriangle } from 'lucide-react';
+import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search, Layers, Star, AlertTriangle, Package, Maximize2 } from 'lucide-react';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
 import { useAuth } from '../context/AuthContext';
 
-export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = 'all' }) => {
+export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, initialCategory = 'all' }) => {
   const { userProfile, toggleFavoritePose, isFavorite } = useAuth();
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [searchTerm, setSearchTerm] = useState('');
@@ -147,9 +147,9 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
                 key={pose.id}
                 className="bg-white border border-cream-300 rounded-3xl p-4 shadow-sm hover:shadow-card transition-shadow flex flex-col sm:flex-row gap-4 relative"
               >
-                {/* Image Thumbnail with Click-to-Zoom */}
+                {/* Image Thumbnail with Click-to-Open-Detail */}
                 <div 
-                  onClick={() => onOpenZoomModal(pose)}
+                  onClick={() => onOpenPoseDetail ? onOpenPoseDetail(pose.id) : onOpenZoomModal(pose)}
                   className="w-full sm:w-36 h-36 rounded-2xl bg-cream-50 border border-cream-200 p-2 shrink-0 flex items-center justify-center relative group cursor-pointer overflow-hidden hover:border-terracotta transition-all"
                 >
                   <PoseSvgIllustration poseId={pose.id} className="w-full h-full" />
@@ -248,6 +248,25 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
                         </ul>
                       </div>
                     )}
+                  </div>
+
+                  {/* Action Buttons: Full Pose & Props Page vs Quick View */}
+                  <div className="mt-3 pt-3 border-t border-[#DECFC0] flex items-center justify-between gap-2">
+                    <button
+                      onClick={() => onOpenPoseDetail ? onOpenPoseDetail(pose.id) : onOpenZoomModal(pose)}
+                      className="flex-1 py-2 px-3 rounded-xl bg-[#FAF6F0] hover:bg-[#F2E8DC] border border-[#8C6549] text-[#382417] text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-98"
+                    >
+                      <Package className="w-3.5 h-3.5 text-[#8C6549]" />
+                      <span>מדריך עזרים ופירוט מלא</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => onOpenZoomModal(pose)}
+                      className="py-2 px-3 rounded-xl bg-white hover:bg-[#FAF6F0] border border-[#D5C2AF] text-[#674831] text-xs font-semibold flex items-center justify-center gap-1 transition-all"
+                      title="תצוגה מהירה בחלונית"
+                    >
+                      <span>תצוגה מהירה</span>
+                    </button>
                   </div>
                 </div>
               </div>

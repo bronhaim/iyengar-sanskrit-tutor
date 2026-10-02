@@ -4,7 +4,7 @@ import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
 import { useAuth } from '../context/AuthContext';
 
-export const ImageModal = ({ pose, onClose }) => {
+export const ImageModal = ({ pose, onClose, onOpenFullPage }) => {
   const { toggleFavoritePose, isFavorite } = useAuth();
   const [activeIndex, setActiveIndex] = useState(0);
   const [imgError, setImgError] = useState(false);
@@ -261,6 +261,20 @@ export const ImageModal = ({ pose, onClose }) => {
               >
                 <Star className={`w-4 h-4 ${isFavorite(pose.id) ? 'fill-amber-500' : ''}`} />
               </button>
+
+              {onOpenFullPage && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    onOpenFullPage(pose.id);
+                  }}
+                  className="px-2.5 py-1.5 rounded-xl bg-[#FAF6F0] hover:bg-[#EAE0D3] border border-[#DECFC0] text-[#382417] flex items-center gap-1.5 text-xs font-bold transition-all shadow-2xs"
+                  title="פתח כעמוד מלא ומדריך עזרים"
+                >
+                  <Maximize2 className="w-3.5 h-3.5 text-[#8C6549]" />
+                  <span className="hidden sm:inline">עמוד מלא</span>
+                </button>
+              )}
 
               <button 
                 onClick={onClose}

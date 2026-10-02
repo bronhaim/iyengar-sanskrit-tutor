@@ -10,6 +10,7 @@ import { ImageModal } from './components/ImageModal';
 import { AuthModal } from './components/AuthModal';
 import { FavoritesScreen } from './components/FavoritesScreen';
 import { RequestFeatureModal } from './components/RequestFeatureModal';
+import { PoseDetailScreen } from './components/PoseDetailScreen';
 import { POSE_DATABASE } from './data/posesData';
 
 export function App() {
@@ -22,6 +23,17 @@ export function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isRequestFeatureModalOpen, setIsRequestFeatureModalOpen] = useState(false);
   const [catalogCategory, setCatalogCategory] = useState('all');
+  const [selectedPoseIdForDetail, setSelectedPoseIdForDetail] = useState(null);
+  const [previousView, setPreviousView] = useState('catalog');
+
+  const openPoseDetail = (poseOrId) => {
+    const id = typeof poseOrId === 'string' ? poseOrId : poseOrId.id;
+    setSelectedPoseIdForDetail(id);
+    setPreviousView(currentView === 'pose-detail' ? 'catalog' : currentView);
+    setCurrentView('pose-detail');
+    setZoomedPose(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Helper to shuffle array for non-repetitive quiz session
   const shuffleArray = (array) => {
@@ -159,6 +171,7 @@ export function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenZoomModal={(p) => setZoomedPose(p)}
+            onOpenPoseDetail={openPoseDetail}
             onOpenAuth={() => setIsAuthModalOpen(true)}
           />
         )}
@@ -198,6 +211,7 @@ export function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenZoomModal={(p) => setZoomedPose(p)}
+            onOpenPoseDetail={openPoseDetail}
             initialCategory={catalogCategory}
           />
         )}
@@ -209,7 +223,21 @@ export function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenZoomModal={(p) => setZoomedPose(p)}
+            onOpenPoseDetail={openPoseDetail}
             onOpenAuth={() => setIsAuthModalOpen(true)}
+          />
+        )}
+
+        {currentView === 'pose-detail' && (
+          <PoseDetailScreen 
+            poseId={selectedPoseIdForDetail || POSE_DATABASE[0].id}
+            onBack={() => {
+              setCurrentView(previousView || 'catalog');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onSelectPose={(newPoseId) => {
+              setSelectedPoseIdForDetail(newPoseId);
+            }}
           />
         )}
 
@@ -273,6 +301,7 @@ export function App() {
         <ImageModal 
           pose={zoomedPose} 
           onClose={() => setZoomedPose(null)} 
+          onOpenFullPage={openPoseDetail}
         />
       )}
 
