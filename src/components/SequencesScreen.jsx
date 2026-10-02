@@ -88,8 +88,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-[#67442B] text-white shadow-sm font-bold'
-                    : 'bg-[#FAF6F0] text-[#382417] border border-[#D5C2AF] hover:bg-white'
+                    ? 'bg-[#FAF6F0] text-[#3E2616] border-2 border-[#8C6549] shadow-xs font-bold'
+                    : 'bg-[#FAF6F0] text-[#5A3E2B] border border-[#D5C2AF] hover:bg-white'
                 }`}
               >
                 {cat.label}
@@ -217,7 +217,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 <div className="pt-1 flex items-center justify-start">
                   <button
                     onClick={() => handleStartGuided(seq)}
-                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all"
+                    className="inline-flex items-center justify-center px-5 py-2.5 rounded-2xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] font-bold text-sm shadow-xs hover:shadow-md transition-all"
                   >
                     <span>התחל תרגול מודרך</span>
                   </button>
@@ -312,14 +312,14 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
             {guidedStepIndex < activeSequence.poses.length - 1 ? (
               <button
                 onClick={() => setGuidedStepIndex(prev => prev + 1)}
-                className="flex-1 py-3 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md text-center transition-all"
+                className="flex-1 py-3 rounded-2xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] font-bold text-sm shadow-xs hover:shadow-md text-center transition-all"
               >
                 <span>תנוחה הבאה</span>
               </button>
             ) : (
               <button
                 onClick={() => setActiveSequence(null)}
-                className="flex-1 py-3 rounded-2xl bg-[#67442B] hover:bg-[#52331E] text-white font-bold text-sm shadow-md text-center transition-all"
+                className="flex-1 py-3 rounded-2xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] font-bold text-sm shadow-xs hover:shadow-md text-center transition-all"
               >
                 <span>סיום תרגול</span>
               </button>

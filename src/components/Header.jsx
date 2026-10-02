@@ -70,8 +70,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={() => setCurrentView('home')}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'home' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             ראשי
@@ -81,8 +81,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={() => setCurrentView('catalog')}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'catalog' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             קטלוג תנוחות
@@ -92,8 +92,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={() => setCurrentView('sequences')}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'sequences' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             רצפי תרגולים
@@ -103,8 +103,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={onStartQuiz || (() => setCurrentView('quiz'))}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'quiz' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             חידון
@@ -114,8 +114,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={() => setCurrentView('roots')}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'roots' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             מילון סנסקריט
@@ -125,8 +125,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             onClick={() => setCurrentView('favorites')}
             className={`px-3.5 py-1.5 rounded-xl transition-all ${
               currentView === 'favorites' 
-                ? 'bg-[#67442B] text-[#FFFDF9] shadow-sm font-bold' 
-                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/50 font-semibold'
+                ? 'bg-[#FAF6F0] text-[#3E2616] border border-[#8C6549] shadow-xs font-bold' 
+                : 'text-[#5A3E2B] hover:text-[#2A180E] hover:bg-[#DBCABA]/40 border border-transparent font-medium'
             }`}
           >
             מועדפים
@@ -193,18 +193,18 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
                     onClick={() => handleNavClick(item.id)}
                     className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all text-right active:scale-[0.99] ${
                       isActive
-                        ? 'bg-[#67442B] text-[#FFFDF9] font-bold shadow-xs'
-                        : 'bg-[#EAE0D3]/60 hover:bg-[#EAE0D3] text-[#382417]'
+                        ? 'bg-[#FAF6F0] border-2 border-[#8C6549] text-[#3E2616] font-bold shadow-xs'
+                        : 'bg-[#EAE0D3]/60 hover:bg-[#EAE0D3] border border-transparent text-[#382417]'
                     }`}
                   >
                     <div className="flex flex-col">
                       <span className="text-sm font-bold leading-tight">{item.label}</span>
-                      <span className={`text-[11px] leading-tight mt-0.5 ${isActive ? 'text-[#FAF6F0]/85' : 'text-[#674831]'}`}>
+                      <span className="text-[11px] leading-tight mt-0.5 text-[#674831]">
                         {item.desc}
                       </span>
                     </div>
                     {isActive && (
-                      <span className="w-2 h-2 rounded-full bg-[#FAF6F0] shrink-0"></span>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#8C6549] shrink-0"></span>
                     )}
                   </button>
                 );

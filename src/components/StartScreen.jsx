@@ -161,32 +161,32 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               מרחב מקיף לתרגול יוגה איינגר אישי - קטלוג תנוחות מפורט, רצפי תרגולים, חידון שמות ותנוחות, ומילון סנסקריט
             </p>
 
-            {/* Quick Action Buttons - 4 Rich Earth-Brown Buttons */}
+            {/* Quick Action Buttons - Light warm background with refined brown borders */}
             <div className="pt-2 w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
               <button
                 onClick={onOpenCatalog}
-                className="px-5 py-3 rounded-full bg-[#67442B] hover:bg-[#52331E] border border-[#482A15]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] text-sm sm:text-base font-bold shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 קטלוג תנוחות
               </button>
 
               <button
                 onClick={onOpenSequences}
-                className="px-5 py-3 rounded-full bg-[#7B5336] hover:bg-[#623F27] border border-[#54341E]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] text-sm sm:text-base font-bold shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 רצפי תרגולים
               </button>
 
               <button
                 onClick={onStartQuiz}
-                className="px-5 py-3 rounded-full bg-[#8D5838] hover:bg-[#724326] border border-[#63391F]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] text-sm sm:text-base font-bold shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 חידון
               </button>
 
               <button
                 onClick={onOpenRoots}
-                className="px-5 py-3 rounded-full bg-[#5A3822] hover:bg-[#452714] border border-[#3A2010]/30 text-[#FFFDF9] text-sm sm:text-base font-bold shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
+                className="px-5 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] text-sm sm:text-base font-bold shadow-xs hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all text-center whitespace-nowrap"
               >
                 מילון סנסקריט
               </button>
@@ -196,11 +196,11 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
             <div className="pt-1 flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={onOpenFavorites}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E6D7C3] hover:bg-[#D8C4AB] border border-[#CBB8A1] text-[#422716] text-xs font-bold transition-all shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] text-xs font-bold transition-all shadow-xs"
               >
                 <span>המועדפים שלי</span>
                 {totalFavs > 0 && (
-                  <span className="bg-[#FAF6F0] border border-[#CBB8A1] text-[#422716] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                  <span className="bg-[#E6D7C3] text-[#3E2616] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                     {totalFavs}
                   </span>
                 )}
@@ -209,9 +209,9 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               {currentUser && (
                 <button
                   onClick={onRequestFeature}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#E6D7C3] hover:bg-[#D8C4AB] border border-[#CBB8A1] text-[#422716] text-xs font-bold transition-all shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] text-xs font-bold transition-all shadow-xs"
                 >
-                  <MessageSquarePlus className="w-3.5 h-3.5 text-[#67442B]" />
+                  <MessageSquarePlus className="w-3.5 h-3.5 text-[#8C6549]" />
                   <span>בקשת תנוחה או פיצ׳ר</span>
                 </button>
               )}
