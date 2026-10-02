@@ -527,7 +527,7 @@ export const ImageModal = ({ pose, onClose, onOpenFullPage }) => {
 
                 {pose.bookReference.note && (
                   <div className="text-[11.5px] leading-relaxed text-[#5F432F] italic border-r-2 border-[#8C6549] pr-2.5 mt-1 bg-white/50 p-2 rounded-lg">
-                    "{pose.bookReference.note}"
+                    "{pose.bookReference.note?.replace(/\.+$/, '')}"
                   </div>
                 )}
               </div>

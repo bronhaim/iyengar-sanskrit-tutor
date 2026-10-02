@@ -251,7 +251,7 @@ export const PoseDetailScreen = ({ poseId, onBack, onSelectPose }) => {
               <div className="font-bold text-[#55331E] flex items-center gap-1.5 mb-1 text-sm">
                 <span>דגש מרכזי של ב.ק.ס איינגר:</span>
               </div>
-              <p className="font-serif italic text-[#442714]">"{pose.iyengarNote}"</p>
+              <p className="font-serif italic text-[#442714]">"{pose.iyengarNote?.replace(/\.+$/, '')}"</p>
             </div>
           )}
 
@@ -402,7 +402,7 @@ export const PoseDetailScreen = ({ poseId, onBack, onSelectPose }) => {
 
           {pose.bookReference.note && (
             <div className="bg-white rounded-2xl p-4 border border-[#D5C2AF] text-sm text-[#442714] leading-relaxed italic border-r-4 border-r-[#8C6549]">
-              "{pose.bookReference.note}"
+              "{pose.bookReference.note?.replace(/\.+$/, '')}"
             </div>
           )}
         </div>
