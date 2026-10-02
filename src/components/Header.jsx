@@ -60,7 +60,11 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
 
           {/* Purple Icon placed to the LEFT of the text */}
           <div className="w-5 h-5 sm:w-6.5 sm:h-6.5 rounded-md sm:rounded-lg bg-gradient-to-br from-[#7B4B85] to-[#542B5E] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform border border-[#542B5E]/30 shrink-0">
-            <span className="leading-none text-[10px] sm:text-xs">🕉️</span>
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 3c-1.5 3-4 5.5-7 6 3 1.5 5 4.5 5 8 0-3.5 2-6.5 5-8-3-.5-5.5-3-7-6z" />
+              <path d="M12 17c1.5-2 3.5-3 6-3.5-2-.5-3.5-1.5-4.5-3" />
+              <path d="M12 17c-1.5-2-3.5-3-6-3.5 2-.5 3.5-1.5 4.5-3" />
+            </svg>
           </div>
         </button>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles, MessageSquarePlus, Send } from 'lucide-react';
+import { User, LogOut, Star, Settings, Check, X, ShieldAlert, Sparkles, MessageSquarePlus, Send, Activity, HeartPulse, AlertCircle, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites, onRequestFeature }) => {
@@ -11,25 +11,25 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites,
     { 
       id: 'knees', 
       label: 'רגישות בברכיים', 
-      emoji: '🦵',
+      icon: Activity,
       desc: 'התראות בתנוחות כפיפה עמוקה ופיתולים' 
     },
     { 
       id: 'lower_back', 
       label: 'רגישות בגב תחתון', 
-      emoji: '🧘',
+      icon: Shield,
       desc: 'התראות בכפיפות לאחור ובמתיחות עמוקות לפנים' 
     },
     { 
       id: 'neck', 
       label: 'רגישות בצוואר / כתפיים', 
-      emoji: '💆',
+      icon: AlertCircle,
       desc: 'התראות בתנוחות הפוכות והרמת זרועות' 
     },
     { 
       id: 'high_bp', 
       label: 'לחץ דם גבוה', 
-      emoji: '🩺',
+      icon: HeartPulse,
       desc: 'התאמת תנוחות הפוכות והנחיות שהייה נתמכת' 
     }
   ];
@@ -214,7 +214,9 @@ export const UserProfileMenu = ({ onOpenAuth, onSelectCategory, onOpenFavorites,
                         }`}
                       >
                         <div className="flex items-center gap-2.5">
-                          <span className="text-base">{opt.emoji}</span>
+                          <div className="w-6 h-6 rounded-lg bg-cream-100 flex items-center justify-center shrink-0 text-[#8C6549]">
+                            <opt.icon className="w-3.5 h-3.5" />
+                          </div>
                           <div>
                             <div className="text-xs font-bold text-charcoal">{opt.label}</div>
                             <div className="text-[10px] text-charcoal-muted">{opt.desc}</div>

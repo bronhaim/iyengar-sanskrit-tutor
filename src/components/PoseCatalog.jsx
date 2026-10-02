@@ -20,7 +20,7 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
 
   const categories = [
     { id: 'all', label: 'הכל' },
-    { id: 'favorites', label: `⭐ מועדפים (${favoritesCount})` },
+    { id: 'favorites', label: favoritesCount > 0 ? `מועדפים (${favoritesCount})` : 'מועדפים' },
     { id: 'standing', label: 'עמידה' },
     { id: 'inversion', label: 'הפוכות' },
     { id: 'backbend', label: 'כפופות לאחור' },
@@ -121,8 +121,12 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
       <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
         {filteredPoses.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-3xl border border-cream-200 p-6">
-            <div className="text-4xl mb-3">
-              {activeCategory === 'favorites' ? '⭐' : '🔍'}
+            <div className="flex justify-center mb-3">
+              {activeCategory === 'favorites' ? (
+                <Star className="w-10 h-10 text-[#8C6549]" />
+              ) : (
+                <Search className="w-10 h-10 text-[#8C6549]" />
+              )}
             </div>
             <h3 className="font-bold text-charcoal text-base mb-1">
               {activeCategory === 'favorites' ? 'עדיין לא סימנת תנוחות מועדפות' : 'לא נמצאו תנוחות מתאימות'}
@@ -158,8 +162,9 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
                     </div>
                   )}
 
-                  <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-2xl z-20">
-                    <span>🔍 לחץ להגדלה</span>
+                  <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1.5 rounded-2xl z-20">
+                    <Search className="w-3.5 h-3.5" />
+                    <span>לחץ להגדלה</span>
                   </div>
                 </div>
 
@@ -227,8 +232,9 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, initialCategory = '
 
                     {pose.anatomicalPointers && pose.anatomicalPointers.length > 0 && (
                       <div className="bg-sky-50/80 border border-sky-200/80 rounded-xl p-2.5 text-xs text-charcoal">
-                        <div className="font-bold text-sky-900 flex items-center gap-1 mb-1">
-                          <span>🎯 כיווני תנועה ופעולה אנטומית:</span>
+                        <div className="font-bold text-sky-900 flex items-center gap-1.5 mb-1">
+                          <Compass className="w-3.5 h-3.5 text-sky-900" />
+                          <span>כיווני תנועה ופעולה אנטומית:</span>
                         </div>
                         <ul className="space-y-1 pr-1 text-[11px]">
                           {pose.anatomicalPointers.map((p, pIdx) => (

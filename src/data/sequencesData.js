@@ -1,7 +1,7 @@
 export const YOGA_SEQUENCES = [
   {
     id: "morning-awakening",
-    title: "🌅 רצף מעורר לבוקר",
+    title: "רצף מעורר לבוקר",
     subtitle: "Morning Awakening Sequence",
     category: "morning",
     timing: "בוקר • לפני האוכל (על קיבה ריקה)",
@@ -11,7 +11,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-amber-300",
     badgeColor: "bg-amber-100 text-amber-900 border-amber-300",
     description: "רצף תנוחות עמידה דינמי ונמרץ להזרמת דם, הרחבת בית החזה, מעורר את חוליות עמוד השדרה ומטעין את הגוף באנרגיה חיונית ליום החדש.",
-    propsNeeded: ["🧱 2 קוביות עץ", "🎗️ חגורת יוגה"],
+    propsNeeded: ["2 קוביות עץ", "חגורת יוגה"],
     poses: [
       { poseId: "tadasana", durationText: "1 דקה • 5 נשימות עמוקות", tip: "עמדו יציב, חלוקת משקל שווה על כפות הרגליים." },
       { poseId: "vriksasana", durationText: "1 דקה לכל צד", tip: "מיקוד המבט קדימה להשגת שיווי משקל." },
@@ -24,7 +24,7 @@ export const YOGA_SEQUENCES = [
   },
   {
     id: "evening-winddown",
-    title: "🌙 רצף הרפיה ושינה לערב",
+    title: "רצף הרפיה ושינה לערב",
     subtitle: "Evening Restorative Wind-Down",
     category: "evening",
     timing: "ערב • לפני השינה",
@@ -34,7 +34,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-indigo-300",
     badgeColor: "bg-indigo-100 text-indigo-900 border-indigo-300",
     description: "רצף כפיפות לפנים והפוכות מרגיעות המורידות לחץ דם, מאיטות את קצב הלב, משחררות מתח מיום העבודה ומכינות את הגוף לשינה עמוקה.",
-    propsNeeded: ["🛌 בולסטר", "🧱 2 קוביות", "🪑 כיסא / שמיכות"],
+    propsNeeded: ["בולסטר", "2 קוביות", "כיסא / שמיכות"],
     poses: [
       { poseId: "uttanasana", durationText: "2 דקות (ראש נח על בלוק/כיסא)", tip: "הרפיית הגב והראש כלפי מטה ללא מאמץ." },
       { poseId: "janu-sirsasana", durationText: "2 דקות לכל צד", tip: "השתמשו בחגורה סביב כף הרגל ושמרו על נשימה רכה." },
@@ -45,7 +45,7 @@ export const YOGA_SEQUENCES = [
   },
   {
     id: "headache-relief",
-    title: "💆 רצף להרגעת כאבי ראש ומגרנות",
+    title: "רצף להרגעת כאבי ראש ומגרנות",
     subtitle: "Headache & Tension Relief Sequence",
     category: "remedial",
     timing: "בכל עת • בעת תחושת עומס, לחץ בראש או מגרנה",
@@ -55,7 +55,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-teal-300",
     badgeColor: "bg-teal-100 text-teal-900 border-teal-300",
     description: "רצף טיפולי (Remedial) ייחודי לאיינגר יוגה שבו קודקוד/מצח הראש נתמכים באופן רציף, דבר המפחית לחץ תוך-גולגולתי ומרגיע את מערכת העצבים.",
-    propsNeeded: ["🧱 קוביות עץ", "🛌 בולסטר", "🧣 כרית עיניים / תחבושת מצח"],
+    propsNeeded: ["קוביות עץ", "בולסטר", "כרית עיניים / תחבושת מצח"],
     poses: [
       { poseId: "prasarita-padottanasana", durationText: "2 דקות (קודקוד הראש על בלוק)", tip: "הנחת הראש על בלוק משקיטה את תנודות המוח." },
       { poseId: "adho-mukha-svanasana", durationText: "2 דקות (מצח נח על בלוק)", tip: "תמיכה במצח מונעת עומס מהצוואר והכתפיים." },
@@ -66,7 +66,7 @@ export const YOGA_SEQUENCES = [
   },
   {
     id: "post-meal-digestion",
-    title: "🍃 רצף עדין להקלה על העיכול (לאחר ארוחה)",
+    title: "רצף עדין להקלה על העיכול (לאחר ארוחה)",
     subtitle: "Post-Meal Digestive Relief",
     category: "digestion",
     timing: "לאחר ארוחה (או בעת תחושת כבדות בבטן)",
@@ -76,7 +76,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-lime-300",
     badgeColor: "bg-lime-100 text-lime-900 border-lime-300",
     description: "תנוחות יחידות שמותר ואף מומלץ לתרגל גם לאחר ארוחה! פותחות את האגן, מעסות בעדינות את איברי הבטן ומקלות על גזים ונפיחות.",
-    propsNeeded: ["🧱 בלוק מעץ", "🎗️ חגורת יוגה"],
+    propsNeeded: ["בלוק מעץ", "חגורת יוגה"],
     poses: [
       { poseId: "virasana", durationText: "3-5 דקות (ישיבה על בלוק בין העקבים)", tip: "תנוחה קלאסית לעיכול! ניתן לתרגל מיד לאחר ארוחה." },
       { poseId: "baddha-konasana", durationText: "3 דקות (עם גב לקיר)", tip: "ישיבה זקופה, פתיחת המפשעות והרחבת האזור האורוגניטלי." },
@@ -86,7 +86,7 @@ export const YOGA_SEQUENCES = [
   },
   {
     id: "stress-anxiety-relief",
-    title: "🧘 רצף להפחתת מתח וחרדה",
+    title: "רצף להפחתת מתח וחרדה",
     subtitle: "Stress & Anxiety Relief Sequence",
     category: "remedial",
     timing: "בכל עת • כשמרגישים עומס רגשי או מתח נפשי",
@@ -96,7 +96,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-rose-300",
     badgeColor: "bg-rose-100 text-rose-900 border-rose-300",
     description: "שילוב בין תנוחות פותחות חזה (להרחבת הנשימה) לכפיפות לפנים נתמכות. מחזיר תחושת ביטחון, קרקוע ושקט פנימי.",
-    propsNeeded: ["🛌 בולסטר", "🧱 2 קוביות", "🎗️ חגורה"],
+    propsNeeded: ["בולסטר", "2 קוביות", "חגורה"],
     poses: [
       { poseId: "adho-mukha-svanasana", durationText: "2 דקות (מצח נתמך)", tip: "הארכת עמוד השדרה והרגעת תנודות החשיבה." },
       { poseId: "baddha-konasana", durationText: "3 דקות (עם גב לקיר)", tip: "נשיפה איטית ועמוקה אל סרעפת משוחררת." },
@@ -107,7 +107,7 @@ export const YOGA_SEQUENCES = [
   },
   {
     id: "pregnancy-safe",
-    title: "🤰 רצף תמיכה עדין להריון",
+    title: "רצף תמיכה עדין להריון",
     subtitle: "Pregnancy Safe Supported Sequence",
     category: "pregnancy",
     timing: "בוקר / צהריים • במהלך ההריון (מתאים לכל הטרימסטרים)",
@@ -117,7 +117,7 @@ export const YOGA_SEQUENCES = [
     borderColor: "border-amber-300",
     badgeColor: "bg-amber-100 text-amber-900 border-amber-300",
     description: "תנוחות בטוחות עם פישוק רחב ועזרים המפנות מקום לבטן הצומחת, מעניקות מרחב לנשימה ומקלות על כאבי גב תחתון ואגן.",
-    propsNeeded: ["🧱 2 קוביות", "🛌 בולסטר", "🧱 קיר לתמיכה"],
+    propsNeeded: ["2 קוביות", "בולסטר", "קיר לתמיכה"],
     poses: [
       { poseId: "tadasana", durationText: "1 דקה (פישוק ברוחב האגן, גב לקיר)", tip: "עמידה רחבה ויציבה המונעת עומס באגן." },
       { poseId: "utthita-trikonasana", durationText: "1.5 דקות לכל צד (יד על בלוק גבוה)", tip: "שימוש בבלוק גבוה מונע דחיסה של הבטן והסרעפת." },

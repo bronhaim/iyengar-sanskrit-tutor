@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Clock, Sparkles, Play, CheckCircle2, ChevronRight, ChevronLeft, Info, Star, Sun, Moon, Brain, Heart, Apple } from 'lucide-react';
+import { ArrowRight, Clock, Sparkles, Play, CheckCircle2, ChevronRight, ChevronLeft, Info, Star, Search, Package } from 'lucide-react';
 import { YOGA_SEQUENCES } from '../data/sequencesData';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
@@ -73,7 +73,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
           {/* Intro Banner */}
           <div className="bg-[#EAE0D3] border border-[#D5C2AF] rounded-2xl p-4 text-right">
             <h3 className="font-bold text-[#382417] text-base mb-1">
-              🧘 רצפי תרגול מותאמים לפי מסורת איינגר
+              רצפי תרגול מותאמים לפי מסורת איינגר
             </h3>
             <p className="text-xs text-[#674831] leading-relaxed">
               בחרו רצף תנוחות מותאם לפי זמן ביום, מצב עיכול, הפחתת כאבי ראש או הריון. התרחבו לקבלת הנחיות שהות ועזרים.
@@ -101,8 +101,12 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
           <div className="space-y-4">
             {filteredSequences.length === 0 ? (
               <div className="text-center py-12 bg-white rounded-3xl border border-cream-200 p-6">
-                <div className="text-4xl mb-3">
-                  {selectedCategory === 'favorites' ? '⭐' : '🔍'}
+                <div className="flex justify-center mb-3">
+                  {selectedCategory === 'favorites' ? (
+                    <Star className="w-10 h-10 text-[#8C6549]" />
+                  ) : (
+                    <Search className="w-10 h-10 text-[#8C6549]" />
+                  )}
                 </div>
                 <h3 className="font-bold text-charcoal text-base mb-1">
                   {selectedCategory === 'favorites' ? 'עדיין לא סימנת רצפי תרגול מועדפים' : 'לא נמצאו רצפים בקטגוריה זו'}
@@ -184,7 +188,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                 {/* Poses Preview List */}
                 <div className="bg-cream-50/80 border border-cream-200 rounded-2xl p-3">
                   <div className="text-xs font-bold text-charcoal mb-2 flex items-center gap-1">
-                    <span>📋 תנוחות ברצף ({seq.poses.length}):</span>
+                    <span>תנוחות ברצף ({seq.poses.length}):</span>
                   </div>
                   <div className="space-y-1.5">
                     {seq.poses.map((step, idx) => {
@@ -284,14 +288,20 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
 
               {/* Sequence Specific Tip */}
               <div className="bg-sage-light/60 border border-sage/30 rounded-2xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-sage-dark mb-0.5">💡 דגש לרצף זה:</div>
+                <div className="font-bold text-sage-dark mb-0.5 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-sage-dark" />
+                  <span>דגש לרצף זה:</span>
+                </div>
                 {currentStep.tip}
               </div>
 
               {/* Props Tip */}
               {currentPose.propsGuide && (
                 <div className="bg-cream-100 border border-cream-300 rounded-2xl p-3 text-xs text-charcoal">
-                  <div className="font-bold text-charcoal mb-0.5">🧱 עזרי איינגר לתנוחה:</div>
+                  <div className="font-bold text-charcoal mb-0.5 flex items-center gap-1.5">
+                    <Package className="w-3.5 h-3.5 text-[#8C6549]" />
+                    <span>עזרי איינגר לתנוחה:</span>
+                  </div>
                   {currentPose.propsGuide}
                 </div>
               )}

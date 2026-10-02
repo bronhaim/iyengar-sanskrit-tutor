@@ -38,7 +38,7 @@ export const EndScreen = ({ score, totalQuestions, onRestart, onGoHome }) => {
             <span className="text-lg text-charcoal-muted font-normal">/ {totalQuestions}</span>
           </div>
           <div className="text-xs font-semibold text-terracotta mt-1">
-            {percentage >= 80 ? 'מצוין! הבנה עמוקה של שפת היוגה 🌸' : 'התקדמות מצוינת! התרגול מביא לשלמות 🙏'}
+            {percentage >= 80 ? 'מצוין! הבנה עמוקה ומדויקת של שפת היוגה' : 'התקדמות מצוינת! התרגול והחזרתיות מביאים לשלמות'}
           </div>
         </div>
 

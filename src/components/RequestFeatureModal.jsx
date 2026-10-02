@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Send, CheckCircle2, MessageSquarePlus, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Send, CheckCircle2, MessageSquarePlus, Sparkles, AlertCircle, BookOpen, Lightbulb, Layers, MessageSquare } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { db, collection, addDoc } from '../services/firebase';
 
@@ -19,10 +19,10 @@ export const RequestFeatureModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const typeOptions = [
-    { id: 'pose', label: 'תנוחת יוגה חדשה', emoji: '🧘' },
-    { id: 'feature', label: 'פיצ׳ר או שיפור באתר', emoji: '💡' },
-    { id: 'sequence', label: 'רצף תרגול חדש', emoji: '📋' },
-    { id: 'other', label: 'משוב / אחר', emoji: '💬' }
+    { id: 'pose', label: 'תנוחת יוגה חדשה', icon: BookOpen },
+    { id: 'feature', label: 'פיצ׳ר או שיפור באתר', icon: Lightbulb },
+    { id: 'sequence', label: 'רצף תרגול חדש', icon: Layers },
+    { id: 'other', label: 'משוב / אחר', icon: MessageSquare }
   ];
 
   const handleSubmit = async (e) => {
@@ -173,7 +173,7 @@ export const RequestFeatureModal = ({ isOpen, onClose }) => {
                         : 'bg-white border-[#E5D9C8] text-charcoal-muted hover:border-cream-300'
                     }`}
                   >
-                    <span className="text-base">{opt.emoji}</span>
+                    <opt.icon className="w-4 h-4 text-[#8C6549] shrink-0" />
                     <span>{opt.label}</span>
                   </button>
                 ))}

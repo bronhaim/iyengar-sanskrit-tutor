@@ -101,7 +101,7 @@ export const QuizScreen = ({
           /* Sanskrit Calligraphy Card for Root Meaning Questions */
           <div className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-cream-100 via-white to-sage-light/30 border border-[#E5D9C8] p-6 sm:p-8 text-center shadow-xs space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-terracotta-light text-terracotta-deep mb-1">
-              <span>🪷</span>
+              <BookOpen className="w-3.5 h-3.5 text-terracotta-deep" />
               <span>שורש מילה בסנסקריט</span>
             </div>
             

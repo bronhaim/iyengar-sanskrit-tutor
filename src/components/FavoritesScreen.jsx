@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Star, Clock, Play, Sparkles, BookOpen, User, Layers, Info, Compass, ChevronLeft } from 'lucide-react';
+import { ArrowRight, Star, Clock, Play, Sparkles, BookOpen, User, Layers, Info, Compass, ChevronLeft, Bookmark, Search } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { POSE_DATABASE } from '../data/posesData';
 import { YOGA_SEQUENCES } from '../data/sequencesData';
@@ -70,7 +70,7 @@ export const FavoritesScreen = ({
               />
             ) : (
               <div className="w-12 h-12 rounded-full bg-cream-200 text-terracotta border border-[#E5D9C8] flex items-center justify-center text-lg font-bold shrink-0">
-                {currentUser ? (currentUser.displayName || currentUser.email || 'מתרגל').charAt(0).toUpperCase() : '⭐'}
+                {currentUser ? (currentUser.displayName || currentUser.email || 'מתרגל').charAt(0).toUpperCase() : <Star className="w-5 h-5 text-terracotta" />}
               </div>
             )}
 
@@ -140,7 +140,9 @@ export const FavoritesScreen = ({
         {/* Completely Empty State */}
         {totalCount === 0 && (
           <div className="bg-white rounded-3xl border border-[#E5D9C8] p-8 sm:p-12 text-center space-y-4">
-            <div className="text-5xl">🧘‍♀️</div>
+            <div className="flex justify-center">
+              <Bookmark className="w-12 h-12 text-[#8C6549]" />
+            </div>
             <h3 className="text-xl font-bold text-charcoal">
               עדיין אין לך פריטים מועדפים
             </h3>
@@ -169,7 +171,7 @@ export const FavoritesScreen = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
-                <span>✨</span>
+                <Sparkles className="w-4 h-4 text-terracotta" />
                 <span>רצפי תרגול מועדפים</span>
                 <span className="text-xs bg-cream-200 text-charcoal px-2 py-0.5 rounded-full font-semibold">
                   {favoriteSequences.length}
@@ -188,7 +190,9 @@ export const FavoritesScreen = ({
 
             {favoriteSequences.length === 0 && activeTab === 'sequences' ? (
               <div className="bg-white rounded-3xl border border-[#E5D9C8] p-8 text-center space-y-3">
-                <div className="text-4xl">✨</div>
+                <div className="flex justify-center">
+                  <Sparkles className="w-8 h-8 text-[#8C6549]" />
+                </div>
                 <h4 className="font-bold text-charcoal">אין רצפי תרגול מועדפים</h4>
                 <p className="text-xs text-charcoal-muted max-w-sm mx-auto">
                   עבור לרצפי התרגול ולחץ על סמל הכוכב כדי לשמור את הרצפים המועדפים עליך.
@@ -253,7 +257,7 @@ export const FavoritesScreen = ({
                     {/* Poses Preview List */}
                     <div className="bg-cream-50/80 border border-cream-200 rounded-2xl p-3">
                       <div className="text-xs font-bold text-charcoal mb-2 flex items-center gap-1">
-                        <span>📋 תנוחות ברצף ({seq.poses.length}):</span>
+                        <span>תנוחות ברצף ({seq.poses.length}):</span>
                       </div>
                       <div className="space-y-1.5">
                         {seq.poses.map((step, idx) => {
@@ -311,7 +315,7 @@ export const FavoritesScreen = ({
           <div className="space-y-4 pt-2">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
-                <span>🧘</span>
+                <Layers className="w-4 h-4 text-terracotta" />
                 <span>תנוחות מועדפות</span>
                 <span className="text-xs bg-cream-200 text-charcoal px-2 py-0.5 rounded-full font-semibold">
                   {favoritePoses.length}
@@ -330,7 +334,9 @@ export const FavoritesScreen = ({
 
             {favoritePoses.length === 0 && activeTab === 'poses' ? (
               <div className="bg-white rounded-3xl border border-[#E5D9C8] p-8 text-center space-y-3">
-                <div className="text-4xl">🧘</div>
+                <div className="flex justify-center">
+                  <Layers className="w-8 h-8 text-[#8C6549]" />
+                </div>
                 <h4 className="font-bold text-charcoal">אין תנוחות מועדפות</h4>
                 <p className="text-xs text-charcoal-muted max-w-sm mx-auto">
                   עבור לקטלוג התנוחות ולחץ על סמל הכוכב בכרטיס התנוחה כדי לשמור אותה כאן.
@@ -367,7 +373,8 @@ export const FavoritesScreen = ({
                         )}
 
                         <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1 rounded-2xl z-20">
-                          <span>🔍 לחץ לצפייה</span>
+                          <Search className="w-3.5 h-3.5" />
+                          <span>לחץ לצפייה</span>
                         </div>
                       </div>
 

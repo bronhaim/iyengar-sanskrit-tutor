@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2, Star } from 'lucide-react';
+import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2, Star, Compass, Activity, Eye, AlertTriangle, Package } from 'lucide-react';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
 import { useAuth } from '../context/AuthContext';
@@ -208,7 +208,7 @@ export const ImageModal = ({ pose, onClose }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2">
-              <span className="text-terracotta-light">✦</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta-light shrink-0"></span>
               <span className="font-medium text-white">{currentItem?.description}</span>
             </div>
 
@@ -377,7 +377,7 @@ export const ImageModal = ({ pose, onClose }) => {
           {/* Dynamic Image Description / Context Banner & Pagination Dots (Outside the image!) */}
           <div className="mt-2 px-3 py-2 bg-cream-100/80 border border-cream-200/80 rounded-xl text-xs text-charcoal flex items-center justify-between gap-2 text-right">
             <div className="flex items-center gap-1.5 flex-1 min-w-0">
-              <span className="text-terracotta text-sm shrink-0">✦</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-terracotta shrink-0"></span>
               <span className="font-medium text-charcoal-dark truncate">{currentItem?.description}</span>
             </div>
 
@@ -417,9 +417,9 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.benefits && (
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-emerald-900 flex items-center gap-1 mb-1">
+                <div className="font-bold text-emerald-900 flex items-center gap-1.5 mb-1">
                   <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>✨ יתרונות פיזיולוגיים ובריאותיים:</span>
+                  <span>יתרונות פיזיולוגיים ובריאותיים:</span>
                 </div>
                 {pose.benefits}
               </div>
@@ -427,8 +427,9 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.anatomicalPointers && pose.anatomicalPointers.length > 0 && (
               <div className="bg-sky-50 border border-sky-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-sky-900 flex items-center gap-1 mb-1.5">
-                  <span>🎯 כיווני תנועה ופעולה אנטומית (Action Vectors):</span>
+                <div className="font-bold text-sky-900 flex items-center gap-1.5 mb-1.5">
+                  <Compass className="w-3.5 h-3.5 text-sky-700" />
+                  <span>כיווני תנועה ופעולה אנטומית (Action Vectors):</span>
                 </div>
                 <ul className="space-y-1.5 pr-1">
                   {pose.anatomicalPointers.map((pointer, idx) => (
@@ -445,15 +446,16 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.muscleAnatomy && (
               <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-indigo-950 flex items-center gap-1 mb-1.5">
-                  <span>🦴 ביומכניקה ואנטומיה שרירית (Ray Long / Kaminoff):</span>
+                <div className="font-bold text-indigo-950 flex items-center gap-1.5 mb-1.5">
+                  <Activity className="w-3.5 h-3.5 text-indigo-700" />
+                  <span>ביומכניקה ואנטומיה שרירית (Ray Long / Kaminoff):</span>
                 </div>
                 <div className="space-y-1 text-xs">
                   <div>
-                    <strong className="text-emerald-800 font-bold">💪 שרירים פועלים (Agonists):</strong> {pose.muscleAnatomy.active}
+                    <strong className="text-emerald-800 font-bold">שרירים פועלים (Agonists):</strong> {pose.muscleAnatomy.active}
                   </div>
                   <div>
-                    <strong className="text-amber-800 font-bold">🧘 שרירים מתארכים (Antagonists):</strong> {pose.muscleAnatomy.stretched}
+                    <strong className="text-amber-800 font-bold">שרירים מתארכים (Antagonists):</strong> {pose.muscleAnatomy.stretched}
                   </div>
                 </div>
               </div>
@@ -461,8 +463,9 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.drishti && (
               <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-purple-900 flex items-center gap-1 mb-1">
-                  <span>👁️ נקודת מיקוד (Drishti):</span>
+                <div className="font-bold text-purple-900 flex items-center gap-1.5 mb-1">
+                  <Eye className="w-3.5 h-3.5 text-purple-700" />
+                  <span>נקודת מיקוד (Drishti):</span>
                 </div>
                 {pose.drishti}
               </div>
@@ -470,8 +473,9 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.cautions && (
               <div className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-rose-900 flex items-center gap-1 mb-1">
-                  <span>⚠️ דגשי בטיחות והתאמות (Cautions):</span>
+                <div className="font-bold text-rose-900 flex items-center gap-1.5 mb-1">
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-700" />
+                  <span>דגשי בטיחות והתאמות (Cautions):</span>
                 </div>
                 {pose.cautions}
               </div>
@@ -479,8 +483,9 @@ export const ImageModal = ({ pose, onClose }) => {
 
             {pose.propsGuide && (
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-amber-900 flex items-center gap-1 mb-1">
-                  <span>🧱 שימוש בעזרי איינגר (Props Guide):</span>
+                <div className="font-bold text-amber-900 flex items-center gap-1.5 mb-1">
+                  <Package className="w-3.5 h-3.5 text-amber-700" />
+                  <span>שימוש בעזרי איינגר (Props Guide):</span>
                 </div>
                 {pose.propsGuide}
               </div>
