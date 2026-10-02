@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2, Star, Compass, Activity, Eye, AlertTriangle, Package } from 'lucide-react';
+import { X, Lightbulb, ChevronLeft, ChevronRight, Layers, Sparkles, Maximize2, ZoomIn, Minimize2, Star, Compass, Activity, Eye, AlertTriangle, Package, BookOpen } from 'lucide-react';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
 import { useAuth } from '../context/AuthContext';
@@ -10,6 +10,7 @@ export const ImageModal = ({ pose, onClose }) => {
   const [imgError, setImgError] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
+  const [previewPropImage, setPreviewPropImage] = useState(null);
 
   // Get gallery items for this pose
   const galleryItems = pose ? getPoseGallery(pose) : [];
@@ -21,6 +22,7 @@ export const ImageModal = ({ pose, onClose }) => {
     setImgError(false);
     setIsFullScreen(false);
     setIsZoomedIn(false);
+    setPreviewPropImage(null);
   }, [pose]);
 
   // Reset image error & zoom state when active index changes
@@ -481,22 +483,139 @@ export const ImageModal = ({ pose, onClose }) => {
               </div>
             )}
 
-            {pose.propsGuide && (
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-charcoal">
-                <div className="font-bold text-amber-900 flex items-center gap-1.5 mb-1">
-                  <Package className="w-3.5 h-3.5 text-amber-700" />
-                  <span>שימוש בעזרי איינגר (Props Guide):</span>
+            {/* Light on Yoga Book Reference Card */}
+            {pose.bookReference && (
+              <div className="bg-[#FAF6F0] border border-[#8C6549]/35 rounded-2xl p-3.5 text-xs text-[#382417] shadow-xs">
+                <div className="font-bold text-[#67442B] flex items-center justify-between gap-1.5 mb-2.5 border-b border-[#D5C2AF]/50 pb-2">
+                  <div className="flex items-center gap-1.5">
+                    <BookOpen className="w-4 h-4 text-[#8C6549]" />
+                    <span className="font-bold text-sm text-[#382417]">מתוך "אור על היוגה" (Light on Yoga)</span>
+                  </div>
+                  <span className="text-[10.5px] font-semibold px-2.5 py-0.5 rounded-full bg-[#EAE0D3] text-[#55331E] border border-[#DECFC0]">
+                    ב.ק.ס איינגר
+                  </span>
                 </div>
-                {pose.propsGuide}
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs mb-2.5">
+                  <div className="bg-white/90 p-2.5 rounded-xl border border-[#DECFC0]">
+                    <div className="text-[10px] text-[#7A5B43] font-semibold">לוח / תמונה מקורית:</div>
+                    <div className="font-bold text-[#382417] text-xs mt-0.5">{pose.bookReference.plate}</div>
+                  </div>
+                  <div className="bg-white/90 p-2.5 rounded-xl border border-[#DECFC0]">
+                    <div className="text-[10px] text-[#7A5B43] font-semibold">מהדורה בעברית (מודן):</div>
+                    <div className="font-bold text-[#382417] text-xs mt-0.5">{pose.bookReference.hebrewPage}</div>
+                  </div>
+                  <div className="bg-white/90 p-2.5 rounded-xl border border-[#DECFC0]">
+                    <div className="text-[10px] text-[#7A5B43] font-semibold">מהדורה באנגלית (Harper):</div>
+                    <div className="font-bold text-[#382417] text-xs mt-0.5">{pose.bookReference.englishPage}</div>
+                  </div>
+                </div>
+
+                {pose.bookReference.note && (
+                  <div className="text-[11.5px] leading-relaxed text-[#5F432F] italic border-r-2 border-[#8C6549] pr-2.5 mt-1 bg-white/50 p-2 rounded-lg">
+                    "{pose.bookReference.note}"
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Iyengar Props Guide */}
+            {(pose.propsList || pose.propsGuide) && (
+              <div className="bg-[#FAF7F2] border border-[#8C6549]/35 rounded-2xl p-3.5 text-xs text-[#382417] shadow-xs space-y-3">
+                <div className="font-bold text-[#67442B] flex flex-wrap items-center justify-between gap-2 border-b border-[#D5C2AF]/50 pb-2">
+                  <div className="flex items-center gap-1.5">
+                    <Package className="w-4 h-4 text-[#8C6549]" />
+                    <span className="font-bold text-sm text-[#382417]">שימוש בעזרי איינגר (Props Guide)</span>
+                  </div>
+                  {pose.propsList && pose.propsList.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {pose.propsList.map((p, i) => (
+                        <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAF6F0] border border-[#8C6549]/40 text-[#603E27] font-semibold">
+                          {p.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {pose.propsList && pose.propsList.length > 0 ? (
+                  <div className="space-y-3">
+                    {pose.propsList.map((item, idx) => (
+                      <div key={idx} className="bg-white/95 rounded-xl p-3 border border-[#E3D6C8] shadow-xs flex flex-col sm:flex-row gap-3 items-start">
+                        {item.image && (
+                          <div 
+                            onClick={() => setPreviewPropImage({ src: item.image, title: `${pose.poseHebrewName} - ${item.name}` })}
+                            className="w-full sm:w-40 h-36 sm:h-28 rounded-lg overflow-hidden border border-[#D5C2AF] shrink-0 cursor-pointer relative group bg-[#FAF6F0]"
+                            title="לחץ להגדלת התמונה"
+                          >
+                            <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white text-[11px] font-bold gap-1">
+                              <ZoomIn className="w-4 h-4" /> הגדל
+                            </div>
+                          </div>
+                        )}
+                        <div className="flex-1 space-y-1.5 w-full">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-bold text-sm text-[#3E2516]">{item.name}</span>
+                            {item.level && (
+                              <span className="text-[10.5px] px-2 py-0.5 rounded-full bg-[#EAE0D3]/80 text-[#603D27] font-medium border border-[#DECFC0]/60">
+                                {item.level}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[11.5px] text-[#674831]">
+                            <strong className="font-bold text-[#442714]">מטרה:</strong> {item.purpose}
+                          </div>
+                          <div className="text-xs text-[#382417] leading-relaxed">
+                            <strong className="font-bold text-[#442714]">הנחיית שימוש:</strong> {item.instructions}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs leading-relaxed text-[#382417]">{pose.propsGuide}</p>
+                )}
               </div>
             )}
           </div>
 
-          <p className="text-center text-[11px] text-charcoal-muted mt-2.5 shrink-0">
+          <p className="text-center text-[11px] text-[#7A5B43] mt-2.5 shrink-0">
             לחץ על התמונה להגדלה מלאה • לחץ X או Esc לסגירה
           </p>
         </div>
       </div>
+
+      {/* Prop Image Fullscreen Preview Overlay */}
+      {previewPropImage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 animate-fadeIn"
+          onClick={() => setPreviewPropImage(null)}
+        >
+          <div 
+            className="relative max-w-4xl w-full bg-[#FAF6F0] rounded-2xl overflow-hidden shadow-2xl border-2 border-[#8C6549]"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-3 bg-[#FAF6F0] border-b border-[#DECFC0] text-xs text-[#382417] font-bold">
+              <span className="text-sm">{previewPropImage.title}</span>
+              <button 
+                onClick={() => setPreviewPropImage(null)} 
+                className="p-1.5 rounded-lg bg-[#EAE0D3] hover:bg-[#DECFC0] text-[#382417] transition-colors"
+                title="סגור"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-2 sm:p-4 bg-[#F2ECE4] flex items-center justify-center">
+              <img 
+                src={previewPropImage.src} 
+                alt={previewPropImage.title} 
+                className="w-full max-h-[75vh] object-contain rounded-xl shadow-xs" 
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
