@@ -1,20 +1,84 @@
-import React, { useState } from 'react';
-import { ArrowRight, Clock, Sparkles, Play, CheckCircle2, ChevronRight, ChevronLeft, Info, Star, Search, Package } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { 
+  ArrowRight, 
+  Clock, 
+  Sparkles, 
+  Play, 
+  CheckCircle2, 
+  ChevronRight, 
+  ChevronLeft, 
+  Info, 
+  Star, 
+  Search, 
+  Package, 
+  Lock, 
+  Shield, 
+  Activity, 
+  HeartPulse, 
+  AlertCircle, 
+  SlidersHorizontal,
+  Check,
+  Crown
+} from 'lucide-react';
 import { YOGA_SEQUENCES } from '../data/sequencesData';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { useAuth } from '../context/AuthContext';
 
-export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory = 'all' }) => {
-  const { userProfile, toggleFavoriteSequence, isFavoriteSequence } = useAuth();
+const SENSITIVITY_CONFIG = [
+  { id: 'knees', label: 'ברכיים', icon: Activity, tip: 'דגש על הפחתת כפיפה עמוקה ותמיכת בלוק' },
+  { id: 'lower_back', label: 'גב תחתון', icon: Shield, tip: 'דגש על הארכת מותנית והרפיה עם בולסטר' },
+  { id: 'neck', label: 'צוואר וכתפיים', icon: AlertCircle, tip: 'דגש על תמיכה במצח ובקודקוד' },
+  { id: 'high_bp', label: 'לחץ דם', icon: HeartPulse, tip: 'דגש על שהיות מתונות והרגעת הדופק' }
+];
+
+export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, initialCategory = 'all' }) => {
+  const { currentUser, userProfile, toggleFavoriteSequence, isFavoriteSequence, updateSensitivities } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [activeSequence, setActiveSequence] = useState(null);
   const [guidedStepIndex, setGuidedStepIndex] = useState(0);
+  const [showSensitivitiesEditor, setShowSensitivitiesEditor] = useState(false);
 
-  const favSeqCount = userProfile.favoriteSequences?.length || 0;
+  // Time of Day smart helper
+  const timeRecommendation = useMemo(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return {
+        greeting: 'בוקר טוב',
+        label: 'המלצת השעה: רצף מעורר לבוקר',
+        recommendedId: 'morning-awakening'
+      };
+    } else if (hour >= 12 && hour < 18) {
+      return {
+        greeting: 'צהריים טובים',
+        label: 'המלצת השעה: רצף עדין לעיכול ושחרור עומס',
+        recommendedId: 'post-meal-digestion'
+      };
+    } else {
+      return {
+        greeting: 'ערב רגוע',
+        label: 'המלצת השעה: רצף הרפיה ושינה לערב',
+        recommendedId: 'evening-winddown'
+      };
+    }
+  }, []);
+
+  const userSensitivities = userProfile?.sensitivities || [];
+  const favSeqCount = userProfile?.favoriteSequences?.length || 0;
+
+  // Calculate personal match for each sequence
+  const isSequenceRecommendedForUser = (seq) => {
+    if (seq.id === timeRecommendation.recommendedId) return true;
+    if (userSensitivities.includes('neck') && (seq.id === 'headache-relief' || seq.id === 'stress-anxiety-relief')) return true;
+    if (userSensitivities.includes('high_bp') && (seq.id === 'evening-winddown' || seq.id === 'headache-relief')) return true;
+    if (userSensitivities.includes('lower_back') && (seq.id === 'evening-winddown' || seq.id === 'pregnancy-safe')) return true;
+    if (userSensitivities.includes('knees') && seq.id === 'post-meal-digestion') return true;
+    return false;
+  };
 
   const categoryFilters = [
     { id: 'all', label: 'הכל' },
+    { id: 'personalized', label: 'מותאם אישית עבורך' },
     { id: 'favorites', label: favSeqCount > 0 ? `מועדפים (${favSeqCount})` : 'מועדפים' },
     { id: 'morning', label: 'בוקר' },
     { id: 'evening', label: 'ערב' },
@@ -23,11 +87,23 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
     { id: 'pregnancy', label: 'הריון' }
   ];
 
-  const filteredSequences = YOGA_SEQUENCES.filter(seq => {
-    if (selectedCategory === 'all') return true;
-    if (selectedCategory === 'favorites') return isFavoriteSequence(seq.id);
-    return seq.category === selectedCategory;
-  });
+  const filteredSequences = useMemo(() => {
+    return YOGA_SEQUENCES.filter(seq => {
+      if (selectedCategory === 'all') return true;
+      if (selectedCategory === 'personalized') return isSequenceRecommendedForUser(seq);
+      if (selectedCategory === 'favorites') return isFavoriteSequence(seq.id);
+      return seq.category === selectedCategory;
+    });
+  }, [selectedCategory, userSensitivities, timeRecommendation.recommendedId, userProfile?.favoriteSequences]);
+
+  const handleToggleSensitivity = (id) => {
+    if (!updateSensitivities) return;
+    const current = userSensitivities;
+    const updated = current.includes(id)
+      ? current.filter(item => item !== id)
+      : [...current, id];
+    updateSensitivities(updated);
+  };
 
   // Helper to resolve pose object from ID
   const getPoseById = (poseId) => {
@@ -42,6 +118,98 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
   const currentStep = activeSequence ? activeSequence.poses[guidedStepIndex] : null;
   const currentPose = currentStep ? getPoseById(currentStep.poseId) : null;
 
+  // 1. GATED ACCESS SCREEN FOR UNREGISTERED USERS
+  if (!currentUser) {
+    return (
+      <div className="flex flex-col h-full bg-[#F5EFEB] animate-fadeIn overflow-hidden">
+        {/* Header */}
+        <header className="p-4 bg-[#FAF6F0] border-b border-[#D5C2AF] flex items-center justify-between shrink-0">
+          <button
+            onClick={onBackToHome}
+            className="px-3.5 py-1.5 rounded-xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] text-sm font-semibold transition-colors"
+          >
+            <span>חזרה לראשי</span>
+          </button>
+
+          <h2 className="text-base font-bold text-[#3E2616]">
+            רצפי תרגול ביתיים
+          </h2>
+        </header>
+
+        {/* Gated Access Presentation */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6 flex items-center justify-center">
+          <div className="max-w-xl w-full bg-[#FAF6F0] border border-[#DECFC0] rounded-3xl p-6 sm:p-10 shadow-lg text-center space-y-6">
+            <div className="w-16 h-16 rounded-2xl bg-[#EAE0D3] border border-[#CBB8A1] flex items-center justify-center text-[#67442B] mx-auto shadow-xs">
+              <Lock className="w-8 h-8 text-[#67442B]" />
+            </div>
+
+            <div className="space-y-2">
+              <div className="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-bold bg-[#E6D7C3] border border-[#CBB8A1] text-[#422716]">
+                חברי קהילת איינגר • גישת תרגול אישית
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#3E2616]">
+                רצפי תרגול מותאמים אישית
+              </h3>
+              <p className="text-sm text-[#624530] font-light leading-relaxed max-w-md mx-auto">
+                עמוד רצפי התרגול זמין למתרגלים רשומים בלבד. התחברו כדי לקבל תוכניות מובנות לפי מסורת איינגר המותאמות לרגישויות הגוף ולזמני היום שלך.
+              </p>
+            </div>
+
+            {/* Value props */}
+            <div className="grid sm:grid-cols-3 gap-3 text-right pt-2">
+              <div className="bg-[#F5EEE6] border border-[#D5C2AF]/60 p-3.5 rounded-2xl flex flex-col gap-1.5">
+                <div className="w-7 h-7 rounded-lg bg-[#EAE0D3] flex items-center justify-center text-[#8C6549]">
+                  <Shield className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-xs text-[#3E2616]">התאמה לרגישויות</h4>
+                <p className="text-[11px] text-[#674831] leading-relaxed">
+                  הנחיות בטיחות מותאמות אישית לברכיים, גב תחתון, צוואר ולחץ דם.
+                </p>
+              </div>
+
+              <div className="bg-[#F5EEE6] border border-[#D5C2AF]/60 p-3.5 rounded-2xl flex flex-col gap-1.5">
+                <div className="w-7 h-7 rounded-lg bg-[#EAE0D3] flex items-center justify-center text-[#8C6549]">
+                  <Clock className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-xs text-[#3E2616]">רצפים לפי זמנים</h4>
+                <p className="text-[11px] text-[#674831] leading-relaxed">
+                  רצפי בוקר מעוררים, ערב להרפיה, שיקום, כאבי ראש ועיכול.
+                </p>
+              </div>
+
+              <div className="bg-[#F5EEE6] border border-[#D5C2AF]/60 p-3.5 rounded-2xl flex flex-col gap-1.5">
+                <div className="w-7 h-7 rounded-lg bg-[#EAE0D3] flex items-center justify-center text-[#8C6549]">
+                  <Play className="w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-xs text-[#3E2616]">נגן תרגול מודרך</h4>
+                <p className="text-[11px] text-[#674831] leading-relaxed">
+                  הדרכה צעד-אחר-צעד, זמני שהות ודגשי עבודה מדויקים עם פרופס.
+                </p>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <button
+                onClick={onOpenAuth}
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border-2 border-[#8C6549] text-[#3E2616] font-bold text-sm shadow-xs hover:shadow-md transition-all text-center"
+              >
+                התחברות או הרשמה מהירה בחינם
+              </button>
+              <button
+                onClick={onBackToHome}
+                className="w-full sm:w-auto px-5 py-3 rounded-full bg-[#EAE0D3] hover:bg-[#D5C2AF] text-[#3E2616] font-semibold text-sm transition-colors text-center"
+              >
+                חזרה לראשי
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. REGISTERED USER VIEW (PERSONALIZED & READY FOR PRO MEMBERSHIP)
   return (
     <div className="flex flex-col h-full bg-[#F5EFEB] animate-fadeIn overflow-hidden">
       
@@ -55,14 +223,19 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
               onBackToHome();
             }
           }}
-          className="px-3.5 py-1.5 rounded-xl bg-[#EAE0D3] hover:bg-[#D5C2AF] text-[#382417] text-sm font-semibold transition-colors"
+          className="px-3.5 py-1.5 rounded-xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] text-sm font-semibold transition-colors"
         >
           <span>{activeSequence ? 'חזרה לרצפים' : 'חזרה לראשי'}</span>
         </button>
 
-        <h2 className="text-base font-bold text-[#382417]">
-          <span>{activeSequence ? activeSequence.title : 'רצפי תרגול ביתיים'}</span>
-        </h2>
+        <div className="flex items-center gap-2 text-right">
+          <span className="text-xs bg-[#E6D7C3] border border-[#CBB8A1] text-[#422716] font-bold px-2 py-0.5 rounded-full hidden sm:inline-block">
+            מתרגל רשום
+          </span>
+          <h2 className="text-base font-bold text-[#3E2616]">
+            <span>{activeSequence ? activeSequence.title : 'רצפי תרגול מותאמים אישית'}</span>
+          </h2>
+        </div>
       </header>
 
       {/* Main Content Area */}
@@ -70,14 +243,100 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
         /* Sequence Catalog View */
         <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
           
-          {/* Intro Banner */}
-          <div className="bg-[#EAE0D3] border border-[#D5C2AF] rounded-2xl p-4 text-right">
-            <h3 className="font-bold text-[#382417] text-base mb-1">
-              רצפי תרגול מותאמים לפי מסורת איינגר
-            </h3>
-            <p className="text-xs text-[#674831] leading-relaxed">
-              בחרו רצף תנוחות מותאם לפי זמן ביום, מצב עיכול, הפחתת כאבי ראש או הריון. התרחבו לקבלת הנחיות שהות ועזרים.
-            </p>
+          {/* Personalized User Sanctuary Banner */}
+          <div className="bg-[#FAF6F0] border border-[#D5C2AF] rounded-3xl p-5 text-right space-y-3 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 className="font-extrabold text-[#3E2616] text-lg">
+                  {timeRecommendation.greeting}, {currentUser.displayName || currentUser.email.split('@')[0]}!
+                </h3>
+                <p className="text-xs text-[#674831] mt-0.5">
+                  רצפי תרגול מובנים לפי מסורת איינגר • מותאמים אישית לפרופיל ולרגישויות הגוף שלך
+                </p>
+              </div>
+
+              {/* Quick toggle for sensitivities editor */}
+              <button
+                onClick={() => setShowSensitivitiesEditor(!showSensitivitiesEditor)}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#EAE0D3] hover:bg-[#DECFC0] border border-[#CBB8A1] text-[#422716] text-xs font-semibold self-start sm:self-auto transition-all shadow-xs"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#8C6549]" />
+                <span>{showSensitivitiesEditor ? 'סגור הגדרות רגישויות' : 'התאמת רגישויות הגוף'}</span>
+              </button>
+            </div>
+
+            {/* Time of Day Context Box */}
+            <div className="bg-[#F5EEE6] border border-[#D5C2AF]/60 rounded-2xl p-3 flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 text-[#3E2616] font-medium">
+                <Sparkles className="w-4 h-4 text-[#8C6549] shrink-0" />
+                <span>{timeRecommendation.label}</span>
+              </div>
+              <button
+                onClick={() => {
+                  const targetSeq = YOGA_SEQUENCES.find(s => s.id === timeRecommendation.recommendedId);
+                  if (targetSeq) handleStartGuided(targetSeq);
+                }}
+                className="px-3 py-1 rounded-xl bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] font-bold text-[11px] shrink-0 transition-all shadow-xs"
+              >
+                התחל רצף מומלץ
+              </button>
+            </div>
+
+            {/* Inline Sensitivities Management Area */}
+            {showSensitivitiesEditor && (
+              <div className="pt-2 border-t border-[#DECFC0] animate-fadeIn space-y-2">
+                <div className="text-xs font-bold text-[#3E2616]">
+                  בחר את הרגישויות שלך לקבלת התאמות ותרגול בטוח:
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {SENSITIVITY_CONFIG.map(sens => {
+                    const isChecked = userSensitivities.includes(sens.id);
+                    return (
+                      <button
+                        key={sens.id}
+                        type="button"
+                        onClick={() => handleToggleSensitivity(sens.id)}
+                        className={`p-2.5 rounded-2xl border text-right transition-all flex items-center justify-between cursor-pointer ${
+                          isChecked 
+                            ? 'bg-[#FAF6F0] border-2 border-[#8C6549] shadow-xs' 
+                            : 'bg-white border-[#D5C2AF] hover:bg-[#FAF6F0]'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <sens.icon className={`w-3.5 h-3.5 ${isChecked ? 'text-[#8C6549]' : 'text-charcoal-muted'}`} />
+                          <span className="text-xs font-bold text-[#3E2616]">{sens.label}</span>
+                        </div>
+                        {isChecked && (
+                          <div className="w-4 h-4 rounded-full bg-[#8C6549] text-white flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 stroke-[3]" />
+                          </div>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Active Sensitivities Summary Pills */}
+            {!showSensitivitiesEditor && userSensitivities.length > 0 && (
+              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                <span className="text-[11px] text-[#674831] font-medium ml-1">רגישויות פעילות:</span>
+                {userSensitivities.map(id => {
+                  const cfg = SENSITIVITY_CONFIG.find(c => c.id === id);
+                  if (!cfg) return null;
+                  return (
+                    <span 
+                      key={id} 
+                      className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#FAF6F0] border border-[#CBB8A1] text-[#3E2616]"
+                    >
+                      <cfg.icon className="w-2.5 h-2.5 text-[#8C6549]" />
+                      <span>{cfg.label}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Category Filter Pills */}
@@ -136,10 +395,17 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
                   >
                     {/* Top Info Header */}
                     <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${seq.badgeColor}`}>
                           {seq.timing}
                         </span>
+
+                        {isSequenceRecommendedForUser(seq) && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#EAE0D3] border border-[#8C6549] text-[#3E2616] shadow-2xs">
+                            <Sparkles className="w-3 h-3 text-[#8C6549]" />
+                            <span>מומלץ עבורך</span>
+                          </span>
+                        )}
 
                         <button
                           onClick={(e) => {
@@ -230,6 +496,21 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, initialCategory
               </div>
             );
           }))}
+          </div>
+
+          {/* Pro / Membership Future Tier Preview */}
+          <div className="bg-[#FAF6F0] border border-[#DECFC0] rounded-3xl p-5 text-right space-y-2 mt-6">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-lg bg-[#EAE0D3] flex items-center justify-center text-[#8C6549]">
+                <Crown className="w-3.5 h-3.5" />
+              </div>
+              <h4 className="font-bold text-sm text-[#3E2616]">
+                תכונות מתקדמות למנויי תרגול (בקרוב)
+              </h4>
+            </div>
+            <p className="text-xs text-[#674831] leading-relaxed">
+              אנחנו עובדים על פיצ׳רים מתקדמים למנויים: הדרכה קולית מונחית עם טיימרים לשהייה, בניית רצפי תרגול מותאמים אישית, וסרטוני הדגמה של מורים מוסמכים.
+            </p>
           </div>
 
         </div>

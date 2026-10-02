@@ -209,6 +209,7 @@ export function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenZoomModal={(p) => setZoomedPose(p)}
+            onOpenAuth={() => setIsAuthModalOpen(true)}
           />
         )}
 
