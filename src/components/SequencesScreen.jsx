@@ -26,13 +26,14 @@ import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { useAuth } from '../context/AuthContext';
 
 const SENSITIVITY_CONFIG = [
+  { id: 'digestion', label: 'בטן ועיכול', icon: Shield, tip: 'הקלה על כאבי בטן, דלקתיות ואי נוחות במערכת העיכול' },
   { id: 'knees', label: 'ברכיים', icon: Activity, tip: 'דגש על הפחתת כפיפה עמוקה ותמיכת בלוק' },
   { id: 'lower_back', label: 'גב תחתון', icon: Shield, tip: 'דגש על הארכת מותנית והרפיה עם בולסטר' },
   { id: 'neck', label: 'צוואר וכתפיים', icon: AlertCircle, tip: 'דגש על תמיכה במצח ובקודקוד' },
   { id: 'high_bp', label: 'לחץ דם', icon: HeartPulse, tip: 'דגש על שהיות מתונות והרגעת הדופק' }
 ];
 
-export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, initialCategory = 'all' }) => {
+export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, onOpenAuth, initialCategory = 'all' }) => {
   const { currentUser, userProfile, toggleFavoriteSequence, isFavoriteSequence, updateSensitivities } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [activeSequence, setActiveSequence] = useState(null);
@@ -69,10 +70,11 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, ini
   // Calculate personal match for each sequence
   const isSequenceRecommendedForUser = (seq) => {
     if (seq.id === timeRecommendation.recommendedId) return true;
-    if (userSensitivities.includes('neck') && (seq.id === 'headache-relief' || seq.id === 'stress-anxiety-relief')) return true;
-    if (userSensitivities.includes('high_bp') && (seq.id === 'evening-winddown' || seq.id === 'headache-relief')) return true;
-    if (userSensitivities.includes('lower_back') && (seq.id === 'evening-winddown' || seq.id === 'pregnancy-safe')) return true;
-    if (userSensitivities.includes('knees') && seq.id === 'post-meal-digestion') return true;
+    if (userSensitivities.includes('digestion') && (seq.category === 'digestion' || seq.id === 'abdominal-pain-relief' || seq.id === 'post-meal-digestion')) return true;
+    if (userSensitivities.includes('lower_back') && (seq.id === 'lower-back-therapy' || seq.id === 'evening-winddown' || seq.id === 'pregnancy-safe')) return true;
+    if (userSensitivities.includes('neck') && (seq.id === 'headache-relief' || seq.id === 'stress-anxiety-relief' || seq.id === 'desk-worker-posture')) return true;
+    if (userSensitivities.includes('high_bp') && (seq.id === 'evening-winddown' || seq.id === 'headache-relief' || seq.id === 'abdominal-pain-relief')) return true;
+    if (userSensitivities.includes('knees') && (seq.id === 'post-meal-digestion' || seq.id === 'abdominal-pain-relief')) return true;
     return false;
   };
 
@@ -80,10 +82,12 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, ini
     { id: 'all', label: 'הכל' },
     { id: 'personalized', label: 'מותאם אישית עבורך' },
     { id: 'favorites', label: favSeqCount > 0 ? `מועדפים (${favSeqCount})` : 'מועדפים' },
+    { id: 'digestion', label: 'בטן ועיכול' },
+    { id: 'remedial', label: 'טיפולי ושיקומי' },
+    { id: 'foundational', label: 'אור על היוגה' },
+    { id: 'posture', label: 'יציבה וגב' },
     { id: 'morning', label: 'בוקר' },
     { id: 'evening', label: 'ערב' },
-    { id: 'remedial', label: 'כאבי ראש ומתח' },
-    { id: 'digestion', label: 'לאחר אוכל' },
     { id: 'pregnancy', label: 'הריון' }
   ];
 
@@ -463,7 +467,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, ini
                       return (
                         <div 
                           key={idx}
-                          onClick={() => onOpenZoomModal(pose)}
+                          onClick={() => onOpenPoseDetail ? onOpenPoseDetail(pose.id) : onOpenZoomModal(pose)}
                           className="flex items-center justify-between text-xs p-1.5 rounded-xl hover:bg-white border border-transparent hover:border-cream-300 transition-colors cursor-pointer"
                         >
                           <div className="flex items-center gap-2">
@@ -585,6 +589,16 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenAuth, ini
                   </div>
                   {currentPose.propsGuide}
                 </div>
+              )}
+
+              {onOpenPoseDetail && (
+                <button
+                  onClick={() => onOpenPoseDetail(currentPose.id)}
+                  className="w-full py-2 px-3 rounded-xl bg-white hover:bg-[#FAF6F0] border border-[#8C6549] text-[#382417] text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-2xs"
+                >
+                  <Package className="w-3.5 h-3.5 text-[#8C6549]" />
+                  <span>צפה במדריך עזרים ופירוט מלא של התנוחה</span>
+                </button>
               )}
 
             </div>
