@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" height="100%" style="background-color: #FAF7F2; font-family: system-ui, -apple-system, sans-serif;">
+  <defs>
+    <!-- Soft shadow filter -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#382417" flood-opacity="0.09" />
+    </filter>
+
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B27B58" />
+      <stop offset="100%" stop-color="#8E5839" />
+    </linearGradient>
+
+    <linearGradient id="bolsterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7B8F77" />
+      <stop offset="100%" stop-color="#556952" />
+    </linearGradient>
+
+    <linearGradient id="blanketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D7C7B7" />
+      <stop offset="100%" stop-color="#B5A08D" />
+    </linearGradient>
+
+    <linearGradient id="blockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D3A16A" />
+      <stop offset="100%" stop-color="#A97341" />
+    </linearGradient>
+
+    <linearGradient id="beltGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3E5C76" />
+      <stop offset="100%" stop-color="#1D2D44" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title & Context -->
+  <text x="460" y="44" text-anchor="middle" font-size="20" font-weight="bold" fill="#382417">סופטה בַּדְהָא קוֹנָאסָאנָה עם עזרים • Supta Baddha Konasana</text>
+  <text x="460" y="70" text-anchor="middle" font-size="13" font-weight="500" fill="#7A5B43">מערך עזרים מלא להרפיית הבטן, פתיחת בית החזה ושחרור המפשעות לפי שיטת איינגר</text>
+
+  <!-- Floor line & Mat -->
+  <line x1="60" y1="530" x2="860" y2="530" stroke="#DECFC0" stroke-width="2" stroke-dasharray="4 4" />
+  <rect x="90" y="522" width="740" height="8" rx="4" fill="#6A5A4D" filter="url(#softShadow)" />
+
+  <!-- ================= PROPS LAYER ================= -->
+
+  <!-- Slanted Bolster under torso and spine -->
+  <g id="bolster" filter="url(#softShadow)">
+    <!-- Base block raising top end of bolster slightly -->
+    <rect x="180" y="465" width="85" height="57" rx="6" fill="url(#blockGrad)" stroke="#8C5C33" stroke-width="1.5" />
+    <text x="222" y="498" text-anchor="middle" font-size="9" font-weight="bold" fill="#583515">קוביה להגבהה</text>
+
+    <!-- Bolster Main Cylindrical Body (slanted from pelvic floor to head) -->
+    <path d="M 165 410 L 450 495 L 440 522 L 155 437 Z" fill="url(#bolsterGrad)" stroke="#3E4E3B" stroke-width="2" rx="10" />
+    <!-- Rounded end of bolster under head -->
+    <ellipse cx="165" cy="423" rx="16" ry="24" fill="#6B7D68" stroke="#3E4E3B" stroke-width="1.5" />
+    <text x="315" y="482" text-anchor="middle" font-size="12" font-weight="bold" fill="#FFFFFF" transform="rotate(16 315 482)">בולסטר לאורך עמוד השדרה</text>
+  </g>
+
+  <!-- Folded Blanket on top of bolster under head & neck -->
+  <g id="blanket" filter="url(#softShadow)">
+    <rect x="150" y="380" width="85" height="24" rx="5" fill="url(#blanketGrad)" stroke="#8C7A68" stroke-width="1.5" />
+    <rect x="153" y="394" width="80" height="10" rx="3" fill="#C2B1A0" stroke="#8C7A68" stroke-width="1" />
+    <text x="192" y="372" text-anchor="middle" font-size="10" font-weight="bold" fill="#654E3A">שמיכה מקופלת לראש ולעורף</text>
+  </g>
+
+  <!-- Support Block under outer right knee/thigh -->
+  <g id="kneeBlockRight" filter="url(#softShadow)">
+    <rect x="530" y="465" width="60" height="57" rx="5" fill="url(#blockGrad)" stroke="#8C5C33" stroke-width="1.5" />
+    <text x="560" y="498" text-anchor="middle" font-size="9" font-weight="bold" fill="#583515">קובית תמיכה</text>
+  </g>
+
+  <!-- Support Block under outer left knee/thigh (slanted visual perspective) -->
+  <g id="kneeBlockLeft" filter="url(#softShadow)">
+    <rect x="620" y="465" width="60" height="57" rx="5" fill="url(#blockGrad)" stroke="#8C5C33" stroke-width="1.5" />
+    <text x="650" y="498" text-anchor="middle" font-size="9" font-weight="bold" fill="#583515">קובית תמיכה</text>
+  </g>
+
+  <!-- ================= PRACTITIONER BODY LAYER ================= -->
+
+  <!-- Arm on floor beside bolster (extended, relaxed, palm up) -->
+  <g id="arms" filter="url(#softShadow)">
+    <!-- Left arm reaching down and out softly -->
+    <path d="M 280 435 Q 330 460 370 515" fill="none" stroke="#D8B597" stroke-width="15" stroke-linecap="round" />
+    <!-- Open palm facing upward -->
+    <ellipse cx="375" cy="517" rx="10" ry="7" fill="#C59B79" stroke="#9E7656" stroke-width="1.5" />
+    <line x1="375" y1="512" x2="384" y2="517" stroke="#9E7656" stroke-width="1.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Reclined Torso resting along the bolster -->
+  <g id="torso" filter="url(#softShadow)">
+    <!-- Pelvis on the floor mat, lower back meeting bolster -->
+    <path d="M 455 522 C 455 500, 435 480, 410 475 C 360 460, 310 440, 260 415 C 245 408, 230 405, 220 405 C 235 425, 270 455, 320 480 C 370 505, 415 520, 455 522 Z" fill="url(#terracottaGrad)" stroke="#673F26" stroke-width="2" />
+    
+    <!-- Chest expansion curve (lifted heart space) -->
+    <path d="M 245 408 Q 300 425 350 455" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.65" />
+    
+    <!-- Relaxed, long abdomen indication -->
+    <path d="M 370 470 Q 405 485 435 505" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" opacity="0.4" />
+  </g>
+
+  <!-- Head resting gently on the folded blanket -->
+  <g id="head" filter="url(#softShadow)">
+    <!-- Neck elongated supported by blanket edge -->
+    <path d="M 220 405 Q 200 395 180 390" fill="none" stroke="#D8B597" stroke-width="14" stroke-linecap="round" />
+    <!-- Head in restful alignment (chin gently toward sternum) -->
+    <circle cx="180" cy="380" r="22" fill="#D8B597" stroke="#9E7656" stroke-width="2" />
+    <!-- Serene hair -->
+    <path d="M 165 370 C 160 360, 185 360, 195 365 C 205 370, 200 395, 185 395 Z" fill="#382417" />
+    <!-- Peaceful closed eye -->
+    <path d="M 183 382 Q 188 385 193 382" fill="none" stroke="#382417" stroke-width="1.8" stroke-linecap="round" />
+  </g>
+
+  <!-- Legs in Baddha Konasana (Bound Angle) supported on blocks -->
+  <g id="baddhaKonasanaLegs" filter="url(#softShadow)">
+    <!-- Right Thigh dropping open onto block -->
+    <path d="M 455 520 Q 490 470 545 470" fill="none" stroke="#2B3A48" stroke-width="24" stroke-linecap="round" />
+    <!-- Right Shin returning inward towards feet -->
+    <path d="M 545 470 Q 600 480 660 515" fill="none" stroke="#2B3A48" stroke-width="20" stroke-linecap="round" />
+
+    <!-- Left Thigh & Shin (depth perspective behind) -->
+    <path d="M 455 515 Q 520 460 635 470" fill="none" stroke="#1D2A35" stroke-width="20" stroke-linecap="round" opacity="0.85" />
+    <path d="M 635 470 Q 655 490 665 515" fill="none" stroke="#1D2A35" stroke-width="18" stroke-linecap="round" opacity="0.85" />
+
+    <!-- Feet together (Soles pressed gently, heels close to pelvis) -->
+    <g id="feet">
+      <ellipse cx="665" cy="515" rx="14" ry="9" fill="#D8B597" stroke="#9E7656" stroke-width="2" />
+      <line x1="665" y1="508" x2="665" y2="522" stroke="#6C4528" stroke-width="2" />
+    </g>
+  </g>
+
+  <!-- Yoga Strap looped around sacrum, through groins, and wrapping around feet -->
+  <g id="yogaStrap" filter="url(#softShadow)">
+    <path d="M 445 510 Q 550 495 660 517" fill="none" stroke="url(#beltGrad)" stroke-width="5" stroke-dasharray="6 3" stroke-linecap="round" />
+    <ellipse cx="663" cy="518" rx="12" ry="5" fill="none" stroke="url(#beltGrad)" stroke-width="4" />
+    <circle cx="445" cy="510" r="4" fill="#1D2D44" />
+  </g>
+
+  <!-- ================= ANNOTATION CALLOUTS & ARROWS ================= -->
+
+  <!-- Callout 1: Bolster under spine -->
+  <g class="callout" transform="translate(240, 210)">
+    <rect x="0" y="0" width="200" height="44" rx="10" fill="#FFFFFF" stroke="#556952" stroke-width="1.5" filter="url(#softShadow)" />
+    <text x="100" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#2B3B29">1. בולסטר לאורך עמוד השדרה</text>
+    <text x="100" y="34" text-anchor="middle" font-size="9.5" fill="#485D45">פתיחת בית החזה והרחבת הריאות</text>
+    <path d="M 100 44 L 290 460" fill="none" stroke="#556952" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="290" cy="460" r="4" fill="#556952" />
+  </g>
+
+  <!-- Callout 2: Folded blanket for head & neck -->
+  <g class="callout" transform="translate(40, 290)">
+    <rect x="0" y="0" width="190" height="44" rx="10" fill="#FFFFFF" stroke="#8C7A68" stroke-width="1.5" filter="url(#softShadow)" />
+    <text x="95" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#4B3929">2. שמיכה לראש ולעורף</text>
+    <text x="95" y="34" text-anchor="middle" font-size="9.5" fill="#675340">גרון רך ועורף ארוך ללא דחיסה</text>
+    <path d="M 130 44 L 180 375" fill="none" stroke="#8C7A68" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="180" cy="375" r="4" fill="#8C7A68" />
+  </g>
+
+  <!-- Callout 3: Pelvis on mat & relaxed abdomen -->
+  <g class="callout" transform="translate(480, 240)">
+    <rect x="0" y="0" width="200" height="44" rx="10" fill="#FFFFFF" stroke="#B27B58" stroke-width="1.5" filter="url(#softShadow)" />
+    <text x="100" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#5B311B">3. אגן במזרן ובטן משוחררת</text>
+    <text x="100" y="34" text-anchor="middle" font-size="9.5" fill="#7C4B2E">מרווח אידיאלי להרגעת כאבי בטן</text>
+    <path d="M 60 44 L 420 480" fill="none" stroke="#B27B58" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="420" cy="480" r="4" fill="#B27B58" />
+  </g>
+
+  <!-- Callout 4: Blocks supporting knees/thighs -->
+  <g class="callout" transform="translate(680, 360)">
+    <rect x="0" y="0" width="200" height="44" rx="10" fill="#FFFFFF" stroke="#A97341" stroke-width="1.5" filter="url(#softShadow)" />
+    <text x="100" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#5E381A">4. קוביות תמיכה לירכיים</text>
+    <text x="100" y="34" text-anchor="middle" font-size="9.5" fill="#7D4E27">מניעת מתח במפשעות ובמפרקי הירך</text>
+    <path d="M 50 44 L 560 465" fill="none" stroke="#A97341" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="560" cy="465" r="4" fill="#A97341" />
+  </g>
+
+  <!-- Callout 5: Yoga strap around sacrum & feet -->
+  <g class="callout" transform="translate(680, 480)">
+    <rect x="0" y="0" width="210" height="44" rx="10" fill="#FFFFFF" stroke="#1D2D44" stroke-width="1.5" filter="url(#softShadow)" />
+    <text x="105" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#142132">5. לולאת חגורה מסביב לכפות הרגליים</text>
+    <text x="105" y="34" text-anchor="middle" font-size="9.5" fill="#2E445E">קיבוע הרגליים לשחרור שרירי מוחלט</text>
+    <path d="M 0 22 L -15 515" fill="none" stroke="#1D2D44" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="663" cy="518" r="4" fill="#1D2D44" />
+  </g>
+
+</svg>
