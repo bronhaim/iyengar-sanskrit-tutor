@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%" style="background-color: #FAF7F2; font-family: system-ui, -apple-system, sans-serif;">
+  <defs>
+    <!-- Shadow for depth -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#382417" flood-opacity="0.08" />
+    </filter>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A27355" />
+      <stop offset="100%" stop-color="#805338" />
+    </linearGradient>
+    <linearGradient id="chairGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A4540" />
+      <stop offset="100%" stop-color="#2D2824" />
+    </linearGradient>
+    <linearGradient id="bolsterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7B8D78" />
+      <stop offset="100%" stop-color="#556852" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title & Context -->
+  <text x="450" y="45" text-anchor="middle" font-size="20" font-weight="bold" fill="#382417">עמידת כתפיים נתמכת על כיסא • Chair Sarvangasana</text>
+  <text x="450" y="70" text-anchor="middle" font-size="13" font-weight="500" fill="#7A5B43">תרשים דיוק עזרים לפי עקרונות שיטת איינגר יוגה</text>
+
+  <!-- Floor line & Mat -->
+  <line x1="80" y1="560" x2="820" y2="560" stroke="#DECFC0" stroke-width="2" stroke-dasharray="4 4" />
+  <rect x="120" y="552" width="660" height="8" rx="4" fill="#6A5A4D" filter="url(#shadow)" />
+
+  <!-- ================= PROPS LAYER ================= -->
+
+  <!-- Bolster under shoulders -->
+  <g id="bolster" filter="url(#shadow)">
+    <!-- Main cylindrical body -->
+    <rect x="490" y="475" width="115" height="77" rx="20" fill="url(#bolsterGrad)" stroke="#3E4E3B" stroke-width="2" />
+    <!-- Bolster seams/ribs -->
+    <ellipse cx="505" cy="513" rx="14" ry="34" fill="#6B7D68" stroke="#3E4E3B" stroke-width="1.5" />
+    <path d="M 505 478 L 595 478" stroke="#90A18E" stroke-width="1.5" opacity="0.6" />
+    <text x="548" y="518" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">בולסטר</text>
+  </g>
+
+  <!-- Yoga Chair (Iyengar folding metal chair) -->
+  <g id="chair" filter="url(#shadow)">
+    <!-- Back chair legs -->
+    <line x1="225" y1="360" x2="195" y2="552" stroke="url(#chairGrad)" stroke-width="10" stroke-linecap="round" />
+    <circle cx="195" cy="552" r="7" fill="#1C1815" />
+
+    <!-- Front chair legs -->
+    <line x1="375" y1="360" x2="350" y2="552" stroke="url(#chairGrad)" stroke-width="10" stroke-linecap="round" />
+    <circle cx="350" cy="552" r="7" fill="#1C1815" />
+
+    <!-- Horizontal crossbars -->
+    <line x1="210" y1="465" x2="362" y2="465" stroke="url(#chairGrad)" stroke-width="6" stroke-linecap="round" />
+
+    <!-- Chair Backrest arch (high frame) -->
+    <path d="M 225 360 L 205 180 Q 245 155 285 180 L 305 360" fill="none" stroke="url(#chairGrad)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" />
+
+    <!-- Chair Seat plate -->
+    <rect x="220" y="352" width="165" height="16" rx="5" fill="#3D3833" stroke="#221E1B" stroke-width="2" />
+
+    <!-- Folded Blanket on chair seat -->
+    <rect x="215" y="332" width="175" height="20" rx="4" fill="#C9B8A6" stroke="#8C7A68" stroke-width="2" />
+    <line x1="215" y1="342" x2="390" y2="342" stroke="#8C7A68" stroke-width="1" />
+    <text x="245" y="323" font-size="10" font-weight="bold" fill="#755E49">שמיכה מרופדת</text>
+  </g>
+
+  <!-- ================= PRACTITIONER BODY LAYER ================= -->
+
+  <!-- Arms reaching back under chair to hold back legs -->
+  <g id="arms">
+    <!-- Arm from shoulders reaching to back chair leg -->
+    <path d="M 505 500 Q 380 505 210 465" fill="none" stroke="#D8B597" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Hands grasping the chair leg -->
+    <ellipse cx="210" cy="465" rx="10" ry="8" fill="#C59B79" stroke="#9E7656" stroke-width="1.5" />
+  </g>
+
+  <!-- Torso & Pelvis -->
+  <g id="torso" filter="url(#shadow)">
+    <!-- Pelvis resting on chair seat -->
+    <path d="M 330 332 C 345 315, 380 325, 385 345 C 390 380, 420 420, 455 460 C 475 480, 495 490, 520 492 C 510 515, 480 515, 460 495 C 430 465, 380 415, 360 365 C 350 340, 335 332, 330 332 Z" fill="url(#terracottaGrad)" stroke="#5E3821" stroke-width="2" />
+    
+    <!-- Chest expansion curve -->
+    <path d="M 445 440 Q 485 465 520 490" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+  </g>
+
+  <!-- Head & Neck on Floor (Off Bolster) -->
+  <g id="head">
+    <!-- Neck extending softly off bolster to floor -->
+    <path d="M 525 495 Q 555 515 580 535" fill="none" stroke="#D8B597" stroke-width="16" stroke-linecap="round" />
+    <!-- Head resting squarely on mat -->
+    <circle cx="615" cy="535" r="22" fill="#D8B597" stroke="#9E7656" stroke-width="2" />
+    <!-- Hair bun / profile -->
+    <ellipse cx="630" cy="542" rx="14" ry="12" fill="#382417" />
+    <!-- Eye & serene face line -->
+    <path d="M 605 530 Q 612 528 618 532" fill="none" stroke="#382417" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- Vertical Active Legs -->
+  <g id="legs" filter="url(#shadow)">
+    <!-- Both legs extending vertically up together -->
+    <!-- Thighs -->
+    <path d="M 330 332 L 340 180 Q 365 178 385 180 L 380 335 Z" fill="#2E3A46" stroke="#1A232C" stroke-width="2" />
+    <!-- Knees divider -->
+    <line x1="339" y1="180" x2="385" y2="180" stroke="#48596A" stroke-width="2" />
+    <!-- Shins & Calves -->
+    <path d="M 340 180 L 348 70 Q 368 68 380 70 L 385 180 Z" fill="#2E3A46" stroke="#1A232C" stroke-width="2" />
+    <!-- Feet (Active, pointed up with balls of feet spread) -->
+    <path d="M 348 70 L 345 50 Q 365 42 380 52 L 378 70 Z" fill="#D8B597" stroke="#9E7656" stroke-width="2" />
+  </g>
+
+  <!-- ================= ANNOTATION CALLOUTS & ARROWS ================= -->
+
+  <!-- Callout 1: Chair & Pelvis -->
+  <g class="callout" transform="translate(100, 260)">
+    <rect x="0" y="0" width="190" height="42" rx="10" fill="#FFFFFF" stroke="#8C6549" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="95" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#382417">1. תמיכת אגן וסאקרום</text>
+    <text x="95" y="32" text-anchor="middle" font-size="9.5" fill="#674831">הישבן נח במלואו על מושב הכיסא</text>
+    <path d="M 190 21 L 245 330" fill="none" stroke="#8C6549" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="245" cy="330" r="4" fill="#8C6549" />
+  </g>
+
+  <!-- Callout 2: Bolster under Shoulders -->
+  <g class="callout" transform="translate(640, 420)">
+    <rect x="0" y="0" width="200" height="42" rx="10" fill="#FFFFFF" stroke="#556852" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="100" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#2B3B29">2. כתפיים על הבולסטר</text>
+    <text x="100" y="32" text-anchor="middle" font-size="9.5" fill="#4D5D4B">חגורת הכתפיים מורמת ופתוחה</text>
+    <path d="M 0 21 L -115 485" fill="none" stroke="#556852" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="-115" cy="485" r="4" fill="#556852" />
+  </g>
+
+  <!-- Callout 3: Free Neck & Head -->
+  <g class="callout" transform="translate(640, 580)">
+    <rect x="0" y="0" width="200" height="42" rx="10" fill="#FFFFFF" stroke="#A84232" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="100" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#7A2416">3. עורף וראש חופשיים</text>
+    <text x="100" y="32" text-anchor="middle" font-size="9.5" fill="#8A3426">אפס לחץ על שבע חוליות הצוואר</text>
+    <path d="M 0 21 L -50 540" fill="none" stroke="#A84232" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="-50" cy="540" r="4" fill="#A84232" />
+  </g>
+
+  <!-- Callout 4: Hand Grip on Back Legs -->
+  <g class="callout" transform="translate(40, 480)">
+    <rect x="0" y="0" width="180" height="42" rx="10" fill="#FFFFFF" stroke="#3D3833" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="90" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#221E1B">4. אחיזת רגלי הכיסא</text>
+    <text x="90" y="32" text-anchor="middle" font-size="9.5" fill="#554F48">סיבוב זרועות ופתיחת בית החזה</text>
+    <path d="M 180 21 L 210 465" fill="none" stroke="#3D3833" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="210" cy="465" r="4" fill="#3D3833" />
+  </g>
+
+  <!-- Callout 5: Vertical Legs -->
+  <g class="callout" transform="translate(460, 100)">
+    <rect x="0" y="0" width="180" height="42" rx="10" fill="#FFFFFF" stroke="#8C6549" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="90" y="18" text-anchor="middle" font-size="11" font-weight="bold" fill="#382417">5. רגליים אנכיות</text>
+    <text x="90" y="32" text-anchor="middle" font-size="9.5" fill="#674831">זרימת דם הפוכה ורענון הלב</text>
+    <path d="M 0 21 L -90 120" fill="none" stroke="#8C6549" stroke-width="1.5" stroke-dasharray="3 3" />
+    <circle cx="-90" cy="120" r="4" fill="#8C6549" />
+  </g>
+
+</svg>
