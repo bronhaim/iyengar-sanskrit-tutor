@@ -52,8 +52,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetai
     } else if (hour >= 12 && hour < 18) {
       return {
         greeting: 'צהריים טובים',
-        label: 'המלצת השעה: רצף עדין לעיכול ושחרור עומס',
-        recommendedId: 'post-meal-digestion'
+        label: 'המלצת השעה: רצף משרדי לרענון הצוואר והגב',
+        recommendedId: 'office-desk-chair-yoga'
       };
     } else {
       return {
@@ -71,8 +71,8 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetai
   const isSequenceRecommendedForUser = (seq) => {
     if (seq.id === timeRecommendation.recommendedId) return true;
     if (userSensitivities.includes('digestion') && (seq.category === 'digestion' || seq.id === 'abdominal-pain-relief' || seq.id === 'post-meal-digestion')) return true;
-    if (userSensitivities.includes('lower_back') && (seq.id === 'lower-back-therapy' || seq.id === 'evening-winddown' || seq.id === 'pregnancy-safe')) return true;
-    if (userSensitivities.includes('neck') && (seq.id === 'headache-relief' || seq.id === 'stress-anxiety-relief' || seq.id === 'desk-worker-posture')) return true;
+    if (userSensitivities.includes('lower_back') && (seq.id === 'lower-back-therapy' || seq.id === 'evening-winddown' || seq.id === 'pregnancy-safe' || seq.id === 'office-desk-chair-yoga')) return true;
+    if (userSensitivities.includes('neck') && (seq.id === 'headache-relief' || seq.id === 'stress-anxiety-relief' || seq.id === 'desk-worker-posture' || seq.id === 'office-desk-chair-yoga')) return true;
     if (userSensitivities.includes('high_bp') && (seq.id === 'evening-winddown' || seq.id === 'headache-relief' || seq.id === 'abdominal-pain-relief')) return true;
     if (userSensitivities.includes('knees') && (seq.id === 'post-meal-digestion' || seq.id === 'abdominal-pain-relief')) return true;
     return false;
@@ -82,6 +82,7 @@ export const SequencesScreen = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetai
     { id: 'all', label: 'הכל' },
     { id: 'personalized', label: 'מותאם אישית עבורך' },
     { id: 'favorites', label: favSeqCount > 0 ? `מועדפים (${favSeqCount})` : 'מועדפים' },
+    { id: 'office', label: 'משרד וכיסא' },
     { id: 'digestion', label: 'בטן ועיכול' },
     { id: 'remedial', label: 'טיפולי ושיקומי' },
     { id: 'foundational', label: 'אור על היוגה' },
