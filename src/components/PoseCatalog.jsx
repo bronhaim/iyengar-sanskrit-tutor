@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search, Layers, Star, AlertTriangle, Package, Maximize2 } from 'lucide-react';
+import { Compass, ArrowRight, Filter, BookOpen, Lightbulb, Search, Layers, Star, AlertTriangle, Package, Maximize2, Info, X } from 'lucide-react';
 import { POSE_DATABASE } from '../data/posesData';
 import { PoseSvgIllustration } from './PoseSvgIllustration';
 import { getPoseGallery } from '../utils/poseGallery';
@@ -9,6 +9,18 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
   const { userProfile, toggleFavoritePose, isFavorite } = useAuth();
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showGuideBanner, setShowGuideBanner] = useState(() => {
+    return localStorage.getItem('seen_iyengar_catalog_guide') !== 'true';
+  });
+
+  const handleDismissGuide = () => {
+    localStorage.setItem('seen_iyengar_catalog_guide', 'true');
+    setShowGuideBanner(false);
+  };
+
+  const handleToggleGuide = () => {
+    setShowGuideBanner(prev => !prev);
+  };
 
   useEffect(() => {
     if (initialCategory) {
@@ -77,10 +89,21 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
           <span>חזרה לראשי</span>
         </button>
 
-        <h2 className="text-base font-bold text-[#382417] flex items-center gap-1.5">
-          <Compass className="w-4 h-4 text-[#74482B]" />
-          <span>קטלוג תנוחות איינגר</span>
-        </h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleToggleGuide}
+            className="p-1.5 px-2.5 rounded-xl border border-[#D5C2AF] bg-[#FAF6F0] hover:bg-[#EAE0D3] text-[#74482B] text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs"
+            title="הסבר והדרכה על השימוש בקטלוג"
+          >
+            <Info className="w-3.5 h-3.5" />
+            <span>מדריך הקטלוג</span>
+          </button>
+
+          <h2 className="text-base font-bold text-[#382417] flex items-center gap-1.5">
+            <Compass className="w-4 h-4 text-[#74482B]" />
+            <span>קטלוג תנוחות איינגר</span>
+          </h2>
+        </div>
       </header>
 
       {/* Filter Tabs & Search */}
@@ -119,6 +142,57 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
 
       {/* Pose List */}
       <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+        {/* Onboarding & Features Guide Banner */}
+        {showGuideBanner && (
+          <div className="bg-[#FAF6F0] border-2 border-[#CBB8A1] rounded-2xl p-4 shadow-sm relative transition-all animate-fadeIn">
+            <button
+              onClick={handleDismissGuide}
+              className="absolute left-3 top-3 p-1 rounded-lg text-[#9C7A5E] hover:text-[#382417] hover:bg-[#EAE0D3] transition-colors"
+              title="סגירת ההסבר"
+              aria-label="סגירה"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-start gap-3 pl-6">
+              <div className="w-9 h-9 rounded-xl bg-[#EAE0D3] border border-[#D5C2AF] flex items-center justify-center shrink-0 text-[#74482B]">
+                <BookOpen className="w-5 h-5" />
+              </div>
+
+              <div className="space-y-2 text-right w-full">
+                <h3 className="text-sm sm:text-base font-bold text-[#382417]">
+                  ברוכים הבאים לקטלוג תנוחות איינגר
+                </h3>
+
+                <p className="text-xs text-[#624530] leading-relaxed">
+                  בקטלוג זה מרוכזות תנוחות היוגה לפי מסורת ב.ק.ס איינגר בליווי תצלומי סטודיו אותנטיים של דוגמן הבית שלנו עם לבוש ואביזרי תרגול מדויקים
+                </p>
+
+                <div className="pt-1 flex flex-col gap-1.5 text-xs text-[#382417]">
+                  <div className="flex items-start gap-2 bg-[#EFE7DE] border border-[#DECFC0] rounded-xl p-2.5">
+                    <Package className="w-4 h-4 text-[#74482B] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-[#74482B]">כפתור ״מדריך עזרים ופירוט מלא״:</span>
+                      <span className="text-[#553622] mr-1">
+                        בכל כרטיס תנוחה תמצאו כפתור ייעודי זה המוביל לעמוד מקיף עם הנחיות מדויקות לשימוש באביזרים (בלוקים, חגורות, בולסטרים, שמיכות וכיסא) לצד ציטוטים ודקויות מתוך הספר ״אור על היוגה״
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-1 flex items-center justify-end">
+                  <button
+                    onClick={handleDismissGuide}
+                    className="py-1 px-3.5 rounded-lg bg-[#74482B] hover:bg-[#5C371F] text-white text-xs font-semibold transition-all shadow-2xs"
+                  >
+                    הבנתי, תודה
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {filteredPoses.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-3xl border border-cream-200 p-6">
             <div className="flex justify-center mb-3">
@@ -133,8 +207,8 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
             </h3>
             <p className="text-xs text-charcoal-muted max-w-xs mx-auto">
               {activeCategory === 'favorites' 
-                ? 'לחץ על סמל הכוכב בכל כרטיס תנוחה כדי להוסיף אותה לרשימת המועדפים האישית שלך.'
-                : 'נסה לחפש מילה אחרת או לבחור קטגוריה שונה.'}
+                ? 'לחצו על סמל הכוכב בכל כרטיס תנוחה כדי להוסיף אותה לרשימת המועדפים האישית'
+                : 'נסו לחפש מילה אחרת או לבחור קטגוריה שונה'}
             </p>
           </div>
         ) : (
@@ -163,8 +237,8 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
                   )}
 
                   <div className="absolute inset-0 bg-charcoal/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold gap-1.5 rounded-2xl z-20">
-                    <Search className="w-3.5 h-3.5" />
-                    <span>לחץ להגדלה</span>
+                    <Package className="w-3.5 h-3.5 text-white" />
+                    <span>למדריך המלא</span>
                   </div>
                 </div>
 
@@ -250,22 +324,14 @@ export const PoseCatalog = ({ onBackToHome, onOpenZoomModal, onOpenPoseDetail, i
                     )}
                   </div>
 
-                  {/* Action Buttons: Full Pose & Props Page vs Quick View */}
-                  <div className="mt-3 pt-3 border-t border-[#DECFC0] flex items-center justify-between gap-2">
+                  {/* Action Button: Full Pose & Props Page */}
+                  <div className="mt-3 pt-3 border-t border-[#DECFC0]">
                     <button
                       onClick={() => onOpenPoseDetail ? onOpenPoseDetail(pose.id) : onOpenZoomModal(pose)}
-                      className="flex-1 py-2 px-3 rounded-xl bg-[#FAF6F0] hover:bg-[#F2E8DC] border border-[#8C6549] text-[#382417] text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-2xs active:scale-98"
+                      className="w-full py-2.5 px-3 rounded-xl bg-[#FAF6F0] hover:bg-[#F2E8DC] border border-[#8C6549] text-[#382417] text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-2xs hover:shadow-xs active:scale-98"
                     >
-                      <Package className="w-3.5 h-3.5 text-[#8C6549]" />
+                      <Package className="w-4 h-4 text-[#8C6549]" />
                       <span>מדריך עזרים ופירוט מלא</span>
-                    </button>
-                    
-                    <button
-                      onClick={() => onOpenZoomModal(pose)}
-                      className="py-2 px-3 rounded-xl bg-white hover:bg-[#FAF6F0] border border-[#D5C2AF] text-[#674831] text-xs font-semibold flex items-center justify-center gap-1 transition-all"
-                      title="תצוגה מהירה בחלונית"
-                    >
-                      <span>תצוגה מהירה</span>
                     </button>
                   </div>
                 </div>
