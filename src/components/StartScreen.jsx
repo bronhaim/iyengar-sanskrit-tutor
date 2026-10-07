@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, MessageSquarePlus } from 'lucide-react';
+import { ChevronRight, ChevronLeft, MessageSquarePlus, Heart } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const SHOWCASE_POSES = [
@@ -88,7 +88,7 @@ const IYENGAR_QUOTES = [
   }
 ];
 
-export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, onOpenFavorites, onRequestFeature, totalPoses }) => {
+export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSequences, onOpenFavorites, onOpenDana, onRequestFeature, totalPoses }) => {
   const { userProfile, currentUser } = useAuth();
   const [currentPoseIdx, setCurrentPoseIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -192,7 +192,7 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
               </button>
             </div>
 
-            {/* Direct Access to Favorites and Feature Request */}
+            {/* Direct Access to Favorites, Dana, and Feature Request */}
             <div className="pt-1 flex flex-wrap items-center justify-center gap-2">
               <button
                 onClick={onOpenFavorites}
@@ -205,6 +205,16 @@ export const StartScreen = ({ onStartQuiz, onOpenRoots, onOpenCatalog, onOpenSeq
                   </span>
                 )}
               </button>
+
+              {onOpenDana && (
+                <button
+                  onClick={onOpenDana}
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FAF6F0] hover:bg-[#EFE5D8] border border-[#8C6549] text-[#3E2616] text-xs font-bold transition-all shadow-xs"
+                >
+                  <Heart className="w-3.5 h-3.5 text-[#8C6549]" />
+                  <span>דאנה (תמיכה באתר)</span>
+                </button>
+              )}
 
               {currentUser && (
                 <button

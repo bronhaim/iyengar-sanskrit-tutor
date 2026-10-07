@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
 import { UserProfileMenu } from './UserProfileMenu';
 
 export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, onSelectCategory, onRequestFeature }) => {
@@ -24,7 +24,8 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
     { id: 'sequences', label: 'רצפי תרגולים', desc: 'תוכניות תרגול מובנות לבית' },
     { id: 'quiz', label: 'חידון שמות ותנוחות', desc: 'אימון זיהוי ותרגול סנסקריט' },
     { id: 'roots', label: 'מילון סנסקריט', desc: 'פירוק והבנת מילות המפתח' },
-    { id: 'favorites', label: 'המועדפים שלי', desc: 'תנוחות ורצפים ששמרת' }
+    { id: 'favorites', label: 'המועדפים שלי', desc: 'תנוחות ורצפים ששמרת' },
+    { id: 'dana', label: 'דאנה • תמיכה באתר', desc: 'נתינה מתוך הלב לתמיכה במרחב התרגול' }
   ];
 
   const handleNavClick = (viewId) => {
@@ -134,6 +135,19 @@ export const Header = ({ currentView, setCurrentView, onStartQuiz, onOpenAuth, o
             }`}
           >
             מועדפים
+          </button>
+
+          <button
+            onClick={() => setCurrentView('dana')}
+            className={`px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 ${
+              currentView === 'dana' 
+                ? 'bg-[#FAF6F0] text-[#74482B] border border-[#74482B] shadow-xs font-bold' 
+                : 'text-[#74482B] hover:text-[#5C371F] hover:bg-[#FAF6F0]/80 border border-transparent font-semibold'
+            }`}
+            title="תמיכה באתר בדאנה"
+          >
+            <Heart className="w-3.5 h-3.5 fill-[#74482B]/20 text-[#74482B]" />
+            <span>דאנה</span>
           </button>
         </nav>
 

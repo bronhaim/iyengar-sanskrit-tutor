@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Heart } from 'lucide-react';
 import { Header } from './components/Header';
 import { StartScreen } from './components/StartScreen';
 import { QuizScreen } from './components/QuizScreen';
@@ -11,6 +12,7 @@ import { AuthModal } from './components/AuthModal';
 import { FavoritesScreen } from './components/FavoritesScreen';
 import { RequestFeatureModal } from './components/RequestFeatureModal';
 import { PoseDetailScreen } from './components/PoseDetailScreen';
+import { DanaScreen } from './components/DanaScreen';
 import { POSE_DATABASE } from './data/posesData';
 
 export function App() {
@@ -25,6 +27,17 @@ export function App() {
   const [catalogCategory, setCatalogCategory] = useState('all');
   const [selectedPoseIdForDetail, setSelectedPoseIdForDetail] = useState(null);
   const [previousView, setPreviousView] = useState('catalog');
+
+  // Detect payment return with ?dana=success or #dana-thank-you
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('dana') === 'success' || window.location.hash === '#dana-thank-you') {
+        setCurrentView('dana-success');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  }, []);
 
   const openPoseDetail = (poseOrId) => {
     const id = typeof poseOrId === 'string' ? poseOrId : poseOrId.id;
@@ -150,6 +163,10 @@ export function App() {
               setCurrentView('favorites');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            onOpenDana={() => {
+              setCurrentView('dana');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             onRequestFeature={() => setIsRequestFeatureModalOpen(true)}
             totalPoses={POSE_DATABASE.length}
           />
@@ -253,6 +270,21 @@ export function App() {
           />
         )}
 
+        {(currentView === 'dana' || currentView === 'dana-success') && (
+          <DanaScreen 
+            isSuccessView={currentView === 'dana-success'}
+            onBackToHome={() => {
+              setCurrentView('home');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenCatalog={() => {
+              setCatalogCategory('all');
+              setCurrentView('catalog');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
       </main>
 
       {/* 3. Footer */}
@@ -286,6 +318,10 @@ export function App() {
             </button>
             <button onClick={() => { setCurrentView('favorites'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors">
               מועדפים
+            </button>
+            <button onClick={() => { setCurrentView('dana'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-[#74482B] transition-colors font-bold flex items-center gap-1">
+              <Heart className="w-3 h-3 text-[#74482B] fill-[#74482B]/20" />
+              <span>דאנה (תרומה)</span>
             </button>
           </div>
 
