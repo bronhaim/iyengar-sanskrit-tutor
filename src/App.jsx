@@ -282,6 +282,7 @@ export function App() {
               setCurrentView('catalog');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
+            paymentUrl="https://mrng.to/1OrKN9VQW2"
           />
         )}
 

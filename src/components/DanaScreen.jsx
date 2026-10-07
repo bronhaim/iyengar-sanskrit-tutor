@@ -32,7 +32,7 @@ const DANA_AMOUNTS = [
 export const DanaScreen = ({ 
   onBackToHome, 
   onOpenCatalog,
-  paymentUrl = 'https://pay.greeninvoice.co.il/',
+  paymentUrl = 'https://mrng.to/1OrKN9VQW2',
   isSuccessView = false 
 }) => {
   const [selectedAmount, setSelectedAmount] = useState(36);
