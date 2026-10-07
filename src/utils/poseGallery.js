@@ -462,7 +462,7 @@ export const KNOWN_POSE_VARIATIONS = {
       title: 'הדגמת סטודיו רשמית',
       badge: 'הדמות הראשית',
       description: 'שירשאסאנה (עמידת ראש): עמידת ראש יציבה ואנכית עם תמיכת אמות שלובות',
-      src: '/images/poses/salamba-sarvangasana.jpg'
+      src: '/images/poses/salamba-sirsasana.jpg'
     },
     {
       id: 'alt',
